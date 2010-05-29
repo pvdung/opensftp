@@ -1,5 +1,5 @@
 *About OpenSFTP
- *[Overview Overview]
+  [Overview Overview]
   [ProjectGoals Project Goals]
   [Features Features]
 
