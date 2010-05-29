@@ -1,15 +1,13 @@
-* About OpenSFTP
-  * [Overview Overview]
-  * [ProjectGoals Project Goals]
-  * [Features Features]
-
-* Documentation
-  * [GettingStarted Getting Started]
-  * [Manuals Manuals]
-  * [Javadoc Javadoc]
-  * [Examples Examples]
-  * [FAQ FAQ]
-
-* Getting Involved
-  * [IssueTracking Issue Tracking]
-  * [MailingLists Mailing Lists]
+  * About OpenSFTP
+    * [Overview Overview]
+    * [ProjectGoals Project Goals]
+    * [Features Features]
+  * Documentation
+    * [GettingStarted Getting Started]
+    * [Manuals Manuals]
+    * [Javadoc Javadoc]
+    * [Examples Examples]
+    * [FAQ FAQ]
+  * Getting Involved
+    * [IssueTracking Issue Tracking]
+    * [MailingLists Mailing Lists]
