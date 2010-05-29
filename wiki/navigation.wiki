@@ -1,7 +1,7 @@
 * About OpenSFTP
-  * [Overview Overview]
-  * [ProjectGoals Project Goals]
-  * [Features Features]
+  [Overview Overview]
+  [ProjectGoals Project Goals]
+  [Features Features]
 
 * Documentation
   * [GettingStarted Getting Started]
