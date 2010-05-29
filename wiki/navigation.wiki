@@ -1,4 +1,4 @@
-* About OpenSFTP
+About OpenSFTP
   [Overview Overview]
   [ProjectGoals Project Goals]
   [Features Features]
