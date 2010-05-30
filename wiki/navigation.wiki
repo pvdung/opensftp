@@ -1,6 +1,6 @@
   * About OpenSFTP
     * [Overview Overview]
-    * [user Who Shall Use It?]
+    * [user Who Shall Use It]
     * [ProjectGoals Project Goals]
     * [Features Features]
   * Documentation
