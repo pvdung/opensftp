@@ -1,9 +1,0 @@
-<font face="Calibri" size="3">
-<p align="left"><font size="4" color="blue">
-Who Shall Use It?
-</font></p>
-----
-You're exactly the guy who need it if -
-  * you are developing your own SFTP client such as desktop version,  RIA version and customized version for some Enterprise Application
-  * or you simply have to put or get files through SFTP protocol in a certain Enterprise Application
-  * or any other scenarios where you have to deal with SFTP.
