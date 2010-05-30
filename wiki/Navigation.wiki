@@ -6,7 +6,8 @@
     * [Features Features]
   * Documentation
     * [GettingStarted Getting Started]
-    * [Manuals Manuals]
+    * [CheatSheet Cheat Sheet]
+    * [Cookbook Cookbook]
     * [Javadoc Javadoc]
     * [Examples Examples]
     * [FAQ FAQ]
