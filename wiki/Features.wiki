@@ -1,3 +1,4 @@
+#labels Featured
 <font face="Calibri" size="3">
 
 The following is a list of features of OpenSFTP: 
@@ -10,8 +11,8 @@ The following is a list of features of OpenSFTP:
     * Cipher: blowfish-cbc,3des-cbc,aes128-cbc,aes192-cbc,aes256-cbc,aes128-ctr,aes192-ctr,aes256-ctr,3des-ctr,arcfour,arcfour128,arcfour256 
     * MAC: hmac-md5, hmac-sha1, hmac-md5-96, hmac-sha1-96 
   * Most SFTP commands are implemented. The leftover will be added in the short future.
-  * Easy to use. You can seamlessly use it in your java project without worrying about the output capturing and exception handling. OpenSFTP manages them well for you.
-  * Easy to troubleshot. OpenSFTP using [http://logging.apache.org/log4j log4j] to record its running status. It's easy to change the logging level and customize your appender.
+  * Easy to use. You can seamlessly use it in your Java project without worrying about the output capturing and exception handling. OpenSFTP manages them well for you.
+  * Easy to troubleshot. OpenSFTP using [http://logging.apache.org/log4j log4j] to record its running status. It's easy to change the logging level, change the logging pattern and even customize your own appender.
   * Easy to extend. This feature contains two levels.
-    * Level 1: It's very easy to develop your own SFTP client (e.g. desktop version, RIA version and customized version for some Enterprise Application) based on OpenSFTP.
-    * Level 2: OpenSFTP provides several interfaces as API to eliminate coupling between the upper application and concrete implementation of OpenSFTP. So upper applicatons based on old versions of openSFTP can still work well without any modification if I find a better SSH2 implementation and rewrite OpenSFTP.
+    * Level 1: It's very easy to develop your own SFTP client (e.g. desktop version, RIA version and customized version for a certain Enterprise Application) based on OpenSFTP.
+    * Level 2: OpenSFTP provides several interfaces as API to eliminate coupling between the upper application and the concrete implementation of OpenSFTP. So upper applicatons based on old versions of openSFTP can still work well without any modification if I find a better SSH2 implementation and rewrite OpenSFTP.
