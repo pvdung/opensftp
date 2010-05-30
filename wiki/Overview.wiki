@@ -1,4 +1,3 @@
-#labels Featured
 <font face="Calibri" size="3">
 <p align="left"><font size="4" color="blue">
 Ease Your Work with SFTP by Using OpenSFTP
