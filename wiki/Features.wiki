@@ -1,6 +1,8 @@
 #labels Featured
 <font face="Calibri" size="3">
-
+<p align="left"><font size="4" color="blue">
+Features
+</font></p>
 The following is a list of features of OpenSFTP: 
   * OpenSFTP is in pure Java, so it's platform-independent. It's know to work with J2SE 1.4.0 or later.
   * SSH2 protocol support. OpenSFTP depends on [http://www.jcraft.com/jsch Jsch]. The following features come with Jsch.
