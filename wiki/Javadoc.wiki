@@ -4,6 +4,7 @@ Get Javadoc
 </font></p>
 ----
 The Javadoc for the latest stable release:
+<br>
 [ Javadoc]
 <br><br>
 The Javadocs for older releases can be found [http://code.google.com/p/opensftp/downloads here].
