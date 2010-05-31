@@ -7,7 +7,7 @@ The latest stable release:
 <br>
 [ Binary JARs] (includes only necessary JARs)
 <br>
-[ All Files] (includes JARs, source, Javadoc, manuals, etc.)
+[ Package] (includes JARs, source, Javadoc, manuals, etc.)
 <br><br>
 Older releases can be found [http://code.google.com/p/opensftp/downloads here].
 <p/>
