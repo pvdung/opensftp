@@ -1,13 +1,9 @@
-#summary One-sentence summary of this page.
-
-= Introduction =
-
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+<font face="Calibri" size="3">
+<p align="left"><font size="4" color="blue">
+Get Javadoc
+</font></p>
+----
+The Javadoc for the latest stable release:
+[ Javadoc]
+<br><br>
+The Javadocs for older releases can be found [http://code.google.com/p/opensftp/downloads here].
