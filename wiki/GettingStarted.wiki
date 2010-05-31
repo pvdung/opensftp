@@ -5,9 +5,9 @@ Get OpenSFTP
 ----
 The latest stable release:
 <br>
-[ Binary JARs]
+[ Binary JARs (includes only necessary JARs)]
 <br>
-[ All Files]
+[ All Files (includes JARs, source, Javadoc, manuals, etc.)]
 <br><br>
 Older releases can be found [http://code.google.com/p/opensftp/downloads here].
 <p/>
@@ -27,7 +27,7 @@ The Simplest Example
 
 
 
-
+<br><br>
 For more examples, please jump to the [Examples] page.
 <p/>
 <p align="left"><font size="4" color="blue">
