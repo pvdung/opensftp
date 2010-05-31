@@ -4,15 +4,18 @@ Get OpenSFTP
 </font></p>
 ----
 The latest stable release:
-[]
-
+<br>
+[ Binary JARs]
+<br>
+[ All Files]
+<br><br>
 Older releases can be found [http://code.google.com/p/opensftp/downloads here].
 <p/>
 <p align="left"><font size="4" color="blue">
 Set Up the Class Path
 </font></p>
 ----
-Add the following JAR files to your class path:
+Add the following JARs to your class path:
   * OpenSFTP-x.x.x.jar
   * jsch-x.x.x.jar
   * jzlib-x.x.x.jar
