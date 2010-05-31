@@ -11,6 +11,7 @@
     * [Javadoc Javadoc]
     * [Examples Examples]
     * [FAQ FAQ]
+    * [ReleaseHistory Release History]
   * Getting Involved
     * [IssueTracking Issue Tracking]
     * [MailingLists Mailing Lists]
