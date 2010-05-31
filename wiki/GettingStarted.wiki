@@ -1,13 +1,36 @@
-#summary One-sentence summary of this page.
+<font face="Calibri" size="3">
+<p align="left"><font size="4" color="blue">
+Get OpenSFTP
+</font></p>
+----
+The latest stable release:
+[]
 
-= Introduction =
+Older releases can be found [http://code.google.com/p/opensftp/downloads here].
+<p/>
+<p align="left"><font size="4" color="blue">
+Set Up the Class Path
+</font></p>
+----
+Add the following JAR files to your class path:
+  * OpenSFTP-x.x.x.jar
+  * jsch-x.x.x.jar
+  * jzlib-x.x.x.jar
+<p/>
+<p align="left"><font size="4" color="blue">
+The Simplest Example
+</font></p>
+----
 
-Add your content here.
 
 
-= Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+For more examples, please jump to the [Examples] page.
+<p/>
+<p align="left"><font size="4" color="blue">
+Where Next?
+</font></p>
+----
+The [CheatSheet Cheat Sheet] is an overview of the entire OpenSFTP API.
+<br>
+Also, the [Javadoc] is a good helper.
