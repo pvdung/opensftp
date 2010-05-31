@@ -4,8 +4,7 @@ Release History
 </font></p>
 ----
 || *Version* || *Date (yyyy/MM/dd)* || *Changes* || *Release Notes* ||
-|| 1.0.0 || 2010/6/5 || `
-Features 
+|| 1.0.0 || 2010/6/5 || `Features 
 f
 f
 f
