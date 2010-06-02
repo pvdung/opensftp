@@ -4,5 +4,7 @@ Opensftp-users
 </font></p>
 ----
 This list deals with everything related to OpenSFTP: support, suggestions, announcments, etc.
+<br>
 Click [https://lists.sourceforge.net/lists/listinfo/opensftp-users here] to subscribe to opensftp-users.
+<br>
 To see the collection of prior postings to the list, visit the [http://sourceforge.net/mailarchive/forum.php?forum_name=opensftp-users Opensftp-users Archives]. 
