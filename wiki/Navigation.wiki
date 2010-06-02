@@ -13,5 +13,5 @@
     * [FAQ FAQ]
     * [ReleaseHistory Release History]
   * Getting Involved
-    * [IssueTracking Issue Tracking]
+    * [http://code.google.com/p/opensftp/issuesIssue Tracking]
     * [MailingLists Mailing Lists]
