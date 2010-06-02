@@ -1,13 +1,8 @@
-#summary One-sentence summary of this page.
-
-= Introduction =
-
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+<font face="Calibri" size="3">
+<p align="left"><font size="4" color="blue">
+Opensftp-users
+</font></p>
+----
+This list deals with everything related to OpenSFTP: support, suggestions, announcments, etc.
+Click [https://lists.sourceforge.net/lists/listinfo/opensftp-users here] to subscribe to opensftp-users.
+To see the collection of prior postings to the list, visit the [http://sourceforge.net/mailarchive/forum.php?forum_name=opensftp-users Opensftp-users Archives]. 
