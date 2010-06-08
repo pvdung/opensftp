@@ -3,6 +3,7 @@
 	<name>opensftp-impl</name>
 	<comment></comment>
 	<projects>
+		<project>opensftp-api</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
