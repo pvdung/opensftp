@@ -14,18 +14,23 @@ public class SftpUtilFactory {
 	 * identifying our {@link SftpUtil} implementation class.
 	 */
 	private static final String SFTPUTIL_PROPERTY = "net.sf.opensftp.SftpUtil";
-	private static final String defaultSftpUtilClassName = "net.sf.opensftp.impl.SftpUtil";
-	private static volatile boolean sftpUtilClassNameInitialized = false;
+	public static final String defaultSftpUtilClassName = "net.sf.opensftp.impl.SftpUtil";
 	private static String sftpUtilClassName = null;
+	private static volatile boolean sftpUtilClassNameInitialized = false;
+	private static Object sftpUtilClassNameLock = new Object();
+	private static SftpUtil sftpUtil = null;
 	private static volatile boolean sftpUtilInitialized = false;
-	private static SftpUtil sftpUtil;
+	private static Object sftpUtilLock = new Object();
 
-	public void setSftpUtilClassName(String name) {
+	public static void setSftpUtilClassName(String name) {
+		log.debug("User is trying to set SftpUtil class name.");
 		if (sftpUtilClassNameInitialized || name == null
-				|| name.trim().length() == 0)
+				|| name.trim().length() == 0) {
+			log.debug("Ignored.");
 			return;
+		}
 
-		synchronized (sftpUtilClassName) {
+		synchronized (sftpUtilClassNameLock) {
 			if (sftpUtilClassNameInitialized)
 				return;
 
@@ -35,21 +40,22 @@ public class SftpUtilFactory {
 				Class.forName(name);
 				sftpUtilClassName = name;
 				sftpUtilClassNameInitialized = true;
-				log.debug("The SftpUtil class name was set to " + name);
+				log.debug("The SftpUtil class name was set to '" + name + "'.");
 				return;
 			} catch (ClassNotFoundException e) {
-				log.warn("The user-specified SftpUtil was not found.");
+				log.warn("The user-specified SftpUtil class '" + name
+						+ "' was not found.");
 			}
 		}
 	}
 
 	/**
-	 * Checks system properties for an SftpUtil implementation specified by the user 
-	 * under the property names {@link #SFTPUTIL_PROPERTY}.
-	 * Use the default one ({@link #defaultSftpUtilClassName}) if not found.
+	 * Checks system properties for an SftpUtil implementation specified by the
+	 * user under the property names {@link #SFTPUTIL_PROPERTY}. Use the default
+	 * one ({@link #defaultSftpUtilClassName}) if not found.
 	 */
-	private void findSftpUtilClassName() {
-		synchronized (sftpUtilClassName) {
+	private static void findSftpUtilClassName() {
+		synchronized (sftpUtilClassNameLock) {
 			if (sftpUtilClassNameInitialized)
 				return;
 
@@ -71,21 +77,21 @@ public class SftpUtilFactory {
 				}
 			}
 
-			sftpUtilClassName = defaultSftpUtilClassName;			
+			sftpUtilClassName = defaultSftpUtilClassName;
 			sftpUtilClassNameInitialized = true;
 			log.debug("Use the default one.");
 		}
 	}
 
-	public String getSftpUtilClassName() {
+	public static String getSftpUtilClassName() {
 		if (!sftpUtilClassNameInitialized)
 			findSftpUtilClassName();
 		return sftpUtilClassName;
 	}
 
-	public SftpUtil getSftpUtil() {
+	public static SftpUtil getSftpUtil() {
 		if (!sftpUtilInitialized) {
-			synchronized (sftpUtil) {
+			synchronized (sftpUtilLock) {
 				if (!sftpUtilInitialized) {
 					try {
 						sftpUtil = (SftpUtil) (new ObjenesisStd()
