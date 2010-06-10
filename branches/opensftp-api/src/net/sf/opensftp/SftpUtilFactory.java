@@ -11,8 +11,8 @@ import org.objenesis.ObjenesisStd;
  * {@link SftpUtil} implementation class to instantiate a Singleton object for.
  * </p>
  * <ul>
- * <li>Use the <code>net.sf.opensftp.SftpUtil</code> system property to identify
- * the requested implementation class.</li>
+ * <li>Use the implementation class specified through the
+ * <code>net.sf.opensftp.SftpUtil</code> system property.</li>
  * <li>Use the implementation class specified through the first and only
  * effective call to {@link #setSftpUtilClassName(String)}.</li>
  * <li>Otherwise, use the default implementation class
@@ -42,7 +42,8 @@ public class SftpUtilFactory {
 	private static volatile boolean sftpUtilClassNameInitialized = false;
 	private static Object sftpUtilClassNameLock = new Object();
 	/**
-	 * The instance of the actual {@link SftpUtil} implementation class.
+	 * The Singleton instance of the actual {@link SftpUtil} implementation
+	 * class.
 	 */
 	private static SftpUtil sftpUtil = null;
 	private static volatile boolean sftpUtilInitialized = false;
@@ -58,17 +59,17 @@ public class SftpUtilFactory {
 	 * This method can be used to set the name of the {@link SftpUtil}
 	 * implementation class programmatically rather than via system properties.
 	 * <p>
-	 * A call to this metods is effective only when the following conditions are
+	 * A call to this method is effective only when the following conditions are
 	 * all met.
 	 * <ul>
-	 * <li>The <code>net.sf.opensftp.SftpUtil</code> system property wasn not or
-	 * not effectively set. For example, It's not a effectively set if you set a
-	 * class which doesn't exist in the classpath or doesn't implement
+	 * <li>The <code>net.sf.opensftp.SftpUtil</code> system property was not or
+	 * not effectively set. For example, It's not a effective set if you specify
+	 * a class which doesn't exist in the classpath or doesn't implement
 	 * {@link SftpUtil} at all.</li>
 	 * <li>No previous call to {@link #getSftpUtilClassName()}.</li>
 	 * <li>No previous call to {@link #getSftpUtil()}.</li>
-	 * <li>The class represented by the name you specified exists in the
-	 * classpath and implements {@link SftpUtil}.</li>
+	 * <li>The class identified by the specified name exists in the classpath
+	 * and implements {@link SftpUtil}.</li>
 	 * <li>No previous effective call to this method.</li>
 	 * </ul>
 	 * <p>
@@ -92,7 +93,8 @@ public class SftpUtilFactory {
 
 			name = name.trim();
 			try {
-				// Check whether the user-specified SftpUtil exists or not.
+				// Check whether the class identified by the specified name
+				// exists in the classpath and implements SftpUtil or not.
 				if (Arrays.asList(Class.forName(name).getInterfaces())
 						.contains(SftpUtil.class)) {
 					sftpUtilClassName = name;
@@ -101,11 +103,11 @@ public class SftpUtilFactory {
 							+ "'.");
 					return;
 				} else {
-					log.debug("The specified clss (" + name
-							+ ") doesn't implement SftpUtil. ");
+					log.warn("The specified clss '" + name
+							+ "' doesn't implement SftpUtil. ");
 				}
 			} catch (ClassNotFoundException e) {
-				log.warn("The user-specified SftpUtil class '" + name
+				log.warn("The specified SftpUtil class '" + name
 						+ "' was not found.");
 			}
 		}
@@ -115,21 +117,22 @@ public class SftpUtilFactory {
 	 * Check the <code>net.sf.opensftp.SftpUtil</code> system property for an
 	 * {@link SftpUtil} implementation class.
 	 * <p>
-	 * The class specified above should exist in the classpath and implement
-	 * {@link SftpUtil}. Otherwise, it will be ignored.
+	 * The class identified by this property should exist in the classpath and
+	 * implement {@link SftpUtil}. Otherwise, this call will take no effect.
 	 */
 	private static void findSftpUtilClassName() {
 		/*
 		 * synchronized (sftpUtilClassNameLock) { if
 		 * (sftpUtilClassNameInitialized) return;
 		 */
-		log.debug("Trying to get SftpUtil class name from system property "
+		log.debug("Trying to get SftpUtil class name from the system property "
 				+ SFTPUTIL_PROPERTY);
 		String tmp = System.getProperty(SFTPUTIL_PROPERTY, null);
 		if (tmp != null && tmp.trim().length() != 0) {
 			try {
 				tmp = tmp.trim();
-				// Check whether the user-specified SftpUtil exists or not.
+				// Check whether the class identified by the specified name
+				// exists in the classpath and implements SftpUtil or not.
 				if (Arrays.asList(Class.forName(tmp).getInterfaces()).contains(
 						SftpUtil.class)) {
 					sftpUtilClassName = tmp;
@@ -137,12 +140,12 @@ public class SftpUtilFactory {
 					log.debug("The SftpUtil class name was set to " + tmp);
 					return;
 				} else {
-					log.debug("The specified clss (" + tmp
-							+ ") doesn't implement SftpUtil. ");
+					log.warn("The specified clss '" + tmp
+							+ "' doesn't implement SftpUtil. ");
 				}
 			} catch (ClassNotFoundException e) {
-				log.warn("The user-specified SftpUtil " + tmp
-						+ " was not found.");
+				log.warn("The specified SftpUtil class '" + tmp
+						+ "' was not found.");
 			}
 		}
 		/*
