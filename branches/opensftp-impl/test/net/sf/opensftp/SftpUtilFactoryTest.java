@@ -6,35 +6,50 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SftpUtilFactoryTest extends SftpUtilFactory{
+public class SftpUtilFactoryTest extends SftpUtilFactoryDup {
 
 	@Before
 	public void setUp() throws Exception {
-		
+
 	}
 
 	@After
-	public void tearDown() throws Exception {
-	}
-
-	@Test
-	public void testSetSftpUtilClassName() {
-		SftpUtilFactory.setSftpUtilClassName(null);
-		SftpUtilFactory.setSftpUtilClassName("");
-		SftpUtilFactory.setSftpUtilClassName("a");
-		SftpUtilFactory.setSftpUtilClassName(" b ");
-		assertTrue(SftpUtilFactory.getSftpUtil() instanceof net.sf.opensftp.impl.SftpUtil);
+	public void tearDown() {
+		SftpUtilFactoryDup.sftpUtil = null;
+		SftpUtilFactoryDup.sftpUtilInitialized = false;
+		SftpUtilFactoryDup.sftpUtilClassName = null;
+		SftpUtilFactoryDup.sftpUtilClassNameInitialized = false;
 	}
 
 	@Test
 	public void testGetSftpUtilClassName() {
-		SftpUtilFactory.setSftpUtilClassName("a");
-		assertTrue(SftpUtilFactory.getSftpUtil() instanceof net.sf.opensftp.impl.SftpUtil);
+		assertTrue(SftpUtilFactoryDup.getSftpUtilClassName().equals("net.sf.opensftp.impl.SftpUtil"));
+		tearDown();
+		SftpUtilFactoryDup.setSftpUtilClassName(" net.sf.opensftp.SftpUtilMock ");
+		assertTrue(SftpUtilFactoryDup.getSftpUtilClassName().equals("net.sf.opensftp.SftpUtilMock"));
 	}
 
 	@Test
 	public void testGetSftpUtil() {
-
+		assertTrue(SftpUtilFactoryDup.getSftpUtil() instanceof net.sf.opensftp.impl.SftpUtil);
+		tearDown();
+		SftpUtilFactoryDup.setSftpUtilClassName(" net.sf.opensftp.SftpUtilMock ");
+		assertTrue(SftpUtilFactoryDup.getSftpUtil() instanceof net.sf.opensftp.SftpUtilMock);
+	}
+	
+	@Test
+	public void testSetSftpUtilClassName() {
+		SftpUtilFactoryDup.setSftpUtilClassName(null);
+		assertTrue(SftpUtilFactoryDup.getSftpUtil() instanceof net.sf.opensftp.impl.SftpUtil);
+		tearDown();
+		SftpUtilFactoryDup.setSftpUtilClassName("");
+		assertTrue(SftpUtilFactoryDup.getSftpUtil() instanceof net.sf.opensftp.impl.SftpUtil);
+		tearDown();
+		SftpUtilFactoryDup.setSftpUtilClassName(" a ");
+		assertTrue(SftpUtilFactoryDup.getSftpUtil() instanceof net.sf.opensftp.impl.SftpUtil);
+		tearDown();
+		SftpUtilFactoryDup.setSftpUtilClassName(" net.sf.opensftp.SftpUtilMock ");
+		assertTrue(SftpUtilFactoryDup.getSftpUtil() instanceof net.sf.opensftp.SftpUtilMock);
 	}
 
 }

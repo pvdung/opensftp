@@ -1,0 +1,8 @@
+For unit testing purpose, SftpUtilFactoryDup is created based on SftpUtilFactory.
+SftpUtilFactoryDup is almost the same as SftpUtilFactory 
+except that the following fields are declared as protected.
+sftpUtilClassName,sftpUtilClassNameInitialized, sftpUtil, sftpUtilInitialized.
+
+SftpUtilMock mocks implement SftpUtil.
+
+ 
