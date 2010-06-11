@@ -1,8 +1,14 @@
-For unit testing purpose, SftpUtilFactoryDup is created based on SftpUtilFactory.
+For UT purpose, SftpUtilFactoryDup is created based on SftpUtilFactory.
 SftpUtilFactoryDup is almost the same as SftpUtilFactory 
 except that the following fields are declared as protected.
 sftpUtilClassName,sftpUtilClassNameInitialized, sftpUtil, sftpUtilInitialized.
 
 SftpUtilMock mocks implement SftpUtil.
 
- 
+By default, SftpUtilFactoryTest covers cases that the 'net.sf.opensftp.SftpUtil' system property is not set. 
+To enable SftpUtilFactoryTest to cover cases that the 'net.sf.opensftp.SftpUtil' system property is set, 
+specify the following vm args individually.
+-Dnet.sf.opensftp.SftpUtil=
+-Dnet.sf.opensftp.SftpUtil=a.b.c
+-Dnet.sf.opensftp.SftpUtil=org.apache.log4j.Logger
+-Dnet.sf.opensftp.SftpUtil=net.sf.opensftp.MockSftpUtil

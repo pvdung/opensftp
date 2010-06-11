@@ -1,6 +1,6 @@
 package net.sf.opensftp;
 
-public class SftpUtilMock implements SftpUtil {
+public class MockSftpUtil implements SftpUtil {
 
 	public SftpResult cd(SftpChannel channel, String path) {
 		// TODO Auto-generated method stub

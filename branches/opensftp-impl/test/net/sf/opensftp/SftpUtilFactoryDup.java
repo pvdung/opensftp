@@ -148,6 +148,9 @@ public class SftpUtilFactoryDup {
 						+ "' was not found.");
 			}
 		}
+		else {
+			log.debug("The system property was not set or was set to blanks.");
+		}
 		/*
 		 * sftpUtilClassName = DEFAULT_SFTPUTIL_CLASSNAME;
 		 * sftpUtilClassNameInitialized = true;
