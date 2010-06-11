@@ -11,7 +11,7 @@ public interface SftpUtil {
 	 * @return a sesion-like or channel-like object representing the connection
 	 *         between the server and client
 	 */
-	public SftpChannel connect(String host, String user, String identityFile) throws Exception;
+	public SftpSession connect(String host, String user, String identityFile) throws Exception;
 
 	/**
 	 * connect to a remote sftp through the default port(22) using publickey
@@ -20,7 +20,7 @@ public interface SftpUtil {
 	 * @return a sesion-like or channel-like object representing the connection
 	 *         between the server and client
 	 */
-	public SftpChannel connect(String host, String user, String passphrase,
+	public SftpSession connect(String host, String user, String passphrase,
 			String identityFile) throws Exception;
 
 	/**
@@ -29,7 +29,7 @@ public interface SftpUtil {
 	 * @return a sesion-like or channel-like object representing the connection
 	 *         between the server and client
 	 */
-	public SftpChannel connect(String host, int port, String user,
+	public SftpSession connect(String host, int port, String user,
 			String passphrase, String identityFile) throws Exception;
 
 	/**
@@ -39,7 +39,7 @@ public interface SftpUtil {
 	 * @return a sesion-like or channel-like object representing the connection
 	 *         between the server and client
 	 */
-	public SftpChannel connectByPasswdAuth(String host, String user,
+	public SftpSession connectByPasswdAuth(String host, String user,
 			String password) throws Exception;
 
 	/**
@@ -48,39 +48,39 @@ public interface SftpUtil {
 	 * @return a sesion-like or channel-like object representing the connection
 	 *         between the server and client
 	 */
-	public SftpChannel connectByPasswdAuth(String host, int port, String user,
+	public SftpSession connectByPasswdAuth(String host, int port, String user,
 			String password) throws Exception;
 
-	public void disconnect(SftpChannel channel);
+	public void disconnect(SftpSession session);
 
-	public SftpResult ls(SftpChannel channel);
+	public SftpResult ls(SftpSession session);
 
-	public SftpResult ls(SftpChannel channel, String path);
+	public SftpResult ls(SftpSession session, String path);
 
-	public SftpResult put(SftpChannel channel, String localFilename);
+	public SftpResult put(SftpSession session, String localFilename);
 
-	public SftpResult put(SftpChannel channel, String localFilename,
+	public SftpResult put(SftpSession session, String localFilename,
 			String remoteFilename);
 
-	public SftpResult get(SftpChannel channel, String remoteFilename);
+	public SftpResult get(SftpSession session, String remoteFilename);
 
-	public SftpResult get(SftpChannel channel, String remoteFilename,
+	public SftpResult get(SftpSession session, String remoteFilename,
 			String localFilename);
 
-	public SftpResult cd(SftpChannel channel, String path);
+	public SftpResult cd(SftpSession session, String path);
 
-	public SftpResult lcd(SftpChannel channel, String path);
+	public SftpResult lcd(SftpSession session, String path);
 
-	public SftpResult mkdir(SftpChannel channel, String path);
+	public SftpResult mkdir(SftpSession session, String path);
 
-	public SftpResult rename(SftpChannel channel, String oldpath, String newpath);
+	public SftpResult rename(SftpSession session, String oldpath, String newpath);
 
-	public SftpResult rm(SftpChannel channel, String filename);
+	public SftpResult rm(SftpSession session, String filename);
 
-	public SftpResult rmdir(SftpChannel channel, String path);
+	public SftpResult rmdir(SftpSession session, String path);
 
-	public SftpResult pwd(SftpChannel channel);
+	public SftpResult pwd(SftpSession session);
 
-	public SftpResult lpwd(SftpChannel channel);
+	public SftpResult lpwd(SftpSession session);
 
 }

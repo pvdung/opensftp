@@ -1,115 +1,116 @@
 package net.sf.opensftp.impl;
 
-import net.sf.opensftp.SftpChannel;
+import net.sf.opensftp.SftpSession;
 import net.sf.opensftp.SftpResult;
 
 public class SftpUtil implements net.sf.opensftp.SftpUtil{
 
-	public SftpResult cd(SftpChannel channel, String path) {
+	public SftpResult cd(SftpSession session, String path) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpChannel connect(String host, String user, String identityFile)
+	public SftpSession connect(String host, String user, String identityFile)
 			throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpChannel connect(String host, String user, String passphrase,
+	public SftpSession connect(String host, String user, String passphrase,
 			String identityFile) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpChannel connect(String host, int port, String user,
+	public SftpSession connect(String host, int port, String user,
 			String passphrase, String identityFile) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpChannel connectByPasswdAuth(String host, String user,
+	public SftpSession connectByPasswdAuth(String host, String user,
 			String password) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpChannel connectByPasswdAuth(String host, int port, String user,
+	public SftpSession connectByPasswdAuth(String host, int port, String user,
 			String password) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void disconnect(SftpChannel channel) {
+	public void disconnect(SftpSession session) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public SftpResult get(SftpChannel channel, String remoteFilename) {
+	public SftpResult get(SftpSession session, String remoteFilename) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpResult get(SftpChannel channel, String remoteFilename,
+	public SftpResult get(SftpSession session, String remoteFilename,
 			String localFilename) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpResult lcd(SftpChannel channel, String path) {
+	public SftpResult lcd(SftpSession session, String path) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpResult lpwd(SftpChannel channel) {
+	public SftpResult lpwd(SftpSession session) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpResult ls(SftpChannel channel) {
+	public SftpResult ls(SftpSession session) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpResult ls(SftpChannel channel, String path) {
+	public SftpResult ls(SftpSession session, String path) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpResult mkdir(SftpChannel channel, String path) {
+	public SftpResult mkdir(SftpSession session, String path) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpResult put(SftpChannel channel, String localFilename) {
+	public SftpResult put(SftpSession session, String localFilename) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpResult put(SftpChannel channel, String localFilename,
+	public SftpResult put(SftpSession session, String localFilename,
 			String remoteFilename) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpResult pwd(SftpChannel channel) {
+	public SftpResult pwd(SftpSession session) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpResult rename(SftpChannel channel, String oldpath, String newpath) {
+	public SftpResult rename(SftpSession session, String oldpath, String newpath) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpResult rm(SftpChannel channel, String filename) {
+	public SftpResult rm(SftpSession session, String filename) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public SftpResult rmdir(SftpChannel channel, String path) {
+	public SftpResult rmdir(SftpSession session, String path) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }
