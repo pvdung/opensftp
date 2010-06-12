@@ -18,4 +18,4 @@ The following is a list of features of OpenSFTP:
   * Easy to troubleshot. OpenSFTP using [http://logging.apache.org/log4j log4j] to record its running status. It's easy to change the logging level, change the logging pattern and even customize your own appender.
   * Easy to extend. This feature contains two levels.
     * Level 1: It's very easy to develop your own SFTP client (e.g. desktop version, RIA version and customized version for a certain Enterprise Application) based on OpenSFTP.
-    * Level 2: OpenSFTP provides several interfaces as API to eliminate coupling between the upper application and the concrete implementation of OpenSFTP. So upper applicatons based on old versions of openSFTP can still work well without any modification if I find a better SSH2 implementation and rewrite OpenSFTP.
+    * Level 2: OpenSFTP provides a well-designed API to eliminate coupling between the upper application and the concrete implementation of OpenSFTP. So upper applicatons based on old versions of openSFTP can still work well without any modification if I find a better SSH2 implementation and rewrite OpenSFTP.
