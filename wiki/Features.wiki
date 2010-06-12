@@ -6,7 +6,7 @@ Features
 ----
 The following is a list of features of OpenSFTP: 
   * OpenSFTP is in pure Java, so it's platform-independent. It's known to work with JDK 1.5.0 or later.
-  * SSH2 protocol support. OpenSFTP depends on [http://www.jcraft.com/jsch Jsch]. The following features come with Jsch.
+  * SSH2 protocol supported. OpenSFTP depends on [http://www.jcraft.com/jsch Jsch]. The following features come with Jsch.
     * Userauth: password, publickey (DSA, RSA)
     * Host key type: ssh-dsa, ssh-rsa
     * passphrase: empty or not
