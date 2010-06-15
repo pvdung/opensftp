@@ -10,32 +10,33 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil{
 		return null;
 	}
 
-	public SftpSession connect(String host, String user, String identityFile)
-			throws Exception {
+	public SftpSession connect(String host, String user, String identityFile,
+			int strictHostKeyChecking) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public SftpSession connect(String host, String user, String passphrase,
-			String identityFile) throws Exception {
+			String identityFile, int strictHostKeyChecking) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public SftpSession connect(String host, int port, String user,
-			String passphrase, String identityFile) throws Exception {
+			String passphrase, String identityFile, int strictHostKeyChecking)
+			throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public SftpSession connectByPasswdAuth(String host, String user,
-			String password) throws Exception {
+			String password, int strictHostKeyChecking) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public SftpSession connectByPasswdAuth(String host, int port, String user,
-			String password) throws Exception {
+			String password, int strictHostKeyChecking) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -111,6 +112,5 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }
