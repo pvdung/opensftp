@@ -12,7 +12,7 @@ package net.sf.opensftp;
  * attributes cover type, permissions, owner, group, size, atime (namely, last
  * access time) and mtime (namely, last modification time).</li>
  * </ul>
- * 
+ * @see SftpFileAttribute
  * @version
  * @author BurningXFlame
  */

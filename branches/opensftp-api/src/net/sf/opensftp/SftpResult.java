@@ -7,7 +7,8 @@ package net.sf.opensftp;
  * </p>
  * <ul>
  * <li><code>successFlag</code>, tells whether the operation succeeds or fails</li>
- * <li><code>error</code>, represents the error message, if any</li>
+ * <li><code>errorCode</code>, represents the integer error code, if any</li>
+ * <li><code>errorMessage</code>, represents the error message, if any</li>
  * <li><code>extension</code>, represents the output of the operation, if any</li>
  * </ul>
  * 
@@ -23,10 +24,16 @@ public interface SftpResult {
 	public boolean getSuccessFalg();
 	
 	/**
-	 * Retrieve the <code>error</code>.
-	 * @return the <code>error</code>.
+	 * Retrieve the <code>errorCode</code>.
+	 * @return the <code>errorCode</code>.
 	 */
-	public String getError();
+	public String getErrorCode();
+
+	/**
+	 * Retrieve the <code>errorMessage</code>.
+	 * @return the <code>errorMessage</code>.
+	 */
+	public String getErrorMessage();
 
 	/**
 	 * Retrieve the <code>extension</code>.
