@@ -3,7 +3,7 @@ SftpUtilFactoryDup is almost the same as SftpUtilFactory
 except that the following fields are declared as protected.
 sftpUtilClassName,sftpUtilClassNameInitialized, sftpUtil, sftpUtilInitialized.
 
-SftpUtilMock mocks implement SftpUtil.
+SftpUtilMock mocks an implementation of SftpUtil.
 
 By default, SftpUtilFactoryTest covers cases that the 'net.sf.opensftp.SftpUtil' system property is not set. 
 To enable SftpUtilFactoryTest to cover cases that the 'net.sf.opensftp.SftpUtil' system property is set, 
