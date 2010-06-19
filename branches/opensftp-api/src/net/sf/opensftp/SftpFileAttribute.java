@@ -80,7 +80,7 @@ public interface SftpFileAttribute {
 	 * Return the <code>permissions</code> attribute of the file or directory
 	 * represented by the {@link SftpFile} object to which this
 	 * <code>SftpFileAttribute</code> object belongs. The return value is a
-	 * three-digis octal number, 0755, for instance.
+	 * three-digit octal number, 0755, for instance.
 	 * 
 	 * @return the <code>permissions</code> attribute of the file or directory
 	 *         represented by the {@link SftpFile} object to which this

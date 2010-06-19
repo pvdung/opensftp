@@ -273,7 +273,7 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param path
-	 *            The path of the folder to create.
+	 *            The path of the directory to create.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -326,7 +326,8 @@ public interface SftpUtil {
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation. Invoking <code>getExtension()</code> on the returned
 	 *         <code>SftpResult</code> object should return an
-	 *         <code>{@link SftpFile}</code> object, if this pwd operation succeed.
+	 *         <code>{@link SftpFile}</code> object, if this pwd operation
+	 *         succeed.
 	 */
 	public SftpResult pwd(SftpSession session);
 
@@ -334,8 +335,148 @@ public interface SftpUtil {
 	 * Represent the lpwd command.
 	 * 
 	 * @return an {@link SftpResult} object representing the result of this
-	 *         operation
+	 *         operation. Invoking <code>getExtension()</code> on the returned
+	 *         <code>SftpResult</code> object should return an
+	 *         <code>{@link SftpFile}</code> object, if this lpwd operation
+	 *         succeed.
 	 */
 	public SftpResult lpwd(SftpSession session);
 
+	/**
+	 * Represent the chgrp command.
+	 * 
+	 * @param session
+	 *            The {@link SftpSession} object you previously got when
+	 *            connecting.
+	 * @param grp
+	 *            The String representing the new group
+	 * @param path
+	 *            The path representing the file or directory the group of which
+	 *            is about to change.
+	 * @return an {@link SftpResult} object representing the result of this
+	 *         operation
+	 */
+	public SftpResult chgrp(SftpSession session, String grp, String path);
+
+	/**
+	 * Represent the chgrp command.
+	 * 
+	 * @param session
+	 *            The {@link SftpSession} object you previously got when
+	 *            connecting.
+	 * @param gid
+	 *            The numeric GID of the new group
+	 * @param path
+	 *            The path representing the file or directory the group of which
+	 *            is about to change.
+	 * @return an {@link SftpResult} object representing the result of this
+	 *         operation
+	 */
+	public SftpResult chgrp(SftpSession session, int gid, String path);
+
+	/**
+	 * Represent the chown command.
+	 * 
+	 * @param session
+	 *            The {@link SftpSession} object you previously got when
+	 *            connecting.
+	 * @param own
+	 *            The String representing the new owner
+	 * @param path
+	 *            The path representing the file or directory the owner of which
+	 *            is about to change.
+	 * @return an {@link SftpResult} object representing the result of this
+	 *         operation
+	 */
+	public SftpResult chown(SftpSession session, String own, String path);
+
+	/**
+	 * Represent the chown command.
+	 * 
+	 * @param session
+	 *            The {@link SftpSession} object you previously got when
+	 *            connecting.
+	 * @param uid
+	 *            The numeric UID of the new owner
+	 * @param path
+	 *            The path representing the file or directory the owner of which
+	 *            is about to change.
+	 * @return an {@link SftpResult} object representing the result of this
+	 *         operation
+	 */
+	public SftpResult chown(SftpSession session, int uid, String path);
+
+	/**
+	 * Represent the chmod command.
+	 * 
+	 * @param session
+	 *            The {@link SftpSession} object you previously got when
+	 *            connecting.
+	 * @param mode
+	 *            The three-digit octal number, 0755 for instance, representing
+	 *            the new permission
+	 * @param path
+	 *            The path representing the file or directory the permission of
+	 *            which is about to change.
+	 * @return an {@link SftpResult} object representing the result of this
+	 *         operation
+	 */
+	public SftpResult chmod(SftpSession session, int mode, String path);
+
+	/**
+	 * Represent the help command.
+	 * 
+	 * @return an {@link SftpResult} object representing the result of this
+	 *         operation
+	 */
+	public SftpResult help(SftpSession session);
+
+	/**
+	 * Represent the lmkdir command.
+	 * 
+	 * @param session
+	 *            The {@link SftpSession} object you previously got when
+	 *            connecting.
+	 * @param path
+	 *            The path of the folder to create.
+	 * @return an {@link SftpResult} object representing the result of this
+	 *         operation
+	 */
+	public SftpResult lmkdir(SftpSession session, String path);
+
+	/**
+	 * Represent the lls command. Invoking this method is equivalent to:
+	 * 
+	 * <pre>
+	 * lls(session, &quot;.&quot;)
+	 * </pre>
+	 * 
+	 * @see #lls(SftpSession, String)
+	 * 
+	 * @param session
+	 *            The {@link SftpSession} object you previously got when
+	 *            connecting.
+	 * @return an {@link SftpResult} object representing the result of this
+	 *         operation. Invoking <code>getExtension()</code> on the returned
+	 *         <code>SftpResult</code> object should return a
+	 *         <code>List<{@link SftpFile}></code> object, if this lls operation
+	 *         succeed.
+	 */
+	public SftpResult lls(SftpSession session);
+
+	/**
+	 * Represent the lls command.
+	 * 
+	 * @param session
+	 *            The {@link SftpSession} object you previously got when
+	 *            connecting.
+	 * @param path
+	 *            The path to lls.
+	 * @return an {@link SftpResult} object representing the result of this
+	 *         operation. Invoking <code>getExtension()</code> on the returned
+	 *         <code>SftpResult</code> object should return a
+	 *         <code>List<{@link SftpFile}></code> object, if this lls operation
+	 *         succeed.
+	 */
+	public SftpResult lls(SftpSession session, String path);
 }
