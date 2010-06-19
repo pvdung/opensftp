@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://opensftp.sf.net/opensftp-config"
+	xmlns:tns="http://opensftp.sf.net/opensftp-config" elementFormDefault="qualified">
+	<element name="opensftp-config">
+		<complexType>
+			<sequence>
+				<element name="sftputil-impl" maxOccurs="1" minOccurs="0"
+					type="string" />
+				<element name="interceptors" maxOccurs="1" minOccurs="0">
+					<complexType>
+						<sequence>
+							<element name="interceptor" maxOccurs="unbounded"
+								minOccurs="0">
+								<complexType>
+									<sequence>
+										<element name="property" maxOccurs="unbounded"
+											minOccurs="0">
+											<complexType>
+												<attribute name="name" type="string" use="required" />
+												<attribute name="type" type="string" use="required" />
+												<attribute name="value" type="string" use="required"/>
+<!-- not implemented yet.
+													<attribute name="ref" type="string" />
+-->
+											</complexType>
+										</element>
+									</sequence>
+									<attribute name="type" type="string" use="required" />
+								</complexType>
+							</element>
+						</sequence>
+					</complexType>
+				</element>
+<!-- not implemented yet.
+				<element name="bean" maxOccurs="unbounded" minOccurs="0">
+					<complexType>
+						<sequence>
+							<element name="property" maxOccurs="unbounded" minOccurs="0">
+								<complexType>
+									<attribute name="name" type="string" use="required" />
+									<attribute name="type" type="string" use="required" />
+									<attribute name="value" type="string" />
+									<attribute name="ref" type="string" />
+								</complexType>
+							</element>
+						</sequence>
+						<attribute name="name" type="string" use="required" />
+						<attribute name="type" type="string" use="required" />
+					</complexType>
+				</element>
+-->
+			</sequence>
+		</complexType>
+	</element>
+</schema>

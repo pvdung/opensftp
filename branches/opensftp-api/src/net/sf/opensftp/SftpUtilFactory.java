@@ -1,9 +1,16 @@
 package net.sf.opensftp;
 
+import java.net.URL;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Arrays;
-
 import org.apache.log4j.Logger;
+import org.dom4j.*;
+import org.dom4j.io.SAXReader;
 import org.objenesis.ObjenesisStd;
+import org.omg.PortableInterceptor.Interceptor;
+
+import net.sf.opensftp.interceptor.*;
 
 /**
  * <p>
@@ -48,8 +55,52 @@ public class SftpUtilFactory {
 	private static SftpUtil sftpUtil = null;
 	private static volatile boolean sftpUtilInitialized = false;
 	private static Object sftpUtilLock = new Object();
+	/**
+	 * The registered interceptors
+	 */
+	private static List<Interceptor> interceptors = null;
+
 	static {
 		findSftpUtilClassName();
+	}
+
+	/**
+	 * Check the <code>net.sf.opensftp.SftpUtil</code> system property for an
+	 * {@link SftpUtil} implementation class.
+	 * <p>
+	 * The class identified by this property should exist in the classpath and
+	 * implement {@link SftpUtil}. Otherwise, this call will take no effect.
+	 */
+	private static void readConfig() {
+		String configFilename = "opensftp-config.xml";
+		String sftputilImplNodeName = "/opensftp-impl";
+		String interceptorNodeName = "/interceptors/interceptor";
+		// find the configuration file
+		URL url = SftpUtilFactory.class.getResource(configFilename);
+		log.debug("Configuration file found at " + url);
+		try {
+			Document document = new SAXReader().read(url);
+			// sftputil-impl
+			Node sftputilImplNode = document
+					.selectSingleNode(sftputilImplNodeName);
+			String sftputilImplClassName = sftputilImplNode.getText();
+			if (sftputilImplClassName != null
+					&& sftputilImplClassName.trim().length() != 0) {
+				checkAndSetSftpUtilClassName(sftputilImplClassName);
+			}
+
+			// interceptor
+			List interceptorNodes = document.selectNodes(interceptorNodeName);
+			for (Iterator iter = interceptorNodes.iterator(); iter.hasNext();) {
+				String interceptor = (String) iter.next();
+				if (interceptor != null && interceptor.trim().length() != 0) {
+					checkAndAddInterceptor(interceptor);
+				}
+			}
+
+		} catch (DocumentException e) {
+			log.error("Failed to parse the configuration file.", e);
+		}
 	}
 
 	/**
@@ -91,25 +142,54 @@ public class SftpUtilFactory {
 				return;
 			}
 
-			name = name.trim();
-			try {
-				// Check whether the class identified by the specified name
-				// exists in the classpath and implements SftpUtil or not.
-				if (Arrays.asList(Class.forName(name).getInterfaces())
-						.contains(SftpUtil.class)) {
-					sftpUtilClassName = name;
-					sftpUtilClassNameInitialized = true;
-					log.debug("The SftpUtil class name was set to '" + name
-							+ "'.");
-					return;
-				} else {
-					log.warn("The specified clss '" + name
-							+ "' doesn't implement SftpUtil. ");
-				}
-			} catch (ClassNotFoundException e) {
-				log.warn("The specified SftpUtil class '" + name
-						+ "' was not found.");
+			checkAndSetSftpUtilClassName(name);
+		}
+	}
+
+	/**
+	 * Check whether the class identified by the specified name exists in the
+	 * classpath and implements SftpUtil or not. If ture, set
+	 * {@link #sftpUtilClassName} to the specified name.
+	 * 
+	 * @param name
+	 *            Name of the SftpUtil implementation class to set
+	 */
+	private static void checkAndSetSftpUtilClassName(String name) {
+		name = name.trim();
+		try {
+
+			if (Arrays.asList(Class.forName(name).getInterfaces()).contains(
+					SftpUtil.class)) {
+				sftpUtilClassName = name;
+				sftpUtilClassNameInitialized = true;
+				log.debug("The SftpUtil class name was set to '" + name + "'.");
+				return;
+			} else {
+				log.warn("The specified clss '" + name
+						+ "' doesn't implement SftpUtil. ");
 			}
+		} catch (ClassNotFoundException e) {
+			log.warn("The specified SftpUtil class '" + name
+					+ "' was not found.");
+		}
+	}
+
+	private static void checkAndAddInterceptor(String name) {
+		name = name.trim();
+		try {
+
+			if (Arrays.asList(Class.forName(name).getInterfaces()).contains(
+					Interceptor.class)) {
+				interceptors.add((Interceptor) (new ObjenesisStd()
+						.getInstantiatorOf(Class.forName(name)).newInstance()));
+				log.debug("A new Interceptor '" + name + "' added.");
+				return;
+			} else {
+				log.warn("The clss '" + name
+						+ "' doesn't implement Interceptor.");
+			}
+		} catch (ClassNotFoundException e) {
+			log.warn("The class '" + name + "' was not found.");
 		}
 	}
 
@@ -119,40 +199,16 @@ public class SftpUtilFactory {
 	 * <p>
 	 * The class identified by this property should exist in the classpath and
 	 * implement {@link SftpUtil}. Otherwise, this call will take no effect.
+	 * 
+	 * @deprecated
 	 */
 	private static void findSftpUtilClassName() {
-		/*
-		 * synchronized (sftpUtilClassNameLock) { if
-		 * (sftpUtilClassNameInitialized) return;
-		 */
 		log.debug("Trying to get SftpUtil class name from the system property "
 				+ SFTPUTIL_PROPERTY);
 		String tmp = System.getProperty(SFTPUTIL_PROPERTY, null);
 		if (tmp != null && tmp.trim().length() != 0) {
-			try {
-				tmp = tmp.trim();
-				// Check whether the class identified by the specified name
-				// exists in the classpath and implements SftpUtil or not.
-				if (Arrays.asList(Class.forName(tmp).getInterfaces()).contains(
-						SftpUtil.class)) {
-					sftpUtilClassName = tmp;
-					sftpUtilClassNameInitialized = true;
-					log.debug("The SftpUtil class name was set to " + tmp);
-					return;
-				} else {
-					log.warn("The specified clss '" + tmp
-							+ "' doesn't implement SftpUtil. ");
-				}
-			} catch (ClassNotFoundException e) {
-				log.warn("The specified SftpUtil class '" + tmp
-						+ "' was not found.");
-			}
+			checkAndSetSftpUtilClassName(tmp);
 		}
-		/*
-		 * sftpUtilClassName = DEFAULT_SFTPUTIL_CLASSNAME;
-		 * sftpUtilClassNameInitialized = true;
-		 * log.debug("Use the default one."); }
-		 */
 	}
 
 	/**
