@@ -2,14 +2,13 @@
 <opensftp-config xmlns="http://opensftp.sf.net/opensftp-config"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://opensftp.sf.net/opensftp-config opensftp-config.xsd ">
-	<sftputil-impl>sftputil-impl</sftputil-impl>
+	<sftputil-impl>net.sf.opensftp.MockSftpUtil</sftputil-impl>
 	<interceptors>
-		<interceptor type="net.sf.opensftp.LoggingInterceptor" />
-		<interceptor type="net.sf.opensftp.MonitoringInterceptor" />
-
-		<interceptor type="net.sf.opensftp.DummyInterceptor">
-			<property name="dummyfield1" type="string" value="value1" />
-			<property name="dummyfield2" type="int" value="2" />
+		<interceptor type="net.sf.opensftp.interceptor.LoggingInterceptor" />
+		<interceptor type="net.sf.opensftp.interceptor.MonitoringInterceptor" />
+		<interceptor type="net.sf.opensftp.interceptor.DummyInterceptor">
+			<property name="dummyfield1" type="java.lang.String" value="value1" />
+			<property name="dummyfield2" type="java.lang.Integer" value="2" />
 			<property-ref name="dummyfield3" type="java.util.HashMap"
 				ref="dummyMap" />
 			<property-ref name="dummyfield4" type="java.util.Date"
@@ -20,18 +19,18 @@
 	</interceptors>
 	<beans>
 		<bean name="dummyMap" type="java.util.HashMap">
-			<initializing-block>put(1,"one");put(2,"two");put(5,"five");</initializing-block>
+			<initializing-block>put("1","one");put("2","two");put("5","five");</initializing-block>
 		</bean>
 		<bean name="dummyDate" type="java.util.Date">
-			<property name="hours" type="int" value="17" />
-			<property name="minutes" type="int" value="30" />
+			<property name="hours" type="java.lang.Integer" value="17" />
+			<property name="minutes" type="java.lang.Integer" value="30" />
 			<initializing-block>setSeconds(40);</initializing-block>
 		</bean>
-		<bean name="dummyDateFormat" type="java.text.DateFormat">
+		<bean name="dummyDateFormat" type="java.text.SimpleDateFormat">
 			<property-ref name="calendar" type="java.util.Calendar"
 				ref="dummyCalendar" />
 		</bean>
-		<bean name="dummyCalendar" type="java.util.Calendar">
+		<bean name="dummyCalendar" type="java.util.GregorianCalendar">
 			<property-ref name="time" type="java.util.Date" ref="dummyDate2" />
 		</bean>
 		<bean name="dummyDate2" type="java.util.Date" />
