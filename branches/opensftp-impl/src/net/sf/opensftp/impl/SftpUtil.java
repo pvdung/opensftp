@@ -50,7 +50,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil{
 	}
 
 	public SftpSession connect(String host, int port, String user,
-			String passphrase, String identityFile, int strictHostKeyChecking)
+			String passphrase, String identityFile, int strictHostKeyChecking, int timeout)
 			throws SftpException {
 		// TODO Auto-generated method stub
 		return null;
@@ -63,7 +63,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil{
 	}
 
 	public SftpSession connectByPasswdAuth(String host, int port, String user,
-			String password, int strictHostKeyChecking) throws SftpException {
+			String password, int strictHostKeyChecking, int timeout) throws SftpException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -78,14 +78,17 @@ public interface SftpUtil {
 	 *            are {@link #STRICT_HOST_KEY_CHECKING_OPTION_ASK},
 	 *            {@link #STRICT_HOST_KEY_CHECKING_OPTION_YES} and
 	 *            {@link #STRICT_HOST_KEY_CHECKING_OPTION_NO}.
+	 * @param timeout
+	 *            the timeout in milliseconds. A timeout of zero is interpreted
+	 *            as an infinite timeout.
 	 * 
 	 * @return a {@link SftpSession} object representing the context information
 	 *         of the communication established between the client and the
 	 *         specified SFTP server.
 	 */
 	public SftpSession connect(String host, int port, String user,
-			String passphrase, String identityFile, int strictHostKeyChecking)
-			throws SftpException;
+			String passphrase, String identityFile, int strictHostKeyChecking,
+			int timeout) throws SftpException;
 
 	/**
 	 * Connect to an SFTP server through the default port(22) using password
@@ -119,13 +122,16 @@ public interface SftpUtil {
 	 *            are {@link #STRICT_HOST_KEY_CHECKING_OPTION_ASK},
 	 *            {@link #STRICT_HOST_KEY_CHECKING_OPTION_YES} and
 	 *            {@link #STRICT_HOST_KEY_CHECKING_OPTION_NO}.
-	 * 
+	 * @param timeout
+	 *            the timeout in milliseconds. A timeout of zero is interpreted
+	 *            as an infinite timeout.
+	 *            
 	 * @return a {@link SftpSession} object representing the context information
 	 *         of the communication established between the client and the
 	 *         specified SFTP server.
 	 */
 	public SftpSession connectByPasswdAuth(String host, int port, String user,
-			String password, int strictHostKeyChecking) throws SftpException;
+			String password, int strictHostKeyChecking, int timeout) throws SftpException;
 
 	/**
 	 * Disconnect from an SFTP server.
