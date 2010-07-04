@@ -1,11 +1,11 @@
 package net.sf.opensftp;
 
-import net.sf.opensftp.interceptor.SftpInterceptor;
+import net.sf.opensftp.interceptor.Interceptor;
 
 public class AbstractSftpUtil implements SftpUtil {
-	private SftpInterceptor interceptor = null;
+	private Interceptor interceptor = null;
 
-	public void setInterceptor(SftpInterceptor interceptor) {
+	public void setInterceptor(Interceptor interceptor) {
 		this.interceptor = interceptor;
 	}
 

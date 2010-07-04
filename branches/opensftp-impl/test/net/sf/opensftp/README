@@ -1,10 +1,13 @@
+1)SftpUtilFactoryDup
 For UT purpose, SftpUtilFactoryDup is created based on SftpUtilFactory.
 SftpUtilFactoryDup is almost the same as SftpUtilFactory 
 except that the following fields are declared as protected.
 sftpUtilClassName,sftpUtilClassNameInitialized, sftpUtil, sftpUtilInitialized.
 
+2)SftpUtilMock
 SftpUtilMock mocks an implementation of SftpUtil.
 
+3)Test the system property functionality
 By default, SftpUtilFactoryTest covers cases that the 'net.sf.opensftp.SftpUtil' system property is not set. 
 To enable SftpUtilFactoryTest to cover cases that the 'net.sf.opensftp.SftpUtil' system property is set, 
 specify the following vm args individually.
@@ -12,3 +15,15 @@ specify the following vm args individually.
 -Dnet.sf.opensftp.SftpUtil=a.b.c
 -Dnet.sf.opensftp.SftpUtil=org.apache.log4j.Logger
 -Dnet.sf.opensftp.SftpUtil=net.sf.opensftp.MockSftpUtil
+
+4)Test the configuration functionality
+To test the configuration functionality, copy opensftp-config-testcases.xml to your classpath and rename it to 'opensftp-config.xml'.
+And set the text of <sftputil-impl> node to the following values once at a time.
+{blank or spaces}
+a.b.c
+org.apache.log4j.Logger
+net.sf.opensftp.MockSftpUtil
+
+5)DummyInterceptor
+Use DummyInterceptor along with opensftp-config-testcases.xml to test the configuration functionality.
+

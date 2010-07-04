@@ -3,27 +3,31 @@
 	xmlns:tns="http://opensftp.sf.net/opensftp-config" elementFormDefault="qualified">
 	<element name="opensftp-config">
 		<complexType>
-			<sequence>
-				<element name="sftputil-impl" maxOccurs="1" minOccurs="0"
-					type="string" />
-				<element name="interceptors" maxOccurs="1" minOccurs="0">
+			<all>
+				<element name="sftputil-impl" type="string" minOccurs="0" />
+
+				<element name="interceptors" minOccurs="0">
 					<complexType>
-						<sequence>
-							<element name="interceptor" maxOccurs="unbounded"
-								minOccurs="0">
+						<sequence maxOccurs="unbounded" minOccurs="0">
+							<element name="interceptor">
 								<complexType>
-									<sequence>
-										<element name="property" maxOccurs="unbounded"
-											minOccurs="0">
-											<complexType>
-												<attribute name="name" type="string" use="required" />
-												<attribute name="type" type="string" use="required" />
-												<attribute name="value" type="string" use="required"/>
-<!-- not implemented yet.
-													<attribute name="ref" type="string" />
--->
-											</complexType>
-										</element>
+									<sequence maxOccurs="unbounded" minOccurs="0">
+										<choice>
+											<element name="property">
+												<complexType>
+													<attribute name="name" type="string" use="required" />
+													<attribute name="type" type="string" use="required" />
+													<attribute name="value" type="string" use="required" />
+												</complexType>
+											</element>
+											<element name="property-ref">
+												<complexType>
+													<attribute name="name" type="string" use="required" />
+													<attribute name="type" type="string" use="required" />
+													<attribute name="ref" type="string" use="required" />
+												</complexType>
+											</element>
+										</choice>
 									</sequence>
 									<attribute name="type" type="string" use="required" />
 								</complexType>
@@ -31,25 +35,43 @@
 						</sequence>
 					</complexType>
 				</element>
-<!-- not implemented yet.
-				<element name="bean" maxOccurs="unbounded" minOccurs="0">
+
+				<element name="beans" minOccurs="0">
 					<complexType>
-						<sequence>
-							<element name="property" maxOccurs="unbounded" minOccurs="0">
+						<sequence maxOccurs="unbounded" minOccurs="0">
+							<element name="bean">
 								<complexType>
+									<sequence>
+										<sequence maxOccurs="unbounded" minOccurs="0">
+											<choice>
+												<element name="property">
+													<complexType>
+														<attribute name="name" type="string" use="required" />
+														<attribute name="type" type="string" use="required" />
+														<attribute name="value" type="string" use="required" />
+													</complexType>
+												</element>
+												<element name="property-ref">
+													<complexType>
+														<attribute name="name" type="string" use="required" />
+														<attribute name="type" type="string" use="required" />
+														<attribute name="ref" type="string" use="required" />
+													</complexType>
+												</element>
+											</choice>
+										</sequence>
+										<element name="initializing-block" type="string"
+											maxOccurs="1" minOccurs="0" />
+									</sequence>
 									<attribute name="name" type="string" use="required" />
 									<attribute name="type" type="string" use="required" />
-									<attribute name="value" type="string" />
-									<attribute name="ref" type="string" />
 								</complexType>
 							</element>
 						</sequence>
-						<attribute name="name" type="string" use="required" />
-						<attribute name="type" type="string" use="required" />
 					</complexType>
 				</element>
--->
-			</sequence>
+
+			</all>
 		</complexType>
 	</element>
 </schema>

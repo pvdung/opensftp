@@ -8,6 +8,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import bsh.This;
+import bsh.util.Sessiond;
+
 public class SftpUtilFactoryTest extends SftpUtilFactoryDup {
 	private static Logger log = Logger.getLogger(SftpUtilFactoryTest.class);
 	private static String defaultSftpUtilClassName = "net.sf.opensftp.impl.SftpUtil";
@@ -17,17 +20,18 @@ public class SftpUtilFactoryTest extends SftpUtilFactoryDup {
 	 * class identified by the system property doesn't exist in the classpath or
 	 * not implement {@link SftpUtil}.
 	 */
-	private static String actualSftpUtilClassNameIdentifiedBySystemProperty = SftpUtilFactoryDup.sftpUtilClassName;
+	private static String actualSftpUtilClassNameIdentifiedBySystemPropertyOrConfiguration = SftpUtilFactoryDup.sftpUtilClassName;
 
 	@BeforeClass
 	public static void setUpBeforeClass() {
-		if (actualSftpUtilClassNameIdentifiedBySystemProperty != null) {
-			defaultSftpUtilClassName = actualSftpUtilClassNameIdentifiedBySystemProperty;
-			mockSftpUtilClassName = actualSftpUtilClassNameIdentifiedBySystemProperty;
+		if (actualSftpUtilClassNameIdentifiedBySystemPropertyOrConfiguration != null) {
+			defaultSftpUtilClassName = actualSftpUtilClassNameIdentifiedBySystemPropertyOrConfiguration;
+			mockSftpUtilClassName = actualSftpUtilClassNameIdentifiedBySystemPropertyOrConfiguration;
 		}
 		StringBuilder str = new StringBuilder(
 				"\nactualSftpUtilClassNameIdentifiedBySystemProperty: ");
-		str.append(actualSftpUtilClassNameIdentifiedBySystemProperty);
+		str
+				.append(actualSftpUtilClassNameIdentifiedBySystemPropertyOrConfiguration);
 		str.append("\ndefaultSftpUtilClassName: ");
 		str.append(defaultSftpUtilClassName);
 		str.append("\nmockSftpUtilClassName: ");
@@ -37,8 +41,8 @@ public class SftpUtilFactoryTest extends SftpUtilFactoryDup {
 
 	@Before
 	public void setUp() {
-		if (actualSftpUtilClassNameIdentifiedBySystemProperty != null) {
-			SftpUtilFactoryDup.sftpUtilClassName = actualSftpUtilClassNameIdentifiedBySystemProperty;
+		if (actualSftpUtilClassNameIdentifiedBySystemPropertyOrConfiguration != null) {
+			SftpUtilFactoryDup.sftpUtilClassName = actualSftpUtilClassNameIdentifiedBySystemPropertyOrConfiguration;
 			SftpUtilFactoryDup.sftpUtilClassNameInitialized = true;
 		}
 	}
@@ -73,16 +77,18 @@ public class SftpUtilFactoryTest extends SftpUtilFactoryDup {
 		String UTName = "testGetSftpUtil";
 		int i = 1;
 		log.info(UTName + " - case " + i++);
+		getSftpUtil();
 		assertTrue(Class.forName(defaultSftpUtilClassName).isInstance(
-				SftpUtilFactoryDup.getSftpUtil()));
+				SftpUtilFactoryDup.proxiedSftpUtil));
 		tearDown();
 
 		log.info(UTName + " - case " + i++);
 		setUp();
 		SftpUtilFactoryDup.sftpUtilClassName = mockSftpUtilClassName;
 		SftpUtilFactoryDup.sftpUtilClassNameInitialized = true;
+		getSftpUtil();
 		assertTrue(Class.forName(mockSftpUtilClassName).isInstance(
-				SftpUtilFactoryDup.getSftpUtil()));
+				SftpUtilFactoryDup.proxiedSftpUtil));
 	}
 
 	@Test
@@ -91,33 +97,33 @@ public class SftpUtilFactoryTest extends SftpUtilFactoryDup {
 		int i = 1;
 		log.info(UTName + " - case " + i++);
 		SftpUtilFactoryDup.setSftpUtilClassName(null);
-		if (actualSftpUtilClassNameIdentifiedBySystemProperty == null) {
+		if (actualSftpUtilClassNameIdentifiedBySystemPropertyOrConfiguration == null) {
 			assertNull(SftpUtilFactoryDup.sftpUtilClassName);
 		} else {
 			assertEquals(SftpUtilFactoryDup.sftpUtilClassName,
-					actualSftpUtilClassNameIdentifiedBySystemProperty);
+					actualSftpUtilClassNameIdentifiedBySystemPropertyOrConfiguration);
 		}
 		tearDown();
 
 		log.info(UTName + " - case " + i++);
 		setUp();
 		SftpUtilFactoryDup.setSftpUtilClassName("");
-		if (actualSftpUtilClassNameIdentifiedBySystemProperty == null) {
+		if (actualSftpUtilClassNameIdentifiedBySystemPropertyOrConfiguration == null) {
 			assertNull(SftpUtilFactoryDup.sftpUtilClassName);
 		} else {
 			assertEquals(SftpUtilFactoryDup.sftpUtilClassName,
-					actualSftpUtilClassNameIdentifiedBySystemProperty);
+					actualSftpUtilClassNameIdentifiedBySystemPropertyOrConfiguration);
 		}
 		tearDown();
 
 		log.info(UTName + " - case " + i++);
 		setUp();
 		SftpUtilFactoryDup.setSftpUtilClassName(" a ");
-		if (actualSftpUtilClassNameIdentifiedBySystemProperty == null) {
+		if (actualSftpUtilClassNameIdentifiedBySystemPropertyOrConfiguration == null) {
 			assertNull(SftpUtilFactoryDup.sftpUtilClassName);
 		} else {
 			assertEquals(SftpUtilFactoryDup.sftpUtilClassName,
-					actualSftpUtilClassNameIdentifiedBySystemProperty);
+					actualSftpUtilClassNameIdentifiedBySystemPropertyOrConfiguration);
 		}
 		tearDown();
 
@@ -152,5 +158,21 @@ public class SftpUtilFactoryTest extends SftpUtilFactoryDup {
 		SftpUtilFactoryDup.setSftpUtilClassName(mockSftpUtilClassName);
 		assertEquals(SftpUtilFactoryDup.sftpUtilClassName,
 				defaultSftpUtilClassName);
+	}
+	
+	@Test
+	public void testInterceptorFunctionality(){
+		String UTName = "testInterceptorFunctionality";
+		int i = 1;
+		log.info(UTName + " - case " + i++);
+		SftpUtil util = getSftpUtil();
+		try {
+			SftpSession session = util.connect(null, null, null, 0);
+			util.cd(session,"..");
+		} catch (SftpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

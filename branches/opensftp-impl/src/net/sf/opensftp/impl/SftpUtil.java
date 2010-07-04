@@ -11,6 +11,31 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil{
 		return null;
 	}
 
+	public SftpResult chgrp(SftpSession session, String grp, String path) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SftpResult chgrp(SftpSession session, int gid, String path) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SftpResult chmod(SftpSession session, int mode, String path) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SftpResult chown(SftpSession session, String own, String path) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SftpResult chown(SftpSession session, int uid, String path) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public SftpSession connect(String host, String user, String identityFile,
 			int strictHostKeyChecking) throws SftpException {
 		// TODO Auto-generated method stub
@@ -59,7 +84,27 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil{
 		return null;
 	}
 
+	public SftpResult help(SftpSession session) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public SftpResult lcd(SftpSession session, String path) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SftpResult lls(SftpSession session) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SftpResult lls(SftpSession session, String path) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SftpResult lmkdir(SftpSession session, String path) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -114,6 +159,5 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }
