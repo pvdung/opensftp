@@ -21,6 +21,9 @@
 		<bean name="dummyMap" type="java.util.HashMap">
 			<initializing-block>put("1","one");put("2","two");put("5","five");</initializing-block>
 		</bean>
+		<bean name="dummyMap" type="java.util.HashMap">
+			<initializing-block>put("1","one");put("2","two");put("5","five");</initializing-block>
+		</bean>
 		<bean name="dummyDate" type="java.util.Date">
 			<property name="hours" type="java.lang.Integer" value="17" />
 			<property name="minutes" type="java.lang.Integer" value="30" />
@@ -33,6 +36,9 @@
 		<bean name="dummyCalendar" type="java.util.GregorianCalendar">
 			<property-ref name="time" type="java.util.Date" ref="dummyDate2" />
 		</bean>
-		<bean name="dummyDate2" type="java.util.Date" />
+		<bean name="dummyDate2" type="java.util.Date" >
+			<property name="hours" type="java.lang.Integer" value="17" />
+		</bean>
 	</beans>
+	<beans></beans>
 </opensftp-config>

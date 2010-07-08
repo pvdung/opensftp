@@ -1,10 +1,8 @@
 package net.sf.opensftp;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.net.URL;
@@ -18,14 +16,16 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.ListIterator;
 import java.util.Map;
-import java.util.logging.Handler;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.log4j.Logger;
 import org.dom4j.*;
+import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
+import org.dom4j.io.XMLWriter;
+import org.dom4j.util.XMLErrorHandler;
 import org.objenesis.ObjenesisStd;
-import org.objenesis.instantiator.basic.NewInstanceInstantiator;
+import org.xml.sax.SAXException;
 
 import bsh.EvalError;
 import bsh.Interpreter;
@@ -94,6 +94,7 @@ public class SftpUtilFactoryDup {
 	 */
 	private static List<Interceptor> interceptors = new ArrayList<Interceptor>();
 
+	private static final String configXSDFileName = "/opensftp-config.xsd";
 	private static final String configFilename = "opensftp-config.xml";
 	// xpath for opensftp-config.xml
 	private static final String ns_prefix = "o";
@@ -281,7 +282,7 @@ public class SftpUtilFactoryDup {
 				log.debug("The SftpUtil class name was set to '" + name + "'.");
 			} else {
 				log.warn("The specified clss '" + name
-						+ "' doesn't implement SftpUtil. ");
+						+ "' doesn't implement 'net.sf.opensftp.SftpUtil'. ");
 			}
 		} catch (ClassNotFoundException e) {
 			log.warn("The specified SftpUtil class '" + name
@@ -312,21 +313,44 @@ public class SftpUtilFactoryDup {
 		}
 		log.debug("Configuration file found at '" + url + "'.");
 		log.debug("Start reading configuration.");
-		InputStream in = SftpUtilFactory.class.getClassLoader()
+		InputStream in = SftpUtilFactoryDup.class.getClassLoader()
 				.getResourceAsStream(configFilename);
 		try {
 			SAXReader configReader = new SAXReader();
+
+			// setXPathNamespaceURIs
 			Map map = new HashMap();
 			map.put(ns_prefix, ns_uri);
 			configReader.getDocumentFactory().setXPathNamespaceURIs(map);
 
-			// configReader.setStripWhitespaceText(true);
-			// Document document = configReader.read(url);
+			// validation
+			String configXSDPath = SftpUtilFactoryDup.class.getResource(
+					configXSDFileName).toString();
+			log.debug("The XSD file found at " + configXSDPath);
+
+			configReader.setValidation(true);
+			configReader.setFeature(
+					"http://apache.org/xml/features/validation/schema", true);
+			configReader
+					.setProperty(
+							"http://apache.org/xml/properties/schema/external-schemaLocation",
+							ns_uri + " " + configXSDPath);
+
+			XMLErrorHandler errorHandler = new XMLErrorHandler();
+			configReader.setErrorHandler(errorHandler);
+
 			Document document = configReader.read(in);
-			// testing
-			FileWriter out = new FileWriter("d:/foo.xml");
-			document.write(out);
-			out.close();
+
+			Element errors = errorHandler.getErrors();
+			if (errors != null && errors.hasContent()) {
+				// output the errors XML
+				log
+						.warn("The configuration file is invalid. Ignore the configuration file. As follows list the validation erros.");
+				log.warn(errors.asXML());
+				new XMLWriter(OutputFormat.createPrettyPrint()).write(errors);
+				return;
+			}
+
 			// sftputil-impl
 			Node sftputilImplNode = document
 					.selectSingleNode(sftputilImplNodePath);
@@ -347,11 +371,13 @@ public class SftpUtilFactoryDup {
 				}
 			}
 			log.debug("End reading configuration.");
+
 		} catch (DocumentException e) {
 			log.error("Failed to parse the configuration file.", e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Failed to parse the configuration file.", e);
+		} catch (SAXException e) {
+			log.error("Failed to parse the configuration file.", e);
 		} finally {
 			in.close();
 		}
@@ -366,18 +392,25 @@ public class SftpUtilFactoryDup {
 	 *            Name of the Interceptor implementation class to add
 	 */
 	private static void checkAndAddInterceptor(Node interceptorNode) {
-		String interceptorClassName = interceptorNode.selectSingleNode(
-				beanTypeAttrRelativePath).getText();
-		if (interceptorClassName == null
-				|| interceptorClassName.trim().length() == 0)
-			return;
-
-		interceptorClassName = interceptorClassName.trim();
-
-		log.debug("Start processing Interceptor '" + interceptorClassName
-				+ "'.");
-
+		String beanName = null;
+		String interceptorClassName = null;
 		try {
+			beanName = interceptorNode.valueOf(beanNameAttrRelativePath);
+			interceptorClassName = interceptorNode
+					.valueOf(beanTypeAttrRelativePath);
+			log.debug("Start initializing Interceptor '" + beanName + "' ("
+					+ interceptorClassName + ").");
+			if (beanName == null || beanName.length() == 0
+					|| interceptorClassName == null
+					|| interceptorClassName.length() == 0) {
+
+				log
+						.warn("Null or blank @name or @type found in the configuration of bean '"
+								+ beanName + "'. Ignore this bean.");
+				return;
+			}
+
+			interceptorClassName = interceptorClassName.trim();
 
 			if (Arrays.asList(
 					Class.forName(interceptorClassName).getInterfaces())
@@ -386,20 +419,25 @@ public class SftpUtilFactoryDup {
 						.getInstantiatorOf(Class.forName(interceptorClassName))
 						.newInstance());
 
-				if (initializeBean(interceptorNode, false, "interceptor",
-						interceptor) != null) {
+				if (initializeBean(interceptorNode, false, beanName,
+						interceptor, null) == null) {
+					log.warn("Failed to initialize Interceptor '" + beanName
+							+ "' (" + interceptorClassName + ").");
+				} else {
 					interceptors.add(interceptor);
-					log.debug("A new Interceptor '" + interceptorClassName
-							+ "' added.");
+					log.debug("A new Interceptor '" + beanName + "' ("
+							+ interceptorClassName + ") is added.");
 				}
 			} else {
 				log.warn("The clss '" + interceptorClassName
-						+ "' doesn't implement Interceptor.");
+						+ "' doesn't implement 'net.sf.opensftp.Interceptor'.");
 			}
 		} catch (ClassNotFoundException e) {
 			log.warn("The class '" + interceptorClassName + "' was not found.");
+		} finally {
+			log.debug("End initializing Interceptor '" + beanName + "' ("
+					+ interceptorClassName + ").");
 		}
-		log.debug("End processing Interceptor '" + interceptorClassName + "'.");
 	}
 
 	/**
@@ -415,8 +453,9 @@ public class SftpUtilFactoryDup {
 	 *            construct the bean. And the values of the
 	 *            <code>beanName</code> and the <code>bean</code> are ignored,
 	 *            because these values are fetched out from the
-	 *            <code>beanNode</code>. This functionality is designed for Bean
-	 *            configuration.<br>
+	 *            <code>beanNode</code>. And this method must check the declared
+	 *            type of this bean against the <code>expectedType</code> param.
+	 *            This functionality is designed for Bean configuration.<br>
 	 *            If this param is set to <code>false</code>, this method must
 	 *            not construct the bean, but use the specified
 	 *            <code>beanName</code> and the <code>bean</code> as the
@@ -428,28 +467,43 @@ public class SftpUtilFactoryDup {
 	 * @param bean
 	 *            the bean. Please refer to the description of the needConstruct
 	 *            param for more details.
+	 * @param expectedType
+	 *            a String value representing a type of which this bean is
+	 *            expected to be an instance. Please refer to the description of
+	 *            the needConstruct param for more details.
+	 * 
 	 * @return the constructed and initialized bean if needConstruct is true,<br>
 	 *         the <code>bean</code> param if needConstruct is false,<br>
 	 *         or null if fail.
 	 */
 	private static Object initializeBean(Node beanNode, boolean needConstruct,
-			String beanName, Object bean) {
+			String beanName, Object bean, String expectedType) {
+
 		try {
 			Interpreter interpreter = new Interpreter();
 			StringBuilder s = new StringBuilder();
 
 			if (needConstruct) {
-				beanName = beanNode.selectSingleNode(beanNameAttrRelativePath)
-						.getText();
-				String beanType = beanNode.selectSingleNode(
-						beanTypeAttrRelativePath).getText();
+				beanName = beanNode.valueOf(beanNameAttrRelativePath);
+				log.debug("Start initializing Bean '" + beanName + "'.");
+				String beanType = beanNode.valueOf(beanTypeAttrRelativePath);
 				if (beanName == null || beanName.length() == 0
 						|| beanType == null || beanType.length() == 0) {
+
 					log
-							.warn("Bean configurtion with null or blank @name or @type found for bean '"
+							.warn("Null or blank @name or @type found in the configuration of bean '"
 									+ beanName + "'. Ignore this bean.");
 					return null;
 				}
+				// check whether the bean conforms to the expected type
+				if (!Class.forName(expectedType).isAssignableFrom(
+						Class.forName(beanType))) {
+					log.warn("Bean '" + beanName + "' is declared as '"
+							+ beanType + "', while it's expected to be a/an '"
+							+ expectedType + "'. Ignore this bean.");
+					return null;
+				}
+
 				s.append(beanName);
 				s.append(" = new ");
 				s.append(beanType);
@@ -458,32 +512,40 @@ public class SftpUtilFactoryDup {
 			} else {
 				if (beanName == null || beanName.length() == 0 || bean == null)
 					return null;
+				log.debug("Start initializing Bean '" + beanName + "'.");
 				interpreter.set(beanName, bean);
 			}
-
-			log.debug("Start initializing Bean '" + beanName + "'.");
 
 			// property nodes
 			List propertyNodes = beanNode.selectNodes(propertyNodeRelativePath);
 			for (Iterator iter = propertyNodes.iterator(); iter.hasNext();) {
 				Node propertyNode = ((Node) iter.next());
-				String propertyName = propertyNode.selectSingleNode(
-						propertyNameAttrRelativePath).getText();
-				String propertyType = propertyNode.selectSingleNode(
-						propertyTypeAttrRelativePath).getText();
-				String propertyValue = propertyNode.selectSingleNode(
-						propertyValueAttrRelativePath).getText();
+				String propertyName = propertyNode
+						.valueOf(propertyNameAttrRelativePath);
+				String propertyType = propertyNode
+						.valueOf(propertyTypeAttrRelativePath);
+				String propertyValue = propertyNode
+						.valueOf(propertyValueAttrRelativePath);
 				if (propertyName == null || propertyName.length() == 0
 						|| propertyType == null || propertyType.length() == 0
 						|| propertyValue == null || propertyValue.length() == 0) {
 					log
-							.warn("Property configurtion with null or blank @name, @type or @value found for bean '"
-									+ beanName + "'. Ignore this bean.");
+							.warn("Null or blank @name or @type found in the configuration of property '"
+									+ propertyName
+									+ "' of bean '"
+									+ beanName
+									+ "'. Ignore this bean.");
 					return null;
 				}
 				log.debug("Start setting property '" + propertyName + "'.");
 				Object value = ConvertUtils.convert(propertyValue, Class
 						.forName(propertyType));
+				if (!Class.forName(propertyType).isInstance(value)) {
+					log.warn("Failed to convert property '" + propertyName
+							+ "' of bean '" + beanName + "' to '"
+							+ propertyType + "'. Ignore this bean.");
+					return null;
+				}
 
 				if (!needConstruct) {
 					s.append(beanName);
@@ -504,18 +566,21 @@ public class SftpUtilFactoryDup {
 					.selectNodes(propertyRefNodeRelativePath);
 			for (Iterator iter = propertyRefNodes.iterator(); iter.hasNext();) {
 				Node propertyNode = ((Node) iter.next());
-				String propertyName = propertyNode.selectSingleNode(
-						propertyNameAttrRelativePath).getText();
-				String propertyType = propertyNode.selectSingleNode(
-						propertyTypeAttrRelativePath).getText();
-				String propertyRef = propertyNode.selectSingleNode(
-						propertyRefAttrRelativePath).getText();
+				String propertyName = propertyNode
+						.valueOf(propertyNameAttrRelativePath);
+				String propertyType = propertyNode
+						.valueOf(propertyTypeAttrRelativePath);
+				String propertyRef = propertyNode
+						.valueOf(propertyRefAttrRelativePath);
 				if (propertyName == null || propertyName.length() == 0
 						|| propertyType == null || propertyType.length() == 0
 						|| propertyRef == null || propertyRef.length() == 0) {
 					log
-							.warn("Property-ref configurtion with null or blank @name, @type or @ref found for bean '"
-									+ beanName + "'. Ignore this bean.");
+							.warn("Null or blank @name or @type found in the configuration of property-ref '"
+									+ propertyName
+									+ "' of bean '"
+									+ beanName
+									+ "'. Ignore this bean.");
 					return null;
 				}
 				log.debug("Start setting property '" + propertyName + "'.");
@@ -524,12 +589,20 @@ public class SftpUtilFactoryDup {
 						beanNodePath + "[" + beanNameAttrRelativePath + "='"
 								+ propertyRef + "']");
 				if (refBeanNode == null) {
-					log.warn("Refers to a non-existent bean '" + propertyRef
+					log.warn("Bean '" + beanName
+							+ "' refers to a non-existent bean '" + propertyRef
 							+ "'. Ignore this Bean.");
-					continue;
+					return null;
 				}
-				value = initializeBean(refBeanNode, true, null, null);
-				if (value != null) {
+				value = initializeBean(refBeanNode, true, null, null,
+						propertyType);
+				if (value == null) {
+					log.warn("Bean '" + beanName + "' refers to a bean, '"
+							+ propertyRef
+							+ "', which is not initialized successfully. "
+							+ "Ignore this Bean.");
+					return null;
+				} else {
 					if (!needConstruct) {
 						s.append(beanName);
 						s.append(".");
@@ -567,11 +640,19 @@ public class SftpUtilFactoryDup {
 			}
 
 		} catch (EvalError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log
+					.warn(
+							"Failed to initialize bean '"
+									+ beanName
+									+ "'. Please check your 'opensftp-config.xml' against the following probable causations.\n"
+									+ "(1) A certain bean or property is declared as a type which provides none no-argument constructor.\n"
+									+ "(2) A certain bean or property is declared as a type which doesn't exist.\n"
+									+ "(3) The declared type of a certain property doesn't match its defined type.\n"
+									+ "(4) A certain bean provide none setter for a certain property.\n"
+									+ "(5) A certain initializing-block contains invalid code.\n",
+							e);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.warn("Failed to initialize bean '" + beanName + "'.", e);
 		} finally {
 			log.debug("End initializing Bean '" + beanName + "'.");
 		}
