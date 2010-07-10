@@ -23,11 +23,18 @@ public interface SftpFile {
 	 * last name in the pathname's name sequence. If the pathname's name
 	 * sequence is empty, then the empty string is returned.
 	 * 
-	 * @return The name of this file or directory, or the empty string if this
+	 * @return the name of this file or directory, or the empty string if this
 	 *         pathname's name sequence is empty.
 	 */
 	public String getName();
-
+	
+	/**
+	 * Return the fullname of this file or directory.
+	 * 
+	 * @return the fullname of this file or directory.
+	 */	
+	public String getFullName();
+	
 	/**
 	 * Return the <code>attribute</code> of this file.
 	 * 

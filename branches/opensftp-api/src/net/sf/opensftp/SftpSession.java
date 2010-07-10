@@ -15,4 +15,25 @@ public interface SftpSession {
 	 * @return the Date Time Pattern of the server.
 	 */
 	public String getServerDateTimePattern();
+	
+	/**
+	 * Return the user.
+	 * 
+	 * @return the user
+	 */	
+	public String getUser();
+
+	/**
+	 * Return the host.
+	 * 
+	 * @return the host
+	 */
+	public String getHost();
+	
+	/**
+	 * Return the current path.
+	 * 
+	 * @return the current path
+	 */
+	public SftpFile getCurrentPath();
 }
