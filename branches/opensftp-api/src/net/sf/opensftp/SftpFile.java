@@ -16,7 +16,7 @@ package net.sf.opensftp;
  * @version
  * @author BurningXFlame
  */
-public interface SftpFile {
+public abstract class SftpFile {
 
 	/**
 	 * Return the <code>name</code> of this file or directory. This is just the
@@ -26,29 +26,33 @@ public interface SftpFile {
 	 * @return the name of this file or directory, or the empty string if this
 	 *         pathname's name sequence is empty.
 	 */
-	public String getName();
+	public abstract String getName();
 	
 	/**
 	 * Return the fullname of this file or directory.
 	 * 
 	 * @return the fullname of this file or directory.
 	 */	
-	public String getFullName();
+	public abstract String getFullName();
 	
 	/**
 	 * Return the <code>attribute</code> of this file.
 	 * 
 	 * @return the <code>attribute</code> of this file.
 	 */
-	public SftpFileAttribute getAttribute();
+	public  abstract SftpFileAttribute getAttribute();
 
 	/**
 	 * Return a string consisting of the <code>attribute</code> and the
-	 * <code>name</code> of this file. It's just a line that you get when
-	 * executing the ls command when accessing an SFTP server.
+	 * <code>name</code> of this file. It's the same as an entry that you get when
+	 * executing the ls command on an SFTP server.
 	 * 
 	 * @return a string consisting of the <code>attribute</code> and
 	 *         <code>name</code> of the file.
 	 */
-	public String toString();
+	public String toString(){
+		StringBuilder s = new StringBuilder();
+		
+		return s.toString();
+	}
 }
