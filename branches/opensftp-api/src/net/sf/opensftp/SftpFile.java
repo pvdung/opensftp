@@ -16,7 +16,7 @@ package net.sf.opensftp;
  * @version
  * @author BurningXFlame
  */
-public abstract class SftpFile {
+public interface SftpFile {
 
 	/**
 	 * Return the <code>name</code> of this file or directory. This is just the
@@ -26,21 +26,21 @@ public abstract class SftpFile {
 	 * @return the name of this file or directory, or the empty string if this
 	 *         pathname's name sequence is empty.
 	 */
-	public abstract String getName();
+	public String getName();
 	
 	/**
 	 * Return the fullname of this file or directory.
 	 * 
 	 * @return the fullname of this file or directory.
 	 */	
-	public abstract String getFullName();
+	public String getFullName();
 	
 	/**
 	 * Return the <code>attribute</code> of this file.
 	 * 
 	 * @return the <code>attribute</code> of this file.
 	 */
-	public  abstract SftpFileAttribute getAttribute();
+	public SftpFileAttribute getAttribute();
 
 	/**
 	 * Return a string consisting of the <code>attribute</code> and the
@@ -50,9 +50,5 @@ public abstract class SftpFile {
 	 * @return a string consisting of the <code>attribute</code> and
 	 *         <code>name</code> of the file.
 	 */
-	public String toString(){
-		StringBuilder s = new StringBuilder();
-		
-		return s.toString();
-	}
+	public String toString();
 }
