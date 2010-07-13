@@ -74,7 +74,7 @@ public interface SftpFileAttribute {
 	 *         represented by the {@link SftpFile} object to which this
 	 *         <code>SftpFileAttribute</code> object belongs.
 	 */
-	public String getPermissions();
+	public String getPermissionsString();
 	
 	/**
 	 * Return the <code>permissions</code> attribute of the file or directory
@@ -86,7 +86,7 @@ public interface SftpFileAttribute {
 	 *         represented by the {@link SftpFile} object to which this
 	 *         <code>SftpFileAttribute</code> object belongs.
 	 */
-	public int getPermissionsInt();
+	public int getPermissions();
 
 	/**
 	 * Return the <code>links</code> attribute of the file or directory
@@ -108,7 +108,18 @@ public interface SftpFileAttribute {
 	 *         represented by the {@link SftpFile} object to which this
 	 *         <code>SftpFileAttribute</code> object belongs.
 	 */
-	public int getOwner();
+	public String getOwner();
+
+	/**
+	 * Return the UID of <code>owner</code> attribute of the file or directory
+	 * represented by the {@link SftpFile} object to which this
+	 * <code>SftpFileAttribute</code> object belongs. 
+	 * 
+	 * @return the <code>owner</code> attribute of the file or directory
+	 *         represented by the {@link SftpFile} object to which this
+	 *         <code>SftpFileAttribute</code> object belongs.
+	 */
+	public int getUID();
 	
 	/**
 	 * Return the <code>group</code> attribute of the file or directory
@@ -119,7 +130,18 @@ public interface SftpFileAttribute {
 	 *         represented by the {@link SftpFile} object to which this
 	 *         <code>SftpFileAttribute</code> object belongs.
 	 */
-	public int getGroup();
+	public String getGroup();
+	
+	/**
+	 * Return the GID of the <code>group</code> attribute of the file or directory
+	 * represented by the {@link SftpFile} object to which this
+	 * <code>SftpFileAttribute</code> object belongs. 
+	 * 
+	 * @return the <code>group</code> attribute of the file or directory
+	 *         represented by the {@link SftpFile} object to which this
+	 *         <code>SftpFileAttribute</code> object belongs.
+	 */
+	public String getGID();	
 	
 	/**
 	 * Return the <code>size</code> attribute of the file or directory
