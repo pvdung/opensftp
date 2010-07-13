@@ -1,9 +1,9 @@
 package net.sf.opensftp;
 
 /**
+ * <code>ProgressListener</code> listens progresses of put/get operations. 
  * 
  * @author BurningXFlame
- * 
  */
 public interface ProgressListener {
 	/**
