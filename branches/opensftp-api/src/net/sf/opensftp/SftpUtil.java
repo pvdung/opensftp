@@ -125,13 +125,14 @@ public interface SftpUtil {
 	 * @param timeout
 	 *            the timeout in milliseconds. A timeout of zero is interpreted
 	 *            as an infinite timeout.
-	 *            
+	 * 
 	 * @return a {@link SftpSession} object representing the context information
 	 *         of the communication established between the client and the
 	 *         specified SFTP server.
 	 */
 	public SftpSession connectByPasswdAuth(String host, int port, String user,
-			String password, int strictHostKeyChecking, int timeout) throws SftpException;
+			String password, int strictHostKeyChecking, int timeout)
+			throws SftpException;
 
 	/**
 	 * Disconnect from an SFTP server.
@@ -168,7 +169,7 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param path
-	 *            The path to ls.
+	 *            The path to be listed.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation. Invoking <code>getExtension()</code> on the returned
 	 *         <code>SftpResult</code> object should return a
@@ -189,7 +190,7 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param localFilename
-	 *            The path of the local file to put.
+	 *            The path of the local file to be uploaded.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -202,9 +203,9 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param localFilename
-	 *            The path of the local file to put.
+	 *            The path of the local file to be uploaded.
 	 * @param remoteFilename
-	 *            The path (on the server) where to put the local file.
+	 *            The remote path where to place the local file.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -224,7 +225,7 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param remoteFilename
-	 *            The path of the remote file to get.
+	 *            The path of the remote file to be downloaded.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -237,7 +238,7 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param remoteFilename
-	 *            The path of the remote file to get.
+	 *            The path of the remote file to be downloaded.
 	 * @param localFilename
 	 *            The local path where to place the remote file.
 	 * @return an {@link SftpResult} object representing the result of this
@@ -253,7 +254,7 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param path
-	 *            The path to cd.
+	 *            The new path
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -266,7 +267,7 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param path
-	 *            The local path to lcd.
+	 *            The new path
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -279,7 +280,7 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param path
-	 *            The path of the directory to create.
+	 *            The path of the directory to be created.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -292,9 +293,9 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param oldpath
-	 *            The path of the file or directory to rename.
+	 *            The path of the file or directory to be renamed.
 	 * @param newpath
-	 *            The path to rename the <code>oldpath</code> to.
+	 *            the desired new file name
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -307,7 +308,7 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param filename
-	 *            The path of the file to delete.
+	 *            The path of the file to be deleted.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -320,7 +321,7 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param path
-	 *            The path of the directory to delete.
+	 *            The path of the directory to be deleted.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -355,10 +356,10 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param grp
-	 *            The String representing the new group
+	 *            the new group
 	 * @param path
 	 *            The path representing the file or directory the group of which
-	 *            is about to change.
+	 *            is about to be changed.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -371,10 +372,10 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param gid
-	 *            The numeric GID of the new group
+	 *            The GID of the new group
 	 * @param path
 	 *            The path representing the file or directory the group of which
-	 *            is about to change.
+	 *            is about to be changed.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -387,10 +388,10 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param own
-	 *            The String representing the new owner
+	 *            the new owner
 	 * @param path
 	 *            The path representing the file or directory the owner of which
-	 *            is about to change.
+	 *            is about to be changed.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -403,10 +404,10 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param uid
-	 *            The numeric UID of the new owner
+	 *            The UID of the new owner
 	 * @param path
 	 *            The path representing the file or directory the owner of which
-	 *            is about to change.
+	 *            is about to be changed.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -419,16 +420,43 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param mode
-	 *            The three-digit octal number, 0755 for instance, representing
-	 *            the new permission
+	 *            an three-digit octal number, 0755 for instance, representing
+	 *            the new permissions
 	 * @param path
 	 *            The path representing the file or directory the permission of
-	 *            which is about to change.
+	 *            which is about to be changed.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
 	public SftpResult chmod(SftpSession session, int mode, String path);
 
+	/**
+	 * Represent the ln/symlink command.
+	 * 
+	 * @param session
+	 *            The {@link SftpSession} object you previously got when
+	 *            connecting.
+	 * @param src
+	 *            The path of the file to be symlinked.
+	 * @param link
+	 *            The path of the link file
+	 * @return an {@link SftpResult} object representing the result of this
+	 *         operation
+	 */
+	public SftpResult ln(SftpSession session, String src, String link);
+
+	/**
+	 * Represent the lumask command.
+	 * 
+	 * @param session
+	 *            The {@link SftpSession} object you previously got when
+	 *            connecting.
+	 * @param umask
+	 *            The new umask.
+	 * @return an {@link SftpResult} object representing the result of this
+	 *         operation
+	 */
+	public SftpResult lumask(SftpSession session, String umask);
 	/**
 	 * Represent the help command.
 	 * 
@@ -444,7 +472,7 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param path
-	 *            The path of the folder to create.
+	 *            The path of the folder to be created.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -477,7 +505,7 @@ public interface SftpUtil {
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param path
-	 *            The path to lls.
+	 *            The local path to be listed.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation. Invoking <code>getExtension()</code> on the returned
 	 *         <code>SftpResult</code> object should return a
@@ -485,4 +513,5 @@ public interface SftpUtil {
 	 *         succeed.
 	 */
 	public SftpResult lls(SftpSession session, String path);
+
 }
