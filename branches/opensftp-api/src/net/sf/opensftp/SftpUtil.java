@@ -209,7 +209,7 @@ public interface SftpUtil {
 	 *         operation
 	 */
 	public SftpResult put(SftpSession session, String localFilename,
-			String remoteFilename);
+			String remoteFilename, ProgressListener progressListener);
 
 	/**
 	 * Represent the get command. Invoking this method is equivalent to:
@@ -244,7 +244,7 @@ public interface SftpUtil {
 	 *         operation
 	 */
 	public SftpResult get(SftpSession session, String remoteFilename,
-			String localFilename);
+			String localFilename, ProgressListener progressListener);
 
 	/**
 	 * Represent the cd command.
