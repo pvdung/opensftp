@@ -12,6 +12,13 @@ import net.sf.opensftp.SftpResult;
 import net.sf.opensftp.SftpSession;
 import net.sf.opensftp.SftpUtilFactory;
 
+/**
+ * <code>LoggingInterceptor</code>s intercept method invocations on
+ * {@link net.sf.opensftp.SftpUtil} objects to provide logging functionality.
+ * 
+ * @version
+ * @author BurningXFlame
+ */
 public class LoggingInterceptor implements Interceptor {
 	private static Logger log = Logger.getLogger(LoggingInterceptor.class);
 
@@ -27,23 +34,13 @@ public class LoggingInterceptor implements Interceptor {
 		this.logCommand = logCommand;
 	}
 
-	/**
-	 * Method invoked upon completion of execution of the given method.
-	 * 
-	 * @param method
-	 *            the intercepted method
-	 * @param args
-	 *            the arguments passed in the intercepted method
-	 * @param result
-	 *            the result returned by the intercepted method
-	 */
 	public void afterMethod(Method method, Object[] args, SftpResult result) {
 		StringBuilder s = new StringBuilder();
 		boolean success = result.getSuccessFalg();
-		
+
 		if (success) {// output
 			String methodName = method.getName();
-			
+
 			if (methodName.equals("ls")) {
 				List<SftpFile> l = (List<SftpFile>) result.getExtension();
 				Iterator<SftpFile> i = l.iterator();
@@ -51,7 +48,7 @@ public class LoggingInterceptor implements Interceptor {
 					s.append(i.next());
 					s.append("\n");
 				}
-				
+
 			} else if (methodName.equals("pwd")) {
 				s.append(((SftpFile) result.getExtension()).getFullName());
 			} else if (methodName.equals("put")) {
@@ -65,20 +62,11 @@ public class LoggingInterceptor implements Interceptor {
 			}
 			log.info(s);
 		} else {// error message
-
-			log.error(s);
+			log.info(result.getErrorMessage());
 		}
 
 	}
 
-	/**
-	 * Method invoked prior to executing the given method.
-	 * 
-	 * @param method
-	 *            the intercepted method
-	 * @param args
-	 *            the arguments passed in the intercepted method
-	 */
 	public void beforeMethod(Method method, Object[] args) {
 		if (logCommand) {
 			SftpSession session = (SftpSession) args[0];
@@ -94,9 +82,7 @@ public class LoggingInterceptor implements Interceptor {
 				s.append(" ");
 				s.append(args[i]);
 			}
-
 			log.info(s);
 		}
-
 	}
 }

@@ -18,25 +18,25 @@ package net.sf.opensftp;
 public interface SftpResult {
 	
 	/**
-	 * Retrieve the <code>successFlag</code>.
+	 * Return the <code>successFlag</code>.
 	 * @return the <code>successFlag</code>.
 	 */
 	public boolean getSuccessFalg();
 	
 	/**
-	 * Retrieve the <code>errorCode</code>.
+	 * Return the <code>errorCode</code>.
 	 * @return the <code>errorCode</code>.
 	 */
 	public String getErrorCode();
 
 	/**
-	 * Retrieve the <code>errorMessage</code>.
+	 * Return the <code>errorMessage</code>.
 	 * @return the <code>errorMessage</code>.
 	 */
 	public String getErrorMessage();
 
 	/**
-	 * Retrieve the <code>extension</code>.
+	 * Return the <code>extension</code>.
 	 * @return the <code>extension</code>.
 	 */
 	public Object getExtension();

@@ -1,5 +1,6 @@
 package net.sf.opensftp.impl;
 
+import net.sf.opensftp.ProgressListener;
 import net.sf.opensftp.SftpException;
 import net.sf.opensftp.SftpSession;
 import net.sf.opensftp.SftpResult;
@@ -50,8 +51,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil{
 	}
 
 	public SftpSession connect(String host, int port, String user,
-			String passphrase, String identityFile, int strictHostKeyChecking, int timeout)
-			throws SftpException {
+			String passphrase, String identityFile, int strictHostKeyChecking,
+			int timeout) throws SftpException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -63,7 +64,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil{
 	}
 
 	public SftpSession connectByPasswdAuth(String host, int port, String user,
-			String password, int strictHostKeyChecking, int timeout) throws SftpException {
+			String password, int strictHostKeyChecking, int timeout)
+			throws SftpException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -79,7 +81,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil{
 	}
 
 	public SftpResult get(SftpSession session, String remoteFilename,
-			String localFilename) {
+			String localFilename, ProgressListener progressListener) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -109,6 +111,11 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil{
 		return null;
 	}
 
+	public SftpResult ln(SftpSession session, String src, String link) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public SftpResult lpwd(SftpSession session) {
 		// TODO Auto-generated method stub
 		return null;
@@ -124,6 +131,11 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil{
 		return null;
 	}
 
+	public SftpResult lumask(SftpSession session, String umask) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public SftpResult mkdir(SftpSession session, String path) {
 		// TODO Auto-generated method stub
 		return null;
@@ -135,7 +147,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil{
 	}
 
 	public SftpResult put(SftpSession session, String localFilename,
-			String remoteFilename) {
+			String remoteFilename, ProgressListener progressListener) {
 		// TODO Auto-generated method stub
 		return null;
 	}

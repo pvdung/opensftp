@@ -12,11 +12,11 @@ import java.util.Date;
  * <li><code>type</code>, regular file | directory | character device | block
  * device | socket | symbolic link | named pipe . Each static field begining
  * with "TYPE_" of this interface represents a file type.</li>
- * <li><code>permissions</code>,</li>
+ * <li><code>permissions</code></li>
  * <li><code>links</code>, the number of directory entries that refer to the
  * file.</li>
- * <li><code>owner</code>, the file's owner.</li>
- * <li><code>group</code>, the group the file belongs to.</li>
+ * <li><code>owner</code></li>
+ * <li><code>group</code></li>
  * <li><code>size</code>, the size of the file in bytes.</li>
  * <li><code>atime</code>, namely, last access time</li>
  * <li><code>mtime</code>, namely, last modification time. If the file is

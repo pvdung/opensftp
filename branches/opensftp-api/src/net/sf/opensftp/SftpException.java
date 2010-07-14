@@ -19,7 +19,7 @@ public class SftpException extends Exception {
 	/**
 	 * Constructs an <code>SftpException</code> with the specified detail
 	 * message. The error message string <code>message</code> can later be
-	 * retrieved by the <code>{@link java.lang.Throwable#getMessage}</code>
+	 * retrieved by the <code>{@link java.lang.Throwable#getMessage()}</code>
 	 * method of class <code>java.lang.Throwable</code>.
 	 * 
 	 * @param message
