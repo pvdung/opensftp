@@ -22,13 +22,13 @@ import net.sf.opensftp.SftpUtilFactory;
 public class LoggingInterceptor implements Interceptor {
 	private static Logger log = Logger.getLogger(LoggingInterceptor.class);
 
-	private boolean logCommand;
+	private boolean logCommand = true;
 
 	/**
 	 * Determine whether to log commands or not.
 	 * 
 	 * @param logCommand
-	 *            log commands if true
+	 *            log commands if true. The default value is <code>true</code>.
 	 */
 	public void logCommand(boolean logCommand) {
 		this.logCommand = logCommand;
