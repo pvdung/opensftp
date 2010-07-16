@@ -15,9 +15,11 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.UserInfo;
+import com.sgm.eai.sftpUtils.Channel;
 
 import net.sf.opensftp.ProgressListener;
 import net.sf.opensftp.SftpException;
+import net.sf.opensftp.SftpFile;
 import net.sf.opensftp.SftpSession;
 import net.sf.opensftp.SftpResult;
 
@@ -143,7 +145,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			session.setUserInfo(userinfo);
 			session.connect();
 			channel = (ChannelSftp) session.openChannel("sftp");
-			channel.connect();
+			channel.connect(timeout);
 			return new SftpSessionImpl(channel);
 		} catch (JSchException e) {
 			String error = "Failed to login. " + user + "@" + host + ":" + port;
@@ -234,9 +236,28 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 		return null;
 	}
 
-	public SftpResult pwd(SftpSession session) {
-		// TODO Auto-generated method stub
-		return null;
+	public SftpResult pwd(SftpSession session) {		
+		SftpResultImpl result = new SftpResultImpl();
+		SftpSessionImpl sessionImpl = (SftpSessionImpl) session;
+		if (!sessionImpl.getDirChanged()) {
+			result.setExtension(sessionImpl.getCurrentPath());
+			result.setSuccessFalg(true);
+		} else {
+			ChannelSftp channelSftp = sessionImpl
+					.getChannelSftp();
+			try {
+				String currentPathStr = channelSftp.pwd();
+				SftpFile file = ;
+				result.setExtension(file);
+				result.setSuccessFalg(true);
+				//update session
+				sessionImpl.setCurrentPath(file);
+			} catch (SftpException e) {
+				log.error("command pwd failed.", e);
+				result.setErrorMessage(e.toString());
+			}
+		}
+		return result;
 	}
 
 	public SftpResult rename(SftpSession session, String oldpath, String newpath) {

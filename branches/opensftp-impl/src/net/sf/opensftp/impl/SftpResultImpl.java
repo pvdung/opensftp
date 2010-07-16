@@ -9,21 +9,47 @@ package net.sf.opensftp.impl;
  * @author BurningXFlame
  */
 public class SftpResultImpl implements net.sf.opensftp.SftpResult {
-	private boolean successFalg;
-	private String errorCode;
-	private String errorMsg;
-	private Object extension;
+	private boolean successFalg = false;
+	private String errorCode = null;
+	private String errorMsg = null;
+	private Object extension = null;
 
+	/**
+	 * Construct a new <code>SftpResult</code> with successFlag being set to
+	 * <code>false</code>, and other properties remaining null.
+	 */
 	public SftpResultImpl() {
+	}
+
+	/**
+	 * Construct a new <code>SftpResult</code> using the specified values. The
+	 * unspecified properties remain null.
+	 */
+	public SftpResultImpl(boolean successFalg, Object extension) {
+		this.successFalg = successFalg;
+		this.extension = extension;
+
+	}
+
+	/**
+	 * Construct a new <code>SftpResult</code> using the specified values. The
+	 * unspecified properties remain null.
+	 */
+	public SftpResultImpl(boolean successFalg, String errorCode, String errorMsg) {
+		this.successFalg = successFalg;
+		this.errorCode = errorCode;
+		this.errorMsg = errorMsg;
 	}
 
 	/**
 	 * Construct a new <code>SftpResult</code> using the specified values .
 	 */
-	public SftpResultImpl(boolean successFalg, String errorCode, String errorMsg,
-			Object extension) {
+	public SftpResultImpl(boolean successFalg, String errorCode,
+			String errorMsg, Object extension) {
 		this.successFalg = successFalg;
 		this.errorCode = errorCode;
+		this.errorMsg = errorMsg;
+		this.extension = extension;
 	}
 
 	public String getErrorCode() {

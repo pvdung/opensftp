@@ -12,7 +12,7 @@ import com.jcraft.jsch.ChannelSftp;
  */
 public class SftpSessionImpl implements net.sf.opensftp.SftpSession {
 	private ChannelSftp channelSftp = null;
-	private boolean dirChanged = false;
+	private boolean dirChanged = true;
 	private String host;
 	private String user;
 	private String serverDateTimePattern;
@@ -21,7 +21,7 @@ public class SftpSessionImpl implements net.sf.opensftp.SftpSession {
 	public SftpSessionImpl(ChannelSftp channelSftp) {
 		this.channelSftp = channelSftp;
 	}
-	
+
 	public ChannelSftp getChannelSftp() {
 		return channelSftp;
 	}
@@ -38,20 +38,32 @@ public class SftpSessionImpl implements net.sf.opensftp.SftpSession {
 		this.host = host;
 	}
 
+	public String getUser() {
+		return user;
+	}
+
 	public void setUser(String user) {
 		this.user = user;
+	}
+
+	public String getServerDateTimePattern() {
+		return serverDateTimePattern;
 	}
 
 	public void setServerDateTimePattern(String serverDateTimePattern) {
 		this.serverDateTimePattern = serverDateTimePattern;
 	}
 
-	public void setCurrentPath(SftpFile currentPath) {
-		this.currentPath = currentPath;
+	public boolean getDirChanged() {
+		return dirChanged;
 	}
 
 	public void setDirChanged(boolean dirChanged) {
 		this.dirChanged = dirChanged;
+	}
+
+	public void setCurrentPath(SftpFile currentPath) {
+		this.currentPath = currentPath;
 	}
 
 	public SftpFile getCurrentPath() {
@@ -63,14 +75,6 @@ public class SftpSessionImpl implements net.sf.opensftp.SftpSession {
 					.getExtension();
 		}
 		return currentPath;
-	}
-
-	public String getUser() {
-		return user;
-	}
-
-	public String getServerDateTimePattern() {
-		return serverDateTimePattern;
 	}
 
 }
