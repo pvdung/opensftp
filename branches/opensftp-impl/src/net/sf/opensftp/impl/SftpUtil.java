@@ -69,8 +69,17 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult chmod(SftpSession session, int mode, String path) {
-		// TODO Auto-generated method stub
-		return null;
+		SftpResultImpl result = new SftpResultImpl();
+		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
+		try {
+			channelSftp.chmod(mode, path);
+			result.setSuccessFalg(true);
+		} catch (com.jcraft.jsch.SftpException e) {
+			log.error("command chgrp failed.", e);
+			result.setErrorMessage(e.toString());
+			result.setErrorCode(e.id);
+		}
+		return result;
 	}
 
 	public SftpResult chown(SftpSession session, String own, String path) {
@@ -79,8 +88,17 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult chown(SftpSession session, int uid, String path) {
-		// TODO Auto-generated method stub
-		return null;
+		SftpResultImpl result = new SftpResultImpl();
+		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
+		try {
+			channelSftp.chmod(uid, path);
+			result.setSuccessFalg(true);
+		} catch (com.jcraft.jsch.SftpException e) {
+			log.error("command chgrp failed.", e);
+			result.setErrorMessage(e.toString());
+			result.setErrorCode(e.id);
+		}
+		return result;
 	}
 
 	public SftpSession connect(String host, String user, String identityFile,
@@ -178,19 +196,60 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public void disconnect(SftpSession session) {
-		// TODO Auto-generated method stub
-
+		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
+		try {
+			// session.disconnect() closes this session and also all channels
+			// derived from it.
+			channelSftp.getSession().disconnect();
+		} catch (JSchException e) {
+			log.error("Failed to disconnect.", e);
+		}
 	}
 
 	public SftpResult get(SftpSession session, String remoteFilename) {
-		// TODO Auto-generated method stub
-		return null;
+		return get(session, remoteFilename, ".", null);
 	}
 
+	/**
+	 * <p>
+	 * Represent the get command.
+	 * </p>
+	 * NOTE: This method doesn't completely implement the
+	 * {@link net.sf.opensftp.SftpUtil#get(SftpSession, String, String, ProgressListener)}
+	 * . The <code>progressListener</code> param must be an
+	 * {@link AbstractProgressListener}. Otherwise, an
+	 * <code>UnsupportedOperationException</code> will be thrown.
+	 * 
+	 * @param progressListener
+	 *            An {@link AbstractProgressListener} listening the progresses
+	 *            of this get operation to provide progress meter functionality.
+	 * 
+	 */
 	public SftpResult get(SftpSession session, String remoteFilename,
 			String localFilename, ProgressListener progressListener) {
-		// TODO Auto-generated method stub
-		return null;
+		AbstractProgressListener convertedProgressListener = null;
+		// throws UnsupportedOperationException if the given progressListener is
+		// not an AbstractProgressListener
+		if (progressListener != null) {
+			if (progressListener instanceof AbstractProgressListener) {
+				convertedProgressListener = (AbstractProgressListener) progressListener;
+			} else {
+				throw new UnsupportedOperationException();
+			}
+		}
+
+		SftpResultImpl result = new SftpResultImpl();
+		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
+		try {
+			channelSftp.get(remoteFilename, localFilename,
+					convertedProgressListener);
+			result.setSuccessFalg(true);
+		} catch (com.jcraft.jsch.SftpException e) {
+			log.error("command get failed", e);
+			result.setErrorMessage(e.toString());
+			result.setErrorCode(e.id);
+		}
+		return result;
 	}
 
 	public SftpResult help(SftpSession session) {
@@ -253,10 +312,46 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 		return null;
 	}
 
+	/**
+	 * <p>
+	 * Represent the put command.
+	 * </p>
+	 * NOTE: This method doesn't completely implement the
+	 * {@link net.sf.opensftp.SftpUtil#get(SftpSession, String, String, ProgressListener)}
+	 * . The <code>progressListener</code> param must be an
+	 * {@link AbstractProgressListener}. Otherwise, an
+	 * <code>UnsupportedOperationException</code> will be thrown.
+	 * 
+	 * @param progressListener
+	 *            An {@link AbstractProgressListener} listening the progresses
+	 *            of this put operation to provide progress meter functionality.
+	 * 
+	 */
 	public SftpResult put(SftpSession session, String localFilename,
 			String remoteFilename, ProgressListener progressListener) {
-		// TODO Auto-generated method stub
-		return null;
+		AbstractProgressListener convertedProgressListener = null;
+		// throws UnsupportedOperationException if the given progressListener is
+		// not an AbstractProgressListener
+		if (progressListener != null) {
+			if (progressListener instanceof AbstractProgressListener) {
+				convertedProgressListener = (AbstractProgressListener) progressListener;
+			} else {
+				throw new UnsupportedOperationException();
+			}
+		}
+
+		SftpResultImpl result = new SftpResultImpl();
+		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
+		try {
+			channelSftp.put(localFilename, remoteFilename,
+					convertedProgressListener);
+			result.setSuccessFalg(true);
+		} catch (com.jcraft.jsch.SftpException e) {
+			log.error("command get failed", e);
+			result.setErrorMessage(e.toString());
+			result.setErrorCode(e.id);
+		}
+		return result;
 	}
 
 	public SftpResult pwd(SftpSession session) {

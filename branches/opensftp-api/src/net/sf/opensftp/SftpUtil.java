@@ -206,6 +206,10 @@ public interface SftpUtil {
 	 *            The path of the local file to be uploaded.
 	 * @param remoteFilename
 	 *            The remote path where to place the local file.
+	 * @param progressListener
+	 *            A <code>ProgressListener</code> listening the progresses of
+	 *            this put operation to provide progress meter functionality.
+	 * 
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -241,6 +245,10 @@ public interface SftpUtil {
 	 *            The path of the remote file to be downloaded.
 	 * @param localFilename
 	 *            The local path where to place the remote file.
+	 * @param progressListener
+	 *            A <code>ProgressListener</code> listening the progresses of
+	 *            this get operation to provide progress meter functionality.
+	 * 
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
