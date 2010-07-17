@@ -10,20 +10,20 @@ package net.sf.opensftp.impl;
  */
 public class SftpResultImpl implements net.sf.opensftp.SftpResult {
 	private boolean successFalg = false;
-	private String errorCode = null;
+	private int errorCode = 0;
 	private String errorMsg = null;
 	private Object extension = null;
 
 	/**
 	 * Construct a new <code>SftpResult</code> with successFlag being set to
-	 * <code>false</code>, and other properties remaining null.
+	 * <code>false</code>, and other properties remaining null or 0.
 	 */
 	public SftpResultImpl() {
 	}
 
 	/**
 	 * Construct a new <code>SftpResult</code> using the specified values. The
-	 * unspecified properties remain null.
+	 * unspecified properties remain null or 0.
 	 */
 	public SftpResultImpl(boolean successFalg, Object extension) {
 		this.successFalg = successFalg;
@@ -35,7 +35,7 @@ public class SftpResultImpl implements net.sf.opensftp.SftpResult {
 	 * Construct a new <code>SftpResult</code> using the specified values. The
 	 * unspecified properties remain null.
 	 */
-	public SftpResultImpl(boolean successFalg, String errorCode, String errorMsg) {
+	public SftpResultImpl(boolean successFalg, int errorCode, String errorMsg) {
 		this.successFalg = successFalg;
 		this.errorCode = errorCode;
 		this.errorMsg = errorMsg;
@@ -44,7 +44,7 @@ public class SftpResultImpl implements net.sf.opensftp.SftpResult {
 	/**
 	 * Construct a new <code>SftpResult</code> using the specified values .
 	 */
-	public SftpResultImpl(boolean successFalg, String errorCode,
+	public SftpResultImpl(boolean successFalg, int errorCode,
 			String errorMsg, Object extension) {
 		this.successFalg = successFalg;
 		this.errorCode = errorCode;
@@ -52,11 +52,11 @@ public class SftpResultImpl implements net.sf.opensftp.SftpResult {
 		this.extension = extension;
 	}
 
-	public String getErrorCode() {
+	public int getErrorCode() {
 		return errorCode;
 	}
 
-	public void setErrorCode(String errorCode) {
+	public void setErrorCode(int errorCode) {
 		this.errorCode = errorCode;
 	}
 

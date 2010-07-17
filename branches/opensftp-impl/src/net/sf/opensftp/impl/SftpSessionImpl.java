@@ -16,7 +16,7 @@ public class SftpSessionImpl implements net.sf.opensftp.SftpSession {
 	private String host;
 	private String user;
 	private String serverDateTimePattern;
-	private SftpFile currentPath;
+	private String currentPath;
 
 	public SftpSessionImpl(ChannelSftp channelSftp) {
 		this.channelSftp = channelSftp;
@@ -62,16 +62,16 @@ public class SftpSessionImpl implements net.sf.opensftp.SftpSession {
 		this.dirChanged = dirChanged;
 	}
 
-	public void setCurrentPath(SftpFile currentPath) {
+	public void setCurrentPath(String currentPath) {
 		this.currentPath = currentPath;
 	}
 
-	public SftpFile getCurrentPath() {
+	public String getCurrentPath() {
 		if (currentPath == null) {
 			dirChanged = true;
 		}
 		if (dirChanged) {
-			currentPath = (SftpFile) SftpUtilFactory.getSftpUtil().pwd(this)
+			currentPath = (String) SftpUtilFactory.getSftpUtil().pwd(this)
 					.getExtension();
 		}
 		return currentPath;

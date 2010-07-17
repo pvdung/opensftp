@@ -27,7 +27,7 @@ public interface SftpResult {
 	 * Return the <code>errorCode</code>.
 	 * @return the <code>errorCode</code>.
 	 */
-	public String getErrorCode();
+	public int getErrorCode();
 
 	/**
 	 * Return the <code>errorMessage</code>.

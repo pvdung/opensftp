@@ -75,7 +75,7 @@ public class LoggingInterceptor implements Interceptor {
 			s.append("@");
 			s.append(session.getHost());
 			s.append(" ");
-			s.append(session.getCurrentPath().getName());
+			s.append(session.getCurrentPath());
 			s.append("]$ ");
 			s.append(method.getName());
 			for (int i = 1; i < args.length; i++) {

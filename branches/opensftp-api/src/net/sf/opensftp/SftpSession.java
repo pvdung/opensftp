@@ -35,5 +35,5 @@ public interface SftpSession {
 	 * 
 	 * @return the current path
 	 */
-	public SftpFile getCurrentPath();
+	public String getCurrentPath();
 }

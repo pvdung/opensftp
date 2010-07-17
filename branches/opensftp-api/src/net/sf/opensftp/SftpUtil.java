@@ -332,9 +332,9 @@ public interface SftpUtil {
 	 * 
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation. Invoking <code>getExtension()</code> on the returned
-	 *         <code>SftpResult</code> object should return an
-	 *         <code>{@link SftpFile}</code> object, if this pwd operation
-	 *         succeed.
+	 *         <code>SftpResult</code> object should return a
+	 *         <code>String</code> object representing the current path, if this
+	 *         pwd operation succeed.
 	 */
 	public SftpResult pwd(SftpSession session);
 
@@ -343,9 +343,9 @@ public interface SftpUtil {
 	 * 
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation. Invoking <code>getExtension()</code> on the returned
-	 *         <code>SftpResult</code> object should return an
-	 *         <code>{@link SftpFile}</code> object, if this lpwd operation
-	 *         succeed.
+	 *         <code>SftpResult</code> object should return a
+	 *         <code>String</code> object representing the current path, if this
+	 *         lpwd operation succeed.
 	 */
 	public SftpResult lpwd(SftpSession session);
 
@@ -457,6 +457,7 @@ public interface SftpUtil {
 	 *         operation
 	 */
 	public SftpResult lumask(SftpSession session, String umask);
+
 	/**
 	 * Represent the help command.
 	 * 
