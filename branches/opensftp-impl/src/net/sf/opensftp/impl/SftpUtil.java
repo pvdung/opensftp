@@ -2,6 +2,7 @@ package net.sf.opensftp.impl;
 
 import java.io.File;
 import java.util.Hashtable;
+import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
@@ -310,13 +311,22 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult ls(SftpSession session) {
-		// TODO Auto-generated method stub
-		return null;
+		return ls(session, ".");
 	}
 
 	public SftpResult ls(SftpSession session, String path) {
-		// TODO Auto-generated method stub
-		return null;
+		SftpResultImpl result = new SftpResultImpl();
+		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
+		try {
+			Vector fileList = channelSftp.ls(path);
+			result.setExtension(fileList);
+			result.setSuccessFalg(true);
+		} catch (com.jcraft.jsch.SftpException e) {
+			log.error("command ls failed.", e);
+			result.setErrorMessage(e.toString());
+			result.setErrorCode(e.id);
+		}
+		return result;
 	}
 
 	public SftpResult lumask(SftpSession session, String umask) {
@@ -325,13 +335,21 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult mkdir(SftpSession session, String path) {
-		// TODO Auto-generated method stub
-		return null;
+		SftpResultImpl result = new SftpResultImpl();
+		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
+		try {
+			channelSftp.mkdir(path);
+			result.setSuccessFalg(true);
+		} catch (com.jcraft.jsch.SftpException e) {
+			log.error("command mkdir failed.", e);
+			result.setErrorMessage(e.toString());
+			result.setErrorCode(e.id);
+		}
+		return result;
 	}
 
 	public SftpResult put(SftpSession session, String localFilename) {
-		// TODO Auto-generated method stub
-		return null;
+		return put(session, localFilename, ".", null);
 	}
 
 	/**
@@ -400,18 +418,53 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult rename(SftpSession session, String oldpath, String newpath) {
-		// TODO Auto-generated method stub
-		return null;
+		SftpResultImpl result = new SftpResultImpl();
+		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
+		try {
+			channelSftp.rename(oldpath, newpath);
+			result.setSuccessFalg(true);
+		} catch (com.jcraft.jsch.SftpException e) {
+			log.error("command mkdir failed.", e);
+			result.setErrorMessage(e.toString());
+			result.setErrorCode(e.id);
+		}
+		return result;
 	}
 
 	public SftpResult rm(SftpSession session, String filename) {
-		// TODO Auto-generated method stub
-		return null;
+		SftpResultImpl result = new SftpResultImpl();
+		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
+		try {
+			channelSftp.rm(filename);
+			result.setSuccessFalg(true);
+		} catch (com.jcraft.jsch.SftpException e) {
+			log.error("command mkdir failed.", e);
+			result.setErrorMessage(e.toString());
+			result.setErrorCode(e.id);
+		}
+		return result;
 	}
 
 	public SftpResult rmdir(SftpSession session, String path) {
-		// TODO Auto-generated method stub
-		return null;
+		SftpResultImpl result = new SftpResultImpl();
+		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
+		try {
+			channelSftp.rmdir(path);
+			result.setSuccessFalg(true);
+		} catch (com.jcraft.jsch.SftpException e) {
+			log.error("command mkdir failed.", e);
+			result.setErrorMessage(e.toString());
+			result.setErrorCode(e.id);
+		}
+		return result;
+	}
+
+	public SftpResult version(SftpSession session) {
+		SftpResultImpl result = new SftpResultImpl();
+		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
+		result.setExtension(channelSftp.version());
+		result.setSuccessFalg(true);
+		return result;
 	}
 
 	private class UserInfo4PubkeyAuth extends BaseUserInfo {
