@@ -75,7 +75,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			channelSftp.chmod(mode, path);
 			result.setSuccessFalg(true);
 		} catch (com.jcraft.jsch.SftpException e) {
-			log.error("command chgrp failed.", e);
+			log.error("command chmod failed.", e);
 			result.setErrorMessage(e.toString());
 			result.setErrorCode(e.id);
 		}
@@ -94,7 +94,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			channelSftp.chmod(uid, path);
 			result.setSuccessFalg(true);
 		} catch (com.jcraft.jsch.SftpException e) {
-			log.error("command chgrp failed.", e);
+			log.error("command chown failed.", e);
 			result.setErrorMessage(e.toString());
 			result.setErrorCode(e.id);
 		}
@@ -258,8 +258,17 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult lcd(SftpSession session, String path) {
-		// TODO Auto-generated method stub
-		return null;
+		SftpResultImpl result = new SftpResultImpl();
+		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
+		try {
+			channelSftp.lcd(path);
+			result.setSuccessFalg(true);
+		} catch (com.jcraft.jsch.SftpException e) {
+			log.error("command lcd failed.", e);
+			result.setErrorMessage(e.toString());
+			result.setErrorCode(e.id);
+		}
+		return result;
 	}
 
 	public SftpResult lls(SftpSession session) {
@@ -278,13 +287,26 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult ln(SftpSession session, String src, String link) {
-		// TODO Auto-generated method stub
-		return null;
+		SftpResultImpl result = new SftpResultImpl();
+		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
+		try {
+			channelSftp.symlink(src, link);
+			result.setSuccessFalg(true);
+		} catch (com.jcraft.jsch.SftpException e) {
+			log.error("command ln failed.", e);
+			result.setErrorMessage(e.toString());
+			result.setErrorCode(e.id);
+		}
+		return result;
 	}
 
 	public SftpResult lpwd(SftpSession session) {
-		// TODO Auto-generated method stub
-		return null;
+		SftpResultImpl result = new SftpResultImpl();
+		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
+		String currentPath = channelSftp.lpwd();
+		result.setExtension(currentPath);
+		result.setSuccessFalg(true);
+		return result;
 	}
 
 	public SftpResult ls(SftpSession session) {
