@@ -28,9 +28,25 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			.getProperty("user.home")
 			+ "/.ssh/known_hosts";
 
+	static {
+		JSch.setLogger(new MyLogger());
+	}
+
 	public SftpResult cd(SftpSession session, String path) {
-		// TODO Auto-generated method stub
-		return null;
+		SftpResultImpl result = new SftpResultImpl();
+		SftpSessionImpl sessionImpl = (SftpSessionImpl) session;
+		ChannelSftp channelSftp = sessionImpl.getChannelSftp();
+		try {
+			channelSftp.cd(path);
+			result.setSuccessFalg(true);
+			// update session
+			sessionImpl.setDirChanged(true);
+		} catch (com.jcraft.jsch.SftpException e) {
+			log.error("command cd failed.", e);
+			result.setErrorMessage(e.toString());
+			result.setErrorCode(e.id);
+		}
+		return result;
 	}
 
 	public SftpResult chgrp(SftpSession session, String grp, String path) {
@@ -39,8 +55,17 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult chgrp(SftpSession session, int gid, String path) {
-		// TODO Auto-generated method stub
-		return null;
+		SftpResultImpl result = new SftpResultImpl();
+		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
+		try {
+			channelSftp.chgrp(gid, path);
+			result.setSuccessFalg(true);
+		} catch (com.jcraft.jsch.SftpException e) {
+			log.error("command chgrp failed.", e);
+			result.setErrorMessage(e.toString());
+			result.setErrorCode(e.id);
+		}
+		return result;
 	}
 
 	public SftpResult chmod(SftpSession session, int mode, String path) {
