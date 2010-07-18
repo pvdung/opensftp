@@ -13,14 +13,16 @@ public interface SftpSession {
 	 * Return the Date Time Pattern of the server.
 	 * 
 	 * @return the Date Time Pattern of the server.
+	 * 
+	 * @deprecated
 	 */
 	public String getServerDateTimePattern();
-	
+
 	/**
 	 * Return the user.
 	 * 
 	 * @return the user
-	 */	
+	 */
 	public String getUser();
 
 	/**
@@ -29,7 +31,7 @@ public interface SftpSession {
 	 * @return the host
 	 */
 	public String getHost();
-	
+
 	/**
 	 * Return the current path.
 	 * 

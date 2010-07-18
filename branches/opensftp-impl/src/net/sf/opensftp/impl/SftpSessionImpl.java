@@ -46,10 +46,12 @@ public class SftpSessionImpl implements net.sf.opensftp.SftpSession {
 		this.user = user;
 	}
 
+	@Deprecated
 	public String getServerDateTimePattern() {
 		return serverDateTimePattern;
 	}
 
+	@Deprecated
 	public void setServerDateTimePattern(String serverDateTimePattern) {
 		this.serverDateTimePattern = serverDateTimePattern;
 	}
