@@ -1,13 +1,17 @@
 package net.sf.opensftp.impl;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.objenesis.instantiator.basic.NewInstanceInstantiator;
 
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.HostKey;
@@ -314,11 +318,30 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 		return ls(session, ".");
 	}
 
+	/**
+	 * Return the absolute path of the given path.
+	 */
+	private String remoteAbsolutePath(SftpSession session, String path) {
+		if (path.charAt(0) == '/')
+			return path;
+		String cwd = session.getCurrentPath();
+		if (cwd.endsWith("/"))
+			return cwd + path;
+		return cwd + "/" + path;
+	}
+
 	public SftpResult ls(SftpSession session, String path) {
 		SftpResultImpl result = new SftpResultImpl();
 		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
 		try {
-			Vector fileList = channelSftp.ls(path);
+			String absoultPath = remoteAbsolutePath(session, path);
+
+			List<SftpFileImpl> fileList = new Vector<SftpFileImpl>();
+			Vector<ChannelSftp.LsEntry> vv = channelSftp.ls(path);
+			Iterator<ChannelSftp.LsEntry> it = vv.iterator();
+			while (it.hasNext()) {
+				fileList.add(new SftpFileImpl(it.next(), absoultPath));
+			}
 			result.setExtension(fileList);
 			result.setSuccessFalg(true);
 		} catch (com.jcraft.jsch.SftpException e) {
