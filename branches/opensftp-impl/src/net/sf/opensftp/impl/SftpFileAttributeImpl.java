@@ -17,11 +17,14 @@ public class SftpFileAttributeImpl implements SftpFileAttribute {
 	private Date aTime;
 	private Date mTime;
 
+	private SftpATTRS attrs;
+
 	public SftpFileAttributeImpl(SftpATTRS attrs) {
 		setAttrs(attrs);
 	}
 
 	public void setAttrs(SftpATTRS attrs) {
+		this.attrs = attrs;
 		type = attrs.getPermissionsString().charAt(0);
 		permissions = attrs.getPermissions();
 		permissionsString = attrs.getPermissionsString().substring(1);
