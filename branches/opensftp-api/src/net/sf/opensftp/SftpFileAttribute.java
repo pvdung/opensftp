@@ -141,7 +141,7 @@ public interface SftpFileAttribute {
 	 *         represented by the {@link SftpFile} object to which this
 	 *         <code>SftpFileAttribute</code> object belongs.
 	 */
-	public String getGID();	
+	public int getGID();	
 	
 	/**
 	 * Return the <code>size</code> attribute of the file or directory
