@@ -22,11 +22,18 @@ import com.jcraft.jsch.Session;
 import com.jcraft.jsch.UserInfo;
 
 import net.sf.opensftp.ProgressListener;
+import net.sf.opensftp.Prompter;
 import net.sf.opensftp.SftpException;
 import net.sf.opensftp.SftpSession;
 import net.sf.opensftp.SftpResult;
 
 public class SftpUtil implements net.sf.opensftp.SftpUtil {
+	private Prompter prompter;
+
+	public void setPrompter(Prompter prompter) {
+		this.prompter = prompter;
+	}
+
 	private static Logger log = Logger.getLogger(SftpUtil.class);
 
 	private final static String known_hosts_file = System
@@ -547,11 +554,11 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 				break;
 
 			case net.sf.opensftp.SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_ASK:
-				Object[] options = { "yes", "no" };
-				int foo = JOptionPane.showOptionDialog(null, str, "Warning",
-						JOptionPane.DEFAULT_OPTION,
-						JOptionPane.WARNING_MESSAGE, null, options, options[1]);
-				flag = (foo == 0);
+				if (prompter == null) {
+					log.warn("No prompter configured. Use the default one - net.sf.opensftp.impl.SwingPrompter.");
+					prompter = new SwingPrompter();
+				}
+				flag = prompter.promptYesNo(str);
 				break;
 			}
 

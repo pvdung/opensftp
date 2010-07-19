@@ -1,6 +1,11 @@
 package net.sf.opensftp;
 
 public class MockSftpUtil implements SftpUtil {
+	private Prompter prompter;
+
+	public void setPrompter(Prompter prompter) {
+		this.prompter = prompter;
+	}
 
 	public SftpResult cd(SftpSession session, String path) {
 		// TODO Auto-generated method stub
@@ -67,7 +72,7 @@ public class MockSftpUtil implements SftpUtil {
 
 	public void disconnect(SftpSession session) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public SftpResult get(SftpSession session, String remoteFilename) {

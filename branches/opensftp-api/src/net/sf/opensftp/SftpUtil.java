@@ -22,6 +22,12 @@ public interface SftpUtil {
 	public final static int STRICT_HOST_KEY_CHECKING_OPTION_NO = 2;
 
 	/**
+	 * 
+	 * @param prompter
+	 */
+	public void setPrompter(Prompter prompter);
+	
+	/**
 	 * Connect to an SFTP server through the default port(22) using publickey
 	 * authentication with empty passphrase. Invoking this method is equivalent
 	 * to:

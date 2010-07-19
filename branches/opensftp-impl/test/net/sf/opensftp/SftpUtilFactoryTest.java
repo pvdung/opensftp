@@ -159,20 +159,20 @@ public class SftpUtilFactoryTest extends SftpUtilFactoryDup {
 		assertEquals(SftpUtilFactoryDup.sftpUtilClassName,
 				defaultSftpUtilClassName);
 	}
-	
-	@Test
-	public void testInterceptorFunctionality(){
+
+
+	public void testInterceptorFunctionality() {
 		String UTName = "testInterceptorFunctionality";
 		int i = 1;
 		log.info(UTName + " - case " + i++);
 		SftpUtil util = getSftpUtil();
 		try {
 			SftpSession session = util.connect(null, null, null, 0);
-			util.cd(session,"..");
+			util.cd(session, "..");
 		} catch (SftpException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 }

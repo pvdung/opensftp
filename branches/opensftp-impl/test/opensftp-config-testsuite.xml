@@ -2,11 +2,17 @@
 <opensftp-config xmlns="http://opensftp.sf.net/opensftp-config"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://opensftp.sf.net/opensftp-config opensftp-config.xsd ">
-	<sftputil-impl>net.sf.opensftp.MockSftpUtil</sftputil-impl>
+	<sftputil-impl type="net.sf.opensftp.MockSftpUtil">
+		<property-ref name="prompter" type="net.sf.opensftp.impl.SwingPrompter"
+			ref="swingPrompter" />
+	</sftputil-impl>
 	<interceptors>
-		<interceptor name="loggingInterceptor" type="net.sf.opensftp.interceptor.LoggingInterceptor" />
-		<interceptor name="monitoringInterceptor" type="net.sf.opensftp.interceptor.MonitoringInterceptor" />
-		<interceptor name="dummyInterceptor" type="net.sf.opensftp.interceptor.DummyInterceptor">
+		<interceptor name="loggingInterceptor"
+			type="net.sf.opensftp.interceptor.LoggingInterceptor" />
+		<interceptor name="monitoringInterceptor"
+			type="net.sf.opensftp.interceptor.MonitoringInterceptor" />
+		<interceptor name="dummyInterceptor"
+			type="net.sf.opensftp.interceptor.DummyInterceptor">
 			<property name="dummyfield1" type="java.lang.String" value="value1" />
 			<property name="dummyfield2" type="java.lang.Integer" value="2" />
 			<property-ref name="dummyfield3" type="java.util.HashMap"
@@ -18,6 +24,7 @@
 		</interceptor>
 	</interceptors>
 	<beans>
+		<bean name="swingPrompter" type="net.sf.opensftp.impl.SwingPrompter" />
 		<bean name="dummyMap" type="java.util.HashMap">
 			<initializing-block>put("1","one");put("2","two");put("5","five");</initializing-block>
 		</bean>

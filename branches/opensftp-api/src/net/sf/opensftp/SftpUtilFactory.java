@@ -71,6 +71,11 @@ public class SftpUtilFactory {
 	 * The name of the default {@link SftpUtil} implementation class.
 	 */
 	private static final String DEFAULT_SFTPUTIL_CLASSNAME = "net.sf.opensftp.impl.SftpUtil";
+
+	/**
+	 * The "sftputil-impl" node ({@link #sftputilImplNodePath}).
+	 */
+	private static Node sftputilImplNode = null;
 	/**
 	 * The name of the actual {@link SftpUtil} implementation class.
 	 */
@@ -177,6 +182,15 @@ public class SftpUtilFactory {
 								.getInstantiatorOf(Class
 										.forName(getSftpUtilClassName()))
 								.newInstance());
+
+						// initialize proxiedSftpUtil
+						if (sftputilImplNode != null
+								&& initializeBean(sftputilImplNode, false,
+										"proxiedSftpUtil", proxiedSftpUtil,
+										null) == null) {
+							log.error("Failed to initialize 'sftputil-impl'("
+									+ sftpUtilClassName + ").");
+						}
 
 						// the InvocationHandler
 						InvocationHandler handler = new SftpUtilInvocationHandler(
@@ -352,13 +366,18 @@ public class SftpUtilFactory {
 			}
 
 			// sftputil-impl
-			Node sftputilImplNode = document
-					.selectSingleNode(sftputilImplNodePath);
-			if (sftputilImplNode != null) {
-				String sftputilImplClassName = sftputilImplNode.getText();
+			Node node = document.selectSingleNode(sftputilImplNodePath);
+			if (node != null) {
+				String sftputilImplClassName = node
+						.valueOf(beanTypeAttrRelativePath);
 				if (sftputilImplClassName != null
 						&& sftputilImplClassName.trim().length() != 0) {
 					checkAndSetSftpUtilClassName(sftputilImplClassName);
+					if (sftpUtilClassNameInitialized == true) { // succeed to
+						// set
+						// sftpUtilClassName
+						sftputilImplNode = node;
+					}
 				}
 			}
 
@@ -460,7 +479,7 @@ public class SftpUtilFactory {
 	 *            not construct the bean, but use the specified
 	 *            <code>beanName</code> and the <code>bean</code> as the
 	 *            already-constructed bean instead. This functionality is
-	 *            designed for Interceptor configuration.
+	 *            designed for sftputil-impl and Interceptor configurations.
 	 * @param beanName
 	 *            the name of the bean. Please refer to the description of the
 	 *            needConstruct param for more details.
