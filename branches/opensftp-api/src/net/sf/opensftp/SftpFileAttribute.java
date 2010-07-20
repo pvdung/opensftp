@@ -31,27 +31,27 @@ public interface SftpFileAttribute {
 	/**
 	 * Represent the regular file type.
 	 */
-	public final static char TYPE_FILE = '-';
+	public final static char TYPE_REGULAR = '-';
 	/**
 	 * Represent the directory type.
 	 */
-	public final static char TYPE_DIR = 'd';
+	public final static char TYPE_DIRECTORY = 'd';
 	/**
 	 * Represent the character device type.
 	 */
-	public final static char TYPE_CDEV = 'c';
+	public final static char TYPE_CHAR_DEVICE = 'c';
 	/**
 	 * Represent the block device type.
 	 */
-	public final static char TYPE_BDEV = 'b';
+	public final static char TYPE_BLOCK_DEVICE = 'b';
 	/**
 	 * Represent the socket file type.
 	 */
-	public final static char TYPE_SOCK = 's';
+	public final static char TYPE_SOCKET = 's';
 	/**
 	 * Represent the symbolic link type.
 	 */
-	public final static char TYPE_LINK = 'l';
+	public final static char TYPE_SYMLINK = 'l';
 
 	/**
 	 * Return the <code>type</code> attribute of the file or directory
@@ -75,7 +75,7 @@ public interface SftpFileAttribute {
 	 *         <code>SftpFileAttribute</code> object belongs.
 	 */
 	public String getPermissionsString();
-	
+
 	/**
 	 * Return the <code>permissions</code> attribute of the file or directory
 	 * represented by the {@link SftpFile} object to which this
@@ -91,7 +91,7 @@ public interface SftpFileAttribute {
 	/**
 	 * Return the <code>links</code> attribute of the file or directory
 	 * represented by the {@link SftpFile} object to which this
-	 * <code>SftpFileAttribute</code> object belongs. 
+	 * <code>SftpFileAttribute</code> object belongs.
 	 * 
 	 * @return the <code>links</code> attribute of the file or directory
 	 *         represented by the {@link SftpFile} object to which this
@@ -102,7 +102,7 @@ public interface SftpFileAttribute {
 	/**
 	 * Return the <code>owner</code> attribute of the file or directory
 	 * represented by the {@link SftpFile} object to which this
-	 * <code>SftpFileAttribute</code> object belongs. 
+	 * <code>SftpFileAttribute</code> object belongs.
 	 * 
 	 * @return the <code>owner</code> attribute of the file or directory
 	 *         represented by the {@link SftpFile} object to which this
@@ -113,62 +113,62 @@ public interface SftpFileAttribute {
 	/**
 	 * Return the UID of <code>owner</code> attribute of the file or directory
 	 * represented by the {@link SftpFile} object to which this
-	 * <code>SftpFileAttribute</code> object belongs. 
+	 * <code>SftpFileAttribute</code> object belongs.
 	 * 
 	 * @return the <code>owner</code> attribute of the file or directory
 	 *         represented by the {@link SftpFile} object to which this
 	 *         <code>SftpFileAttribute</code> object belongs.
 	 */
 	public int getUID();
-	
+
 	/**
 	 * Return the <code>group</code> attribute of the file or directory
 	 * represented by the {@link SftpFile} object to which this
-	 * <code>SftpFileAttribute</code> object belongs. 
+	 * <code>SftpFileAttribute</code> object belongs.
 	 * 
 	 * @return the <code>group</code> attribute of the file or directory
 	 *         represented by the {@link SftpFile} object to which this
 	 *         <code>SftpFileAttribute</code> object belongs.
 	 */
 	public String getGroup();
-	
+
 	/**
-	 * Return the GID of the <code>group</code> attribute of the file or directory
-	 * represented by the {@link SftpFile} object to which this
-	 * <code>SftpFileAttribute</code> object belongs. 
+	 * Return the GID of the <code>group</code> attribute of the file or
+	 * directory represented by the {@link SftpFile} object to which this
+	 * <code>SftpFileAttribute</code> object belongs.
 	 * 
 	 * @return the <code>group</code> attribute of the file or directory
 	 *         represented by the {@link SftpFile} object to which this
 	 *         <code>SftpFileAttribute</code> object belongs.
 	 */
-	public int getGID();	
-	
+	public int getGID();
+
 	/**
 	 * Return the <code>size</code> attribute of the file or directory
 	 * represented by the {@link SftpFile} object to which this
-	 * <code>SftpFileAttribute</code> object belongs. 
+	 * <code>SftpFileAttribute</code> object belongs.
 	 * 
 	 * @return the <code>size</code> attribute of the file or directory
 	 *         represented by the {@link SftpFile} object to which this
 	 *         <code>SftpFileAttribute</code> object belongs.
 	 */
 	public long getSize();
-	
+
 	/**
 	 * Return the <code>atime</code> attribute of the file or directory
 	 * represented by the {@link SftpFile} object to which this
-	 * <code>SftpFileAttribute</code> object belongs. 
+	 * <code>SftpFileAttribute</code> object belongs.
 	 * 
 	 * @return the <code>atime</code> attribute of the file or directory
 	 *         represented by the {@link SftpFile} object to which this
 	 *         <code>SftpFileAttribute</code> object belongs.
 	 */
 	public Date getATime();
-	
+
 	/**
 	 * Return the <code>mtime</code> attribute of the file or directory
 	 * represented by the {@link SftpFile} object to which this
-	 * <code>SftpFileAttribute</code> object belongs. 
+	 * <code>SftpFileAttribute</code> object belongs.
 	 * 
 	 * @return the <code>mtime</code> attribute of the file or directory
 	 *         represented by the {@link SftpFile} object to which this
