@@ -265,8 +265,34 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult help(SftpSession session) {
-		// TODO Auto-generated method stub
-		return null;
+		String help = "      Available commands:\n"
+				+ "      * means unimplemented command.\n"
+				+ "bye                           Quit sftp\n"
+				+ "cd path                       Change remote directory to 'path'\n"
+				+ "chgrp grp path                Change group of file 'path' to 'grp'\n"
+				+ "chmod mode path               Change permissions of file 'path' to 'mode'\n"
+				+ "chown own path                Change owner of file 'path' to 'own'\n"
+				+ "exit                          Quit sftp\n"
+				+ "get remote-path [local-path]  Download file\n"
+				+ "help                          Display this help text\n"
+				+ "lcd path                      Change local directory to 'path'\n"
+				+ "*lls [ls-options [path]]      Display local directory listing\n"
+				+ "*lmkdir path                  Create local directory\n"
+				+ "ln oldpath newpath            Symlink remote file\n"
+				+ "lpwd                          Print local working directory\n"
+				+ "ls [path]                     Display remote directory listing\n"
+				+ "*lumask umask                 Set local umask to 'umask'\n"
+				+ "mkdir path                    Create remote directory\n"
+				+ "put local-path [remote-path]  Upload file\n"
+				+ "pwd                           Display remote working directory\n"
+				+ "quit                          Quit sftp\n"
+				+ "rename oldpath newpath        Rename remote file\n"
+				+ "rm path                       Delete remote file\n"
+				+ "rmdir path                    Remove remote directory\n"
+				+ "symlink oldpath newpath       Symlink remote file\n"
+				+ "version                       Show SFTP version\n"
+				+ "?                             Synonym for help";
+		return new SftpResultImpl(true, help);
 	}
 
 	public SftpResult lcd(SftpSession session, String path) {
@@ -555,7 +581,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 
 			case net.sf.opensftp.SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_ASK:
 				if (prompter == null) {
-					log.warn("No prompter configured. Use the default one - net.sf.opensftp.impl.SwingPrompter.");
+					log
+							.warn("No prompter configured. Use the default one - net.sf.opensftp.impl.SwingPrompter.");
 					prompter = new SwingPrompter();
 				}
 				flag = prompter.promptYesNo(str);
