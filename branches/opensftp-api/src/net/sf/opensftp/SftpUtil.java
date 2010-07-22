@@ -378,6 +378,7 @@ public interface SftpUtil {
 	 *            is about to be changed.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
+	 * @deprecated
 	 */
 	public SftpResult chgrp(SftpSession session, String grp, String path);
 
@@ -410,6 +411,7 @@ public interface SftpUtil {
 	 *            is about to be changed.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
+	 * @deprecated
 	 */
 	public SftpResult chown(SftpSession session, String own, String path);
 
