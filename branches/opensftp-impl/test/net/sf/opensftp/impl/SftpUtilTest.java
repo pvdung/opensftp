@@ -63,12 +63,12 @@ public class SftpUtilTest {
 		new File(known_hosts_file).delete();
 	}
 
-	@Test(expected = Throwable.class)
+	@Test//(expected = Throwable.class)
 	public void testConnect() {
 		String UTName = "testConnect";
 
-		int[] options = { SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO,
-		SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES,
+		int[] options = { //SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO,
+				SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES,
 				SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_ASK };
 		int i = 1;
 
