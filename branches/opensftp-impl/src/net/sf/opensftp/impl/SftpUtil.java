@@ -35,10 +35,11 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	private static Logger log = Logger.getLogger(SftpUtil.class);
-
+	private static Logger logger4LoggingInterceptor = Logger
+			.getLogger(net.sf.opensftp.interceptor.LoggingInterceptor.class);
 	private final static String known_hosts_file = System
-			.getProperty("user.home")
-			+ "/.ssh/known_hosts";
+
+	.getProperty("user.home") + "/.ssh/known_hosts";
 
 	static {
 		JSch.setLogger(new MyLogger());
@@ -133,8 +134,11 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 		try {
 			JSch jsch = new JSch();
 			// private key
-			jsch.addIdentity(new File(System.getProperty("user.home")
-					+ "/.ssh/" + identityFile).getAbsolutePath());
+			if (identityFile.startsWith("~/") || identityFile.startsWith("~\\")) {
+				identityFile = System.getProperty("user.home")
+						+ identityFile.substring(identityFile.indexOf("~") + 1);
+			}
+			jsch.addIdentity(new File(identityFile).getAbsolutePath());
 
 			// known hosts
 			jsch.setKnownHosts(new File(known_hosts_file).getAbsolutePath());
@@ -527,7 +531,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 		String passphrase;
 
 		public String getPassphrase() {
-			log.debug("Passphrase retrieved.");
+			log.info("Passphrase retrieved.");
+			logger4LoggingInterceptor.info("Passphrase retrieved.");
 			return passphrase;
 		}
 
@@ -541,7 +546,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 		String passwd;
 
 		public String getPassword() {
-			log.debug("Password retrieved.");
+			log.info("Password retrieved.");
+			logger4LoggingInterceptor.info("Password retrieved.");
 			return passwd;
 		}
 
@@ -566,7 +572,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 		}
 
 		public void showMessage(String message) {
-			log.debug(message);
+			log.info(message);
+			logger4LoggingInterceptor.info(message);
 		}
 
 		public boolean promptYesNo(String str) {
@@ -589,25 +596,26 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 				break;
 			}
 
-			log.debug(str + flag);
+			log.info(str + flag);
+			logger4LoggingInterceptor.info(str + flag);
 			return flag;
 		}
 
 		public boolean promptPassword(String message) {
-			log.debug("Asking for password...");
+			log.info("Asking for password...");
+			logger4LoggingInterceptor.info("Asking for password...");
 			return true;
 		}
 
 		public boolean promptPassphrase(String message) {
-			log.debug("Asking for passphrase...");
+			log.info("Asking for passphrase...");
+			logger4LoggingInterceptor.info("Asking for passphrase...");
 			return true;
 		}
 	}
 
 	private static class MyLogger implements com.jcraft.jsch.Logger {
 		private static Logger log = Logger.getLogger(JSch.class);
-		private static Logger logger4LoggingInterceptor = Logger
-				.getLogger(net.sf.opensftp.interceptor.LoggingInterceptor.class);
 
 		static Hashtable<Integer, Level> levels = new Hashtable<Integer, Level>();
 		static {

@@ -24,16 +24,18 @@ specify the following vm args individually.
 -Dnet.sf.opensftp.SftpUtil=a.b.c
 -Dnet.sf.opensftp.SftpUtil=org.apache.log4j.Logger
 -Dnet.sf.opensftp.SftpUtil=net.sf.opensftp.MockSftpUtil
+-Dnet.sf.opensftp.SftpUtil=net.sf.opensftp.impl.SftpUtil
 
 4)Test the configuration functionality
 To test the configuration functionality, copy opensftp-config-testsuite.xml to your classpath and rename it to 'opensftp-config.xml'.
 
 4.1)Test the SftpUtil configuration functionality
-set the text of <sftputil-impl> node to the following values once at a time.
+set the "type" attrubute of the <sftputil-impl> node to the following values once at a time.
 {blank or spaces}
 a.b.c
 org.apache.log4j.Logger
 net.sf.opensftp.MockSftpUtil
+net.sf.opensftp.impl.SftpUtil
 
 4.2)Test the Interceptor/Bean configuration functionality
 Use DummyInterceptor along with opensftp-config-testsuite.xml to test the configuration functionality.
