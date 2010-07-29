@@ -64,7 +64,7 @@ public class SftpUtilTest {
 	}
 
 	@Test//(expected = Throwable.class)
-	public void testConnect() {
+	public void testConnectionFunctionalities() {
 		String UTName = "testConnect";
 
 		int[] options = { //SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO,
@@ -138,5 +138,9 @@ public class SftpUtilTest {
 			tearDown();
 		}
 
+	}
+	
+	public void testOtherFunctionalities() {
+		
 	}
 }
