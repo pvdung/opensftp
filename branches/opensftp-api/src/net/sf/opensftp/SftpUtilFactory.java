@@ -693,7 +693,12 @@ public class SftpUtilFactory {
 
 		public Object invoke(Object proxy, Method method, Object[] args)
 				throws Throwable {
-
+			
+			if (method.getName().startsWith("connect")
+					|| method.getName().equals("disconnect")) {
+				return method.invoke(this.proxiedObj, args);
+			}
+			
 			// before invocation
 			ListIterator<Interceptor> it = interceptors.listIterator();
 			while (it.hasNext()) {

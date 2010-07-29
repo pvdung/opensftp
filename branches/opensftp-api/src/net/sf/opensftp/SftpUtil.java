@@ -75,12 +75,13 @@ public interface SftpUtil {
 	 * @param passphrase
 	 *            Passphrase. An empty string ("") indicates no passphrase.
 	 * @param identityFile
-	 *            The path of the identityFile. It's strongly recommended to
-	 *            place your identityFile under your home folder,
-	 *            /home/<i>yourusername</i> for Linux for instance, for
-	 *            security. If you specify a value begining with '~' and a
-	 *            following directory separator ('/' or '\\'), the '~' is
-	 *            treated as your home folder.
+	 *            The path of the identityFile. for security, it's strongly
+	 *            recommended to place your identityFile under the
+	 *            <code>.ssh</code> folder of your home folder,
+	 *            /home/<i>yourusername</i>/.ssh for Linux for instance. If
+	 *            you specify a value begining with '~' and a following
+	 *            directory separator ('/' or '\\'), the '~' is treated as your
+	 *            home folder.
 	 * @param strictHostKeyChecking
 	 *            The strictHostKeyChecking option. Valid values for this param
 	 *            are {@link #STRICT_HOST_KEY_CHECKING_OPTION_ASK},

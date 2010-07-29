@@ -4,7 +4,8 @@ import java.lang.reflect.Method;
 import net.sf.opensftp.SftpResult;
 
 /**
- * <code>Interceptor</code>s intercept method invocations on
+ * <code>Interceptor</code>s intercept method invocations ( except method calls
+ * to <code>connect</code> and <code>disconnect</code> ) on
  * {@link net.sf.opensftp.SftpUtil} objects to provide various customized
  * functionality.
  * 
