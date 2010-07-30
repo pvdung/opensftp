@@ -704,6 +704,7 @@ public class SftpUtilFactory {
 			while (it.hasNext()) {
 				it.next().beforeMethod(method, args);
 			}
+			
 			SftpResult result = (SftpResult) method.invoke(this.proxiedObj,
 					args);
 

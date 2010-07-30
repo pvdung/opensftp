@@ -25,49 +25,69 @@ public class LoggingInterceptor implements Interceptor {
 	private boolean logCommand = true;
 
 	/**
+	 * This property is used to make <code>LoggingInterceptor</code> work well
+	 * even when sftp methods are nested, i.e. an sftp method is invoked by
+	 * another sftp method.
+	 */
+	private int nestCounter = 0;
+
+	/**
 	 * Determine whether to log commands or not.
 	 * 
 	 * @param logCommand
-	 *            log commands if true. The default value is <code>true</code>.
+	 *            log commands if true.
 	 */
-	public void logCommand(boolean logCommand) {
+	public void setLogCommand(boolean logCommand) {
 		this.logCommand = logCommand;
 	}
 
 	public void afterMethod(Method method, Object[] args, SftpResult result) {
+		nestCounter--;
+		if (nestCounter != 0) {
+			return;
+		}
 		StringBuilder s = new StringBuilder();
 		boolean success = result.getSuccessFalg();
 
 		if (success) {// output
 			String methodName = method.getName();
 
-			if (methodName.equals("ls")) {
+			if (methodName.equals("get")) {
+
+			} else if (methodName.equals("help")) {
+				s.append(result.getExtension());
+			} else if (methodName.equals("lls")) {
+
+			} else if (methodName.equals("lpwd")) {
+				s.append(result.getExtension());
+			} else if (methodName.equals("ls")) {
 				List<SftpFile> l = (List<SftpFile>) result.getExtension();
 				Iterator<SftpFile> i = l.iterator();
 				while (i.hasNext()) {
 					s.append(i.next());
-					s.append("\n");
+					if (i.hasNext())
+						s.append("\n");
 				}
-
-			} else if (methodName.equals("pwd")) {
-				s.append(((SftpFile) result.getExtension()).getFullName());
 			} else if (methodName.equals("put")) {
 
-			} else if (methodName.equals("get")) {
-
-			} else if (methodName.equals("lpwd")) {
-
-			} else if (methodName.equals("lls")) {
-
+			} else if (methodName.equals("pwd")) {
+				s.append(result.getExtension());
+			} else if (methodName.equals("version")) {
+				s.append(result.getExtension());
 			}
-			log.info(s);
+			if (s.length() != 0)
+				log.info(s);
 		} else {// error message
 			log.info(result.getErrorMessage());
 		}
-
 	}
 
 	public void beforeMethod(Method method, Object[] args) {
+		nestCounter++;
+		if (nestCounter != 1) {
+			return;
+		}
+
 		if (logCommand) {
 			SftpSession session = (SftpSession) args[0];
 			StringBuilder s = new StringBuilder("[");
@@ -79,8 +99,10 @@ public class LoggingInterceptor implements Interceptor {
 			s.append("]$ ");
 			s.append(method.getName());
 			for (int i = 1; i < args.length; i++) {
-				s.append(" ");
-				s.append(args[i]);
+				if (args[i] != null) {
+					s.append(" ");
+					s.append(args[i]);
+				}
 			}
 			log.info(s);
 		}
