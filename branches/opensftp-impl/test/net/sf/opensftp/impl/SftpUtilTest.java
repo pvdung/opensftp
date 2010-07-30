@@ -68,7 +68,7 @@ public class SftpUtilTest {
 	 * Test connection functions:<br>
 	 * connect, disconnect.
 	 */
-	@Test
+	//@Test
 	// (expected = Throwable.class)
 	public void testConnectionFunctionalities() {
 		String UTName = "testConnect";
@@ -215,7 +215,7 @@ public class SftpUtilTest {
 	 * Test local functions:<br>
 	 * lcd, lls, lmkdir, lpwd.
 	 */
-	@Test
+	//@Test
 	public void testLocalFunctions() {
 		String UTName = "testLocalFunctions";
 		int i = 1;
@@ -255,7 +255,7 @@ public class SftpUtilTest {
 	 * Test rarely used functions:<br>
 	 * chgrp, chmod, chown, ln(symlink), lumask.
 	 */
-	@Test
+	//@Test
 	public void testRarelyUsedFunctions() {
 		String UTName = "testRarelyUsedFunctions";
 		int i = 1;

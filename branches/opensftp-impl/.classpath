@@ -5,7 +5,7 @@
 	<classpathentry kind="src" path="/opensftp-api"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="lib/jsch-0.1.42.jar" sourcepath="E:/programming_java/MyDoc/jsch/jsch-0.1.42.zip"/>
+	<classpathentry kind="lib" path="lib/jsch-0.1.42.jar" sourcepath="D:/MyDoc/Jsch/jsch-0.1.42.zip"/>
 	<classpathentry kind="lib" path="lib/jzlib-1.0.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,17 +1,13 @@
 package net.sf.opensftp.impl;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import javax.swing.JOptionPane;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.objenesis.instantiator.basic.NewInstanceInstantiator;
 
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.HostKey;
@@ -172,10 +168,21 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 
 			channel = (ChannelSftp) session.openChannel("sftp");
 			channel.connect(timeout);
-			return new SftpSessionImpl(channel);
+
+			//initialize SftpSessionImpl
+			SftpSessionImpl sftpSessionImpl = new SftpSessionImpl(channel);
+			sftpSessionImpl.setHost(host);
+			sftpSessionImpl.setUser(user);
+			sftpSessionImpl.setCurrentPath(channel.pwd());
+			sftpSessionImpl.setDirChanged(false);
+			return sftpSessionImpl;
 
 		} catch (JSchException e) {
 			String error = "Failed to login. " + user + "@" + host + ":" + port;
+			log.error(error, e);
+			throw new SftpException(error);
+		} catch (com.jcraft.jsch.SftpException e) {
+			String error = "Failed to retrieve the current working path.";
 			log.error(error, e);
 			throw new SftpException(error);
 		}
@@ -203,9 +210,20 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			session.connect();
 			channel = (ChannelSftp) session.openChannel("sftp");
 			channel.connect(timeout);
-			return new SftpSessionImpl(channel);
+			
+			//initialize SftpSessionImpl
+			SftpSessionImpl sftpSessionImpl = new SftpSessionImpl(channel);
+			sftpSessionImpl.setHost(host);
+			sftpSessionImpl.setUser(user);
+			sftpSessionImpl.setCurrentPath(channel.pwd());
+			sftpSessionImpl.setDirChanged(false);
+			return sftpSessionImpl;
 		} catch (JSchException e) {
 			String error = "Failed to login. " + user + "@" + host + ":" + port;
+			log.error(error, e);
+			throw new SftpException(error);
+		} catch (com.jcraft.jsch.SftpException e) {
+			String error = "Failed to retrieve the current working path.";
 			log.error(error, e);
 			throw new SftpException(error);
 		}
@@ -269,8 +287,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult help(SftpSession session) {
-		String help = "      Available commands:\n"
-				+ "      * means unimplemented command.\n"
+		String help = "Available commands:\n"
+				+ "* means unimplemented command.\n"
 				+ "bye                           Quit sftp\n"
 				+ "cd path                       Change remote directory to 'path'\n"
 				+ "chgrp grp path                Change group of file 'path' to 'grp'\n"
