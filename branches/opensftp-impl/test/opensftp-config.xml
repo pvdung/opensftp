@@ -3,12 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://opensftp.sf.net/opensftp-config opensftp-config.xsd ">
 	<sftputil-impl type="net.sf.opensftp.impl.SftpUtil">
+		<property-ref name="prompter" type="net.sf.opensftp.impl.SwingPrompter"
+			ref="swingPrompter" />
 	</sftputil-impl>
 	<interceptors>
 		<interceptor name="loggingInterceptor"
-			type="net.sf.opensftp.interceptor.LoggingInterceptor">
-<!--			<property name="logCommand" type="java.lang.Boolean" value="true" />-->
-		</interceptor>
+			type="net.sf.opensftp.interceptor.LoggingInterceptor" />
 	</interceptors>
 	<beans>
 		<bean name="swingPrompter" type="net.sf.opensftp.impl.SwingPrompter" />
