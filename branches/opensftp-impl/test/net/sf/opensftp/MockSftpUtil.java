@@ -172,4 +172,9 @@ public class MockSftpUtil implements SftpUtil {
 		return null;
 	}
 
+	public SftpResult version(SftpSession session) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
