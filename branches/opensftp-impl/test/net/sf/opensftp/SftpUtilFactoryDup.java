@@ -338,7 +338,7 @@ public class SftpUtilFactoryDup {
 			configReader.getDocumentFactory().setXPathNamespaceURIs(map);
 
 			// validation
-			String configXSDPath = SftpUtilFactoryDup.class.getResource(
+			String configXSDPath = SftpUtilFactoryDup.class.getClassLoader().getResource(
 					configXSDFileName).toString();
 			log.debug("The XSD file found at " + configXSDPath);
 

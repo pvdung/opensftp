@@ -99,7 +99,7 @@ public class SftpUtilFactory {
 	 */
 	private static List<Interceptor> interceptors = new ArrayList<Interceptor>();
 
-	private static final String configXSDFileName = "/opensftp-config.xsd";
+	private static final String configXSDFileName = "opensftp-config.xsd";
 	private static final String configFilename = "opensftp-config.xml";
 	// xpath for opensftp-config.xml
 	private static final String ns_prefix = "o";
@@ -338,7 +338,7 @@ public class SftpUtilFactory {
 			configReader.getDocumentFactory().setXPathNamespaceURIs(map);
 
 			// validation
-			String configXSDPath = SftpUtilFactory.class.getResource(
+			String configXSDPath = SftpUtilFactory.class.getClassLoader().getResource(
 					configXSDFileName).toString();
 			log.debug("The XSD file found at " + configXSDPath);
 

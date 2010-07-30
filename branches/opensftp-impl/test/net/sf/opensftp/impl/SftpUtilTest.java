@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 
 import net.sf.opensftp.SftpException;
+import net.sf.opensftp.SftpResult;
 import net.sf.opensftp.SftpSession;
 import net.sf.opensftp.SftpUtil;
 import net.sf.opensftp.SftpUtilFactory;
@@ -140,7 +141,54 @@ public class SftpUtilTest {
 
 	}
 	
-	public void testOtherFunctionalities() {
+	@Test
+	public void testCommonFunctions() {
+		String UTName = "testCommonFunctions";
+		int i = 1;
+		log.info(UTName + " - case " + i++);
+		
+		try {
+			session = util.connectByPasswdAuth(host, user,
+					password, SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES);			
+		} catch (SftpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertNotNull(session);
+
+		SftpResult result = util.ls(session);
+		assertTrue(result.getSuccessFalg());
+		
+		result = util.pwd(session);
+		assertTrue(result.getSuccessFalg());
+
+		result = util.mkdir(session, "tmp4sftp");
+		assertTrue(result.getSuccessFalg());
+
+		result = util.put(session, "D:/Received/README", "tmp4sftp", null);
+		assertTrue(result.getSuccessFalg());
+
+		result = util.put(session, "D:/Received/README", "tmp4sftp/README2", null);
+		assertTrue(result.getSuccessFalg());
+
+		result = util.get(session, "tmp4sftp/README2", "D:/Received", null);
+		assertTrue(result.getSuccessFalg());
+
+		result = util.get(session, "tmp4sftp/README2", "D:/Received/README3", null);
+		assertTrue(result.getSuccessFalg());
+		
+		result = util.rm(session, "tmp4sftp/*");
+		assertTrue(result.getSuccessFalg());
+
+		result = util.rmdir(session, "tmp4sftp");
+		assertTrue(result.getSuccessFalg());
+
+		result = util.cd(session, "..");
+		assertTrue(result.getSuccessFalg());
+
+		result = util.pwd(session);
+		assertTrue(result.getSuccessFalg());
 		
 	}
 }
