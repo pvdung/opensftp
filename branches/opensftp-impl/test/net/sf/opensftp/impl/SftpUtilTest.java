@@ -142,7 +142,7 @@ public class SftpUtilTest {
 	}
 	
 	@Test
-	public void testCommonFunctions() {
+	public void testFrequentlyUsedFunctions() {
 		String UTName = "testCommonFunctions";
 		int i = 1;
 		log.info(UTName + " - case " + i++);
@@ -157,7 +157,10 @@ public class SftpUtilTest {
 		
 		assertNotNull(session);
 
-		SftpResult result = util.ls(session);
+		SftpResult result = util.help(session);
+		assertTrue(result.getSuccessFalg());
+		
+		result = util.ls(session);
 		assertTrue(result.getSuccessFalg());
 		
 		result = util.pwd(session);
