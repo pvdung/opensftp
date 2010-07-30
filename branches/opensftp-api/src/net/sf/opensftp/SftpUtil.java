@@ -78,10 +78,10 @@ public interface SftpUtil {
 	 *            The path of the identityFile. for security, it's strongly
 	 *            recommended to place your identityFile under the
 	 *            <code>.ssh</code> folder of your home folder,
-	 *            /home/<i>yourusername</i>/.ssh for Linux for instance. If
-	 *            you specify a value begining with '~' and a following
-	 *            directory separator ('/' or '\\'), the '~' is treated as your
-	 *            home folder.
+	 *            /home/<i>yourusername</i>/.ssh for Linux for instance. If you
+	 *            specify a value begining with '~' and a following directory
+	 *            separator ('/' or '\\'), the '~' is treated as your home
+	 *            folder.
 	 * @param strictHostKeyChecking
 	 *            The strictHostKeyChecking option. Valid values for this param
 	 *            are {@link #STRICT_HOST_KEY_CHECKING_OPTION_ASK},
@@ -534,4 +534,17 @@ public interface SftpUtil {
 	 */
 	public SftpResult lls(SftpSession session, String path);
 
+	/**
+	 * Represent the version command.
+	 * 
+	 * @param session
+	 *            The {@link SftpSession} object you previously got when
+	 *            connecting.
+	 * @return an {@link SftpResult} object representing the result of this
+	 *         operation. Invoking <code>getExtension()</code> on the returned
+	 *         <code>SftpResult</code> object should return a
+	 *         <code>String</code> object, if this operation
+	 *         succeed.
+	 */
+	public SftpResult version(SftpSession session);
 }

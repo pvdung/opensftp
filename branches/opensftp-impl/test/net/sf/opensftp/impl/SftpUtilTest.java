@@ -64,12 +64,17 @@ public class SftpUtilTest {
 		new File(known_hosts_file).delete();
 	}
 
-	@Test//(expected = Throwable.class)
+	/**
+	 * Test connection functions:<br>
+	 * connect, disconnect.
+	 */
+	@Test
+	// (expected = Throwable.class)
 	public void testConnectionFunctionalities() {
 		String UTName = "testConnect";
 
-		int[] options = { //SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO,
-				SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES,
+		int[] options = { // SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO,
+		SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES,
 				SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_ASK };
 		int i = 1;
 
@@ -140,29 +145,33 @@ public class SftpUtilTest {
 		}
 
 	}
-	
+
+	/**
+	 * Test frequently used functions:<br>
+	 * cd, get, help(?), ls, mkdir, put, pwd, rename, rm, rmdir, version.
+	 */
 	@Test
 	public void testFrequentlyUsedFunctions() {
 		String UTName = "testCommonFunctions";
 		int i = 1;
 		log.info(UTName + " - case " + i++);
-		
+
 		try {
-			session = util.connectByPasswdAuth(host, user,
-					password, SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES);			
+			session = util.connectByPasswdAuth(host, user, password,
+					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES);
 		} catch (SftpException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		assertNotNull(session);
 
 		SftpResult result = util.help(session);
 		assertTrue(result.getSuccessFalg());
-		
+
 		result = util.ls(session);
 		assertTrue(result.getSuccessFalg());
-		
+
 		result = util.pwd(session);
 		assertTrue(result.getSuccessFalg());
 
@@ -172,15 +181,20 @@ public class SftpUtilTest {
 		result = util.put(session, "D:/Received/README", "tmp4sftp", null);
 		assertTrue(result.getSuccessFalg());
 
-		result = util.put(session, "D:/Received/README", "tmp4sftp/README2", null);
+		result = util.put(session, "D:/Received/README", "tmp4sftp/README2",
+				null);
 		assertTrue(result.getSuccessFalg());
 
 		result = util.get(session, "tmp4sftp/README2", "D:/Received", null);
 		assertTrue(result.getSuccessFalg());
 
-		result = util.get(session, "tmp4sftp/README2", "D:/Received/README3", null);
+		result = util.get(session, "tmp4sftp/README2", "D:/Received/README3",
+				null);
 		assertTrue(result.getSuccessFalg());
-		
+
+		result = util.rename(session, "tmp4sftp/README2", "tmp4sftp/README3");
+		assertTrue(result.getSuccessFalg());
+
 		result = util.rm(session, "tmp4sftp/*");
 		assertTrue(result.getSuccessFalg());
 
@@ -192,6 +206,112 @@ public class SftpUtilTest {
 
 		result = util.pwd(session);
 		assertTrue(result.getSuccessFalg());
+
+		result = util.version(session);
+		assertTrue(result.getSuccessFalg());
+	}
+
+	/**
+	 * Test local functions:<br>
+	 * lcd, lls, lmkdir, lpwd.
+	 */
+	@Test
+	public void testLocalFunctions() {
+		String UTName = "testLocalFunctions";
+		int i = 1;
+		log.info(UTName + " - case " + i++);
+
+		try {
+			session = util.connectByPasswdAuth(host, user, password,
+					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES);
+		} catch (SftpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		assertNotNull(session);
+
+		SftpResult result;
+
+		// unsupported function
+		// result = util.lls(session);
+		// assertTrue(result.getSuccessFalg());
+
+		result = util.lpwd(session);
+		assertTrue(result.getSuccessFalg());
+
+		// unsupported function
+		// result = util.lmkdir(session, "tmp4sftp");
+		// assertTrue(result.getSuccessFalg());
+
+		result = util.lcd(session, "..");
+		assertTrue(result.getSuccessFalg());
+
+		result = util.lpwd(session);
+		assertTrue(result.getSuccessFalg());
+	}
+
+	/**
+	 * Test rarely used functions:<br>
+	 * chgrp, chmod, chown, ln(symlink), lumask.
+	 */
+	@Test
+	public void testRarelyUsedFunctions() {
+		String UTName = "testRarelyUsedFunctions";
+		int i = 1;
+		log.info(UTName + " - case " + i++);
+
+		try {
+			session = util.connectByPasswdAuth(host, user, password,
+					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES);
+		} catch (SftpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		assertNotNull(session);
+
+		int uid = 1;
+		int gid = 1;
+		int mode= 0755;
+		String path="tmp4sftp/README";
+		String pathLn="README.ln";
 		
+		SftpResult result;
+
+		//preparations
+		result = util.mkdir(session, "tmp4sftp");
+		assertTrue(result.getSuccessFalg());
+
+		result = util.put(session, "D:/Received/README", "tmp4sftp", null);
+		assertTrue(result.getSuccessFalg());
+		
+		//start testing
+		result = util.ln(session, path, pathLn);
+		assertTrue(result.getSuccessFalg());
+		
+		result = util.chmod(session, mode, path);
+		assertTrue(result.getSuccessFalg());
+		
+		result = util.chgrp(session, gid, path);
+		assertTrue(result.getSuccessFalg());
+
+		result = util.chown(session, uid, path);
+		assertTrue(result.getSuccessFalg());
+
+		//unsupported function
+//		String mask="";
+//		result = util.lumask(session, mask);
+//		assertTrue(result.getSuccessFalg());
+		
+		//site clearing
+		result = util.rm(session, pathLn);
+		assertTrue(result.getSuccessFalg());
+		
+		result = util.rm(session, "tmp4sftp/*");
+		assertTrue(result.getSuccessFalg());
+
+		result = util.rmdir(session, "tmp4sftp");
+		assertTrue(result.getSuccessFalg());
 	}
 }
