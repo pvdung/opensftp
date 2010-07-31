@@ -12,22 +12,12 @@ public class MockSftpUtil implements SftpUtil {
 		return null;
 	}
 
-	public SftpResult chgrp(SftpSession session, String grp, String path) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public SftpResult chgrp(SftpSession session, int gid, String path) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public SftpResult chmod(SftpSession session, int mode, String path) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public SftpResult chown(SftpSession session, String own, String path) {
 		// TODO Auto-generated method stub
 		return null;
 	}

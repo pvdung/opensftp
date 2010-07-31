@@ -34,8 +34,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	private static Logger logger4LoggingInterceptor = Logger
 			.getLogger(net.sf.opensftp.interceptor.LoggingInterceptor.class);
 	private final static String known_hosts_file = System
-
-	.getProperty("user.home") + "/.ssh/known_hosts";
+			.getProperty("user.home")
+			+ "/.ssh/known_hosts";
 
 	static {
 		JSch.setLogger(new MyLogger());
@@ -277,8 +277,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult help(SftpSession session) {
-		String help = "      Available commands:\n"
-				+ "      * means unimplemented command.\n"
+		String help = "Available commands:\n"
+				+ "* means unimplemented command.\n"
 				+ "bye                           Quit sftp\n"
 				+ "cd path                       Change remote directory to 'path'\n"
 				+ "chgrp grp path                Change group of file 'path' to 'grp'\n"

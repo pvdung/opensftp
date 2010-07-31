@@ -68,7 +68,7 @@ public class SftpUtilTest {
 	 * Test connection functions:<br>
 	 * connect, disconnect.
 	 */
-	//@Test
+	@Test
 	// (expected = Throwable.class)
 	public void testConnectionFunctionalities() {
 		String UTName = "testConnect";
@@ -150,7 +150,7 @@ public class SftpUtilTest {
 	 * Test frequently used functions:<br>
 	 * cd, get, help(?), ls, mkdir, put, pwd, rename, rm, rmdir, version.
 	 */
-	//@Test
+	// @Test
 	public void testFrequentlyUsedFunctions() {
 		String UTName = "testCommonFunctions";
 		int i = 1;
@@ -215,7 +215,7 @@ public class SftpUtilTest {
 	 * Test local functions:<br>
 	 * lcd, lls, lmkdir, lpwd.
 	 */
-	//@Test
+	// @Test
 	public void testLocalFunctions() {
 		String UTName = "testLocalFunctions";
 		int i = 1;
@@ -255,7 +255,7 @@ public class SftpUtilTest {
 	 * Test rarely used functions:<br>
 	 * chgrp, chmod, chown, ln(symlink), lumask.
 	 */
-	@Test
+	// @Test
 	public void testRarelyUsedFunctions() {
 		String UTName = "testRarelyUsedFunctions";
 		int i = 1;
@@ -273,41 +273,41 @@ public class SftpUtilTest {
 
 		int uid = 1001;
 		int gid = 1001;
-		int mode= 0755;
-		String path="tmp4sftp/README";
-		String pathLn="README.ln";
-		
+		int mode = 0755;
+		String path = "tmp4sftp/README";
+		String pathLn = "README.ln";
+
 		SftpResult result;
 
-		//preparations
+		// preparations
 		result = util.mkdir(session, "tmp4sftp");
 		assertTrue(result.getSuccessFalg());
 
 		result = util.put(session, "D:/Received/README", "tmp4sftp", null);
 		assertTrue(result.getSuccessFalg());
-		
-		//start testing
+
+		// start testing
 		result = util.ln(session, path, pathLn);
 		assertTrue(result.getSuccessFalg());
-		
+
 		result = util.chmod(session, mode, path);
 		assertTrue(result.getSuccessFalg());
-		
+
 		result = util.chgrp(session, gid, path);
 		assertTrue(result.getSuccessFalg());
 
 		result = util.chown(session, uid, path);
 		assertTrue(result.getSuccessFalg());
 
-		//unsupported function
-//		String mask="";
-//		result = util.lumask(session, mask);
-//		assertTrue(result.getSuccessFalg());
-		
-		//site clearing
+		// unsupported function
+		// String mask="";
+		// result = util.lumask(session, mask);
+		// assertTrue(result.getSuccessFalg());
+
+		// site clearing
 		result = util.rm(session, pathLn);
 		assertTrue(result.getSuccessFalg());
-		
+
 		result = util.rm(session, "tmp4sftp/*");
 		assertTrue(result.getSuccessFalg());
 
