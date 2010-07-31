@@ -66,10 +66,55 @@ public class SftpUtilTest {
 
 	/**
 	 * Test connection functions:<br>
+	 * connect through Password Authentication with strictHostKeyChecking = no.
+	 */
+	@Test(expected = Throwable.class)
+	public void testConnectionFunctionality_passwordAuth_unstrictHostKeyChecking() {
+		String UTName = "testConnectionFunctionality_passwordAuth_unstrictHostKeyChecking";
+
+		int i = 1;
+
+		log.info("-------------------" + UTName + " - case " + i++
+				+ "--------------------");
+		try {
+			session = util.connectByPasswdAuth(host, port, user, password,
+					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO, timeout);
+		} catch (SftpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		assertNull(session);
+	}
+
+	/**
+	 * Test connection functions:<br>
+	 * connect through Password Authentication with strictHostKeyChecking = no.
+	 */
+	@Test(expected = Throwable.class)
+	public void testConnectionFunctionality_pubkeyAuth_unstrictHostKeyChecking() {
+		String UTName = "testConnectionFunctionality_pubkeyAuth_unstrictHostKeyChecking";
+
+		int i = 1;
+
+		log.info("-------------------" + UTName + " - case " + i++
+				+ "--------------------");
+		try {
+			session = util.connect(host, port, user, passphrase, identityFile,
+					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO, timeout);
+		} catch (SftpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		assertNull(session);
+	}
+
+	/**
+	 * Test connection functions:<br>
 	 * connect, disconnect.
 	 */
-	@Test
-	// (expected = Throwable.class)
+	//@Test
 	public void testConnectionFunctionalities() {
 		String UTName = "testConnect";
 

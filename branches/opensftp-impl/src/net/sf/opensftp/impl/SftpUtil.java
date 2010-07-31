@@ -168,13 +168,15 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			return sftpSessionImpl;
 
 		} catch (JSchException e) {
-			String error = "Failed to login. " + user + "@" + host + ":" + port;
-			log.error(error, e);
-			throw new SftpException(error);
+			String error = "Failed to login ( " + user + "@" + host + ":" + port +" ).";
+			SftpException exception = new SftpException(error, e);
+			log.error(error, exception);
+			throw exception;
 		} catch (com.jcraft.jsch.SftpException e) {
 			String error = "Failed to retrieve the current working path.";
-			log.error(error, e);
-			throw new SftpException(error);
+			SftpException exception = new SftpException(error, e);
+			log.error(error, exception);
+			throw exception;
 		}
 	}
 
@@ -209,13 +211,15 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			sftpSessionImpl.setDirChanged(false);
 			return sftpSessionImpl;
 		} catch (JSchException e) {
-			String error = "Failed to login. " + user + "@" + host + ":" + port;
-			log.error(error, e);
-			throw new SftpException(error);
+			String error = "Failed to login ( " + user + "@" + host + ":" + port +" ).";
+			SftpException exception = new SftpException(error, e);
+			log.error(error, exception);
+			throw exception;
 		} catch (com.jcraft.jsch.SftpException e) {
 			String error = "Failed to retrieve the current working path.";
-			log.error(error, e);
-			throw new SftpException(error);
+			SftpException exception = new SftpException(error, e);
+			log.error(error, exception);
+			throw exception;
 		}
 	}
 
@@ -226,7 +230,10 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			// derived from it.
 			channelSftp.getSession().disconnect();
 		} catch (JSchException e) {
+			String error = "Failed to disconnect.";
 			log.error("Failed to disconnect.", e);
+			log.error(error, new SftpException(error, e));
+
 		}
 	}
 
