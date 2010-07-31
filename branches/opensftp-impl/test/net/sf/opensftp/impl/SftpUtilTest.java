@@ -150,7 +150,7 @@ public class SftpUtilTest {
 	 * Test frequently used functions:<br>
 	 * cd, get, help(?), ls, mkdir, put, pwd, rename, rm, rmdir, version.
 	 */
-	@Test
+	//@Test
 	public void testFrequentlyUsedFunctions() {
 		String UTName = "testCommonFunctions";
 		int i = 1;
@@ -255,7 +255,7 @@ public class SftpUtilTest {
 	 * Test rarely used functions:<br>
 	 * chgrp, chmod, chown, ln(symlink), lumask.
 	 */
-	//@Test
+	@Test
 	public void testRarelyUsedFunctions() {
 		String UTName = "testRarelyUsedFunctions";
 		int i = 1;
@@ -271,8 +271,8 @@ public class SftpUtilTest {
 
 		assertNotNull(session);
 
-		int uid = 1;
-		int gid = 1;
+		int uid = 1001;
+		int gid = 1001;
 		int mode= 0755;
 		String path="tmp4sftp/README";
 		String pathLn="README.ln";

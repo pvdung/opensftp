@@ -8,7 +8,9 @@
 	</sftputil-impl>
 	<interceptors>
 		<interceptor name="loggingInterceptor"
-			type="net.sf.opensftp.interceptor.LoggingInterceptor" />
+			type="net.sf.opensftp.interceptor.LoggingInterceptor">
+			<property name="logCommand" type="java.lang.Boolean" value="true" />
+		</interceptor>
 	</interceptors>
 	<beans>
 		<bean name="swingPrompter" type="net.sf.opensftp.impl.SwingPrompter" />

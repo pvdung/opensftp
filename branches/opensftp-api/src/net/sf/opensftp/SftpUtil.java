@@ -381,7 +381,7 @@ public interface SftpUtil {
 	 *         operation
 	 * @deprecated
 	 */
-	public SftpResult chgrp(SftpSession session, String grp, String path);
+	//public SftpResult chgrp(SftpSession session, String grp, String path);
 
 	/**
 	 * Represent the chgrp command.
@@ -414,7 +414,7 @@ public interface SftpUtil {
 	 *         operation
 	 * @deprecated
 	 */
-	public SftpResult chown(SftpSession session, String own, String path);
+	//public SftpResult chown(SftpSession session, String own, String path);
 
 	/**
 	 * Represent the chown command.

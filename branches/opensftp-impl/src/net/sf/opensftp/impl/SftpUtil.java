@@ -58,11 +58,6 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 		return result;
 	}
 
-	public SftpResult chgrp(SftpSession session, String grp, String path) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public SftpResult chgrp(SftpSession session, int gid, String path) {
 		SftpResultImpl result = new SftpResultImpl();
 		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
@@ -89,11 +84,6 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			result.setErrorCode(e.id);
 		}
 		return result;
-	}
-
-	public SftpResult chown(SftpSession session, String own, String path) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public SftpResult chown(SftpSession session, int uid, String path) {
@@ -169,7 +159,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			channel = (ChannelSftp) session.openChannel("sftp");
 			channel.connect(timeout);
 
-			//initialize SftpSessionImpl
+			// initialize SftpSessionImpl
 			SftpSessionImpl sftpSessionImpl = new SftpSessionImpl(channel);
 			sftpSessionImpl.setHost(host);
 			sftpSessionImpl.setUser(user);
@@ -210,8 +200,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			session.connect();
 			channel = (ChannelSftp) session.openChannel("sftp");
 			channel.connect(timeout);
-			
-			//initialize SftpSessionImpl
+
+			// initialize SftpSessionImpl
 			SftpSessionImpl sftpSessionImpl = new SftpSessionImpl(channel);
 			sftpSessionImpl.setHost(host);
 			sftpSessionImpl.setUser(user);
@@ -287,8 +277,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult help(SftpSession session) {
-		String help = "Available commands:\n"
-				+ "* means unimplemented command.\n"
+		String help = "      Available commands:\n"
+				+ "      * means unimplemented command.\n"
 				+ "bye                           Quit sftp\n"
 				+ "cd path                       Change remote directory to 'path'\n"
 				+ "chgrp grp path                Change group of file 'path' to 'grp'\n"

@@ -98,10 +98,17 @@ public class LoggingInterceptor implements Interceptor {
 			s.append(session.getCurrentPath());
 			s.append("]$ ");
 			s.append(method.getName());
-			for (int i = 1; i < args.length; i++) {
-				if (args[i] != null) {
-					s.append(" ");
-					s.append(args[i]);
+			if (method.getName().startsWith("chmod")) {
+				s.append(" ");
+				s.append(Integer.toOctalString(((Integer)args[1]).intValue()));
+				s.append(" ");
+				s.append(args[2]);
+			} else {
+				for (int i = 1; i < args.length; i++) {
+					if (args[i] != null) {
+						s.append(" ");
+						s.append(args[i]);
+					}
 				}
 			}
 			log.info(s);
