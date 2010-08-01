@@ -11,7 +11,7 @@ And what's more, it's platform-independent, easy to use, easy to troubleshot and
 <br>
 You can use OpenSFTP as a <font color="blue">LIGHTWEIGHT</font> SFTP client
 <br>
-Or develop your own SFTP client, such as a desktop version,  an RIA version and a customized version for a certain Enterprise Application, based on OpenSFTP.
+Or develop your own SFTP client, such as a desktop version,  an RIA version or a customized version for a certain Enterprise Application, based on OpenSFTP.
 <br>
 OpenSFTP is licensed under <font color="blue"><a href="http://www.gnu.org/licenses/lgpl.html"><img src="http://www.gnu.org/graphics/lgplv3-88x31.png" alt="GNU LGPLv3" title="GNU LGPLv3" align="middle"/></a></font>.
 <br><br>
