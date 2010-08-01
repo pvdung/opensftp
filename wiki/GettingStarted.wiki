@@ -36,4 +36,4 @@ Where Next?
 ----
 The [CheatSheet Cheat Sheet] is an overview of the entire OpenSFTP API.
 <br>
-Also, the [Javadoc] is a good helper.
+Besides, the [Javadoc] is a good helper.
