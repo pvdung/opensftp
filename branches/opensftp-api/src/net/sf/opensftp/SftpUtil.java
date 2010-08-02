@@ -38,7 +38,7 @@ public interface SftpUtil {
 	 * connect(host, 22, user, &quot;&quot;, identityFile, strictHostKeyChecking)
 	 * </pre>
 	 * 
-	 * @see #connect(String, int, String, String, String, int)
+	 * @see #connect(String, int, String, String, String, int, int)
 	 * @return a {@link SftpSession} object representing the context information
 	 *         of the communication established between the client and the
 	 *         specified SFTP server.
@@ -54,7 +54,7 @@ public interface SftpUtil {
 	 * connect(host, 22, user, passphrase, identityFile, strictHostKeyChecking)
 	 * </pre>
 	 * 
-	 * @see #connect(String, int, String, String, String, int)
+	 * @see #connect(String, int, String, String, String, int, int)
 	 * @return a {@link SftpSession} object representing the context information
 	 *         of the communication established between the client and the
 	 *         specified SFTP server.
@@ -107,7 +107,7 @@ public interface SftpUtil {
 	 * connectByPasswdAuth(host, 22, user, password, strictHostKeyChecking)
 	 * </pre>
 	 * 
-	 * @see #connectByPasswdAuth(String, int, String, String, int)
+	 * @see #connectByPasswdAuth(String, int, String, String, int, int)
 	 * @return a {@link SftpSession} object representing the context information
 	 *         of the communication established between the client and the
 	 *         specified SFTP server.
@@ -193,7 +193,7 @@ public interface SftpUtil {
 	 * put(session, localFilename, &quot;.&quot;)
 	 * </pre>
 	 * 
-	 * @see #put(SftpSession, String, String)
+	 * @see #put(SftpSession, String, String, ProgressListener)
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
@@ -232,7 +232,7 @@ public interface SftpUtil {
 	 * get(session, remoteFilename, &quot;.&quot;)
 	 * </pre>
 	 * 
-	 * @see #get(SftpSession, String, String)
+	 * @see #get(SftpSession, String, String, ProgressListener)
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
@@ -381,7 +381,7 @@ public interface SftpUtil {
 	 *         operation
 	 * @deprecated
 	 */
-	//public SftpResult chgrp(SftpSession session, String grp, String path);
+	// public SftpResult chgrp(SftpSession session, String grp, String path);
 
 	/**
 	 * Represent the chgrp command.
@@ -414,7 +414,7 @@ public interface SftpUtil {
 	 *         operation
 	 * @deprecated
 	 */
-	//public SftpResult chown(SftpSession session, String own, String path);
+	// public SftpResult chown(SftpSession session, String own, String path);
 
 	/**
 	 * Represent the chown command.
@@ -543,8 +543,7 @@ public interface SftpUtil {
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation. Invoking <code>getExtension()</code> on the returned
 	 *         <code>SftpResult</code> object should return a
-	 *         <code>String</code> object, if this operation
-	 *         succeed.
+	 *         <code>String</code> object, if this operation succeed.
 	 */
 	public SftpResult version(SftpSession session);
 }

@@ -39,7 +39,7 @@ import net.sf.opensftp.interceptor.*;
  * </p>
  * <ul>
  * <li>Use the implementation class specified through the
- * <code>/opensftp-impl</code> node in the <code>opensftp-config.xml</code>
+ * <code>/opensftp-config/sftputil-impl</code> node in the <code>opensftp-config.xml</code>
  * configuration file.</li>
  * <li>Use the implementation class specified through the
  * <code>net.sf.opensftp.SftpUtil</code> system property.</li>
