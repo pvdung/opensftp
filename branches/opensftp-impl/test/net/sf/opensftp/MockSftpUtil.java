@@ -179,4 +179,9 @@ public class MockSftpUtil implements SftpUtil {
 		return null;
 	}
 
+	public void setProgressListener(ProgressListener progressListener) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

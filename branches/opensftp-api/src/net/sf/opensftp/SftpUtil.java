@@ -22,12 +22,22 @@ public interface SftpUtil {
 	public final static int STRICT_HOST_KEY_CHECKING_OPTION_NO = 2;
 
 	/**
-	 * Set prompter.
+	 * Set the <code>prompter</code> property. If the specified value is valid,
+	 * any implementation of opensftp must use this prompter in any scenario
+	 * where a <code>Prompter</code> should be used.
 	 * 
-	 * @param prompter
 	 * @see {@link Prompter}
 	 */
 	public void setPrompter(Prompter prompter);
+
+	/**
+	 * Set the <code>progressListener</code> property. If the specified value is
+	 * valid, any implementation of opensftp must use this progressListener in
+	 * any scenario where a <code>ProgressListener</code> should be used.
+	 * 
+	 * @see {@link ProgressListener}
+	 */
+	public void setProgressListener(ProgressListener progressListener);
 
 	/**
 	 * Connect to an SFTP server through the default port(22) using publickey
@@ -198,18 +208,6 @@ public interface SftpUtil {
 	public SftpResult put(SftpSession session, String localFilename);
 
 	/**
-	 * Represent the put command. Invoking this method is equivalent to:
-	 * 
-	 * <pre>
-	 * put(session, localFilename, remoteFilename, null)
-	 * </pre>
-	 * 
-	 * @see #put(SftpSession, String, String, ProgressListener)
-	 */
-	public SftpResult put(SftpSession session, String localFilename,
-			String remoteFilename);
-
-	/**
 	 * Represent the put command.
 	 * 
 	 * @param session
@@ -219,15 +217,12 @@ public interface SftpUtil {
 	 *            The path of the local file to be uploaded.
 	 * @param remoteFilename
 	 *            The remote path where to place the local file.
-	 * @param progressListener
-	 *            A <code>ProgressListener</code> listening the progresses of
-	 *            this put operation to provide progress meter functionality.
 	 * 
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
 	public SftpResult put(SftpSession session, String localFilename,
-			String remoteFilename, ProgressListener progressListener);
+			String remoteFilename);
 
 	/**
 	 * Represent the get command. Invoking this method is equivalent to:
@@ -241,18 +236,6 @@ public interface SftpUtil {
 	public SftpResult get(SftpSession session, String remoteFilename);
 
 	/**
-	 * Represent the get command. Invoking this method is equivalent to:
-	 * 
-	 * <pre>
-	 * get(session, remoteFilename, localFilename, null)
-	 * </pre>
-	 * 
-	 * @see #get(SftpSession, String, String, ProgressListener)
-	 */
-	public SftpResult get(SftpSession session, String remoteFilename,
-			String localFilename);
-
-	/**
 	 * Represent the get command.
 	 * 
 	 * @param session
@@ -262,15 +245,12 @@ public interface SftpUtil {
 	 *            The path of the remote file to be downloaded.
 	 * @param localFilename
 	 *            The local path where to place the remote file.
-	 * @param progressListener
-	 *            A <code>ProgressListener</code> listening the progresses of
-	 *            this get operation to provide progress meter functionality.
 	 * 
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
 	public SftpResult get(SftpSession session, String remoteFilename,
-			String localFilename, ProgressListener progressListener);
+			String localFilename);
 
 	/**
 	 * Represent the cd command.

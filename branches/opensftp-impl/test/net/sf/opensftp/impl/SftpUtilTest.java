@@ -223,18 +223,16 @@ public class SftpUtilTest {
 		result = util.mkdir(session, "tmp4sftp");
 		assertTrue(result.getSuccessFlag());
 
-		result = util.put(session, "D:/Received/README", "tmp4sftp", null);
+		result = util.put(session, "D:/Received/README", "tmp4sftp");
 		assertTrue(result.getSuccessFlag());
 
-		result = util.put(session, "D:/Received/README", "tmp4sftp/README2",
-				null);
+		result = util.put(session, "D:/Received/README", "tmp4sftp/README2");
 		assertTrue(result.getSuccessFlag());
 
-		result = util.get(session, "tmp4sftp/README2", "D:/Received", null);
+		result = util.get(session, "tmp4sftp/README2", "D:/Received");
 		assertTrue(result.getSuccessFlag());
 
-		result = util.get(session, "tmp4sftp/README2", "D:/Received/README3",
-				null);
+		result = util.get(session, "tmp4sftp/README2", "D:/Received/README3");
 		assertTrue(result.getSuccessFlag());
 
 		result = util.rename(session, "tmp4sftp/README2", "tmp4sftp/README3");
@@ -328,7 +326,7 @@ public class SftpUtilTest {
 		result = util.mkdir(session, "tmp4sftp");
 		assertTrue(result.getSuccessFlag());
 
-		result = util.put(session, "D:/Received/README", "tmp4sftp", null);
+		result = util.put(session, "D:/Received/README", "tmp4sftp");
 		assertTrue(result.getSuccessFlag());
 
 		// start testing

@@ -25,11 +25,32 @@ import net.sf.opensftp.SftpResult;
 
 public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	private Prompter prompter;
+	private AbstractProgressListener progressListener;
 	private static final String unsupported = "The requested operation is not supported.";
 	private static final int SSH_ERROR_OP_UNSUPPORTED = 8;
 
 	public void setPrompter(Prompter prompter) {
 		this.prompter = prompter;
+	}
+
+	/**
+	 * Set the <code>progressListener</code> property. If the specified value is
+	 * valid, any implementation of opensftp must use this progressListener in
+	 * any scenario where a <code>ProgressListener</code> should be used.
+	 * <p>
+	 * NOTE: This concrete implementation of opensftp doesn't fully support
+	 * <code>ProgressListener</code>. The <code>progressListener</code> param
+	 * must be an {@link AbstractProgressListener}. Otherwise, this invocation
+	 * is ignored.
+	 */
+	public void setProgressListener(ProgressListener progressListener) {
+		if (progressListener != null) {
+			if (progressListener instanceof AbstractProgressListener) {
+				this.progressListener = (AbstractProgressListener) progressListener;
+			} else {
+				log.warn("The specified ProgressListener is not an AbstractProgressListener. Ignore it.");
+			}
+		}
 	}
 
 	private static Logger log = Logger.getLogger(SftpUtil.class);
@@ -247,44 +268,16 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 
 	public SftpResult get(SftpSession session, String remoteFilename,
 			String localFilename) {
-		return get(session, remoteFilename, localFilename, null);
+		return get(session, remoteFilename, localFilename, progressListener);
 	}
 
-	/**
-	 * <p>
-	 * Represent the get command.
-	 * </p>
-	 * NOTE: This method doesn't completely implement the
-	 * {@link net.sf.opensftp.SftpUtil#get(SftpSession, String, String, ProgressListener)}
-	 * . The <code>progressListener</code> param must be an
-	 * {@link AbstractProgressListener}. Otherwise, the ProgressListener will be
-	 * ignored.
-	 * 
-	 * @param progressListener
-	 *            An {@link AbstractProgressListener} listening the progresses
-	 *            of this get operation to provide progress meter functionality.
-	 * 
-	 */
-	public SftpResult get(SftpSession session, String remoteFilename,
-			String localFilename, ProgressListener progressListener) {
-		AbstractProgressListener convertedProgressListener = null;
-		// throws UnsupportedOperationException if the given progressListener is
-		// not an AbstractProgressListener
-		if (progressListener != null) {
-			if (progressListener instanceof AbstractProgressListener) {
-				convertedProgressListener = (AbstractProgressListener) progressListener;
-			} else {
-				progressListener = null;
-				log
-						.warn("The specified ProgressListener is not an AbstractProgressListener. Ignore it.");
-			}
-		}
-
+	private SftpResult get(SftpSession session, String remoteFilename,
+			String localFilename, AbstractProgressListener progressListener) {
 		SftpResultImpl result = new SftpResultImpl();
 		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
 		try {
 			channelSftp.get(remoteFilename, localFilename,
-					convertedProgressListener);
+					progressListener);
 			result.setSuccessFalg(true);
 		} catch (com.jcraft.jsch.SftpException e) {
 			log.error("command get failed", e);
@@ -436,44 +429,16 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 
 	public SftpResult put(SftpSession session, String localFilename,
 			String remoteFilename) {
-		return put(session, localFilename, remoteFilename, null);
+		return put(session, localFilename, remoteFilename, progressListener);
 	}
 
-	/**
-	 * <p>
-	 * Represent the put command.
-	 * </p>
-	 * NOTE: This method doesn't completely implement the
-	 * {@link net.sf.opensftp.SftpUtil#get(SftpSession, String, String, ProgressListener)}
-	 * . The <code>progressListener</code> param must be an
-	 * {@link AbstractProgressListener}. Otherwise, the ProgressListener will be
-	 * ignored.
-	 * 
-	 * @param progressListener
-	 *            An {@link AbstractProgressListener} listening the progresses
-	 *            of this put operation to provide progress meter functionality.
-	 * 
-	 */
-	public SftpResult put(SftpSession session, String localFilename,
-			String remoteFilename, ProgressListener progressListener) {
-		AbstractProgressListener convertedProgressListener = null;
-		// throws UnsupportedOperationException if the given progressListener is
-		// not an AbstractProgressListener
-		if (progressListener != null) {
-			if (progressListener instanceof AbstractProgressListener) {
-				convertedProgressListener = (AbstractProgressListener) progressListener;
-			} else {
-				progressListener = null;
-				log
-						.warn("The specified ProgressListener is not an AbstractProgressListener. Ignore it.");
-			}
-		}
-
+	private SftpResult put(SftpSession session, String localFilename,
+			String remoteFilename, AbstractProgressListener progressListener) {
 		SftpResultImpl result = new SftpResultImpl();
 		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
 		try {
 			channelSftp.put(localFilename, remoteFilename,
-					convertedProgressListener);
+					progressListener);
 			result.setSuccessFalg(true);
 		} catch (com.jcraft.jsch.SftpException e) {
 			log.error("command get failed", e);
