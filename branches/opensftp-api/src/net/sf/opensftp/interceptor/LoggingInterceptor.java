@@ -56,7 +56,7 @@ public class LoggingInterceptor implements Interceptor {
 			String methodName = method.getName();
 
 			if (methodName.equals("get")) {
-
+				//Now ProgressListener is in charge of this.
 			} else if (methodName.equals("help")) {
 				s.append(result.getExtension());
 			} else if (methodName.equals("lpwd")) {
@@ -70,7 +70,7 @@ public class LoggingInterceptor implements Interceptor {
 						s.append("\n");
 				}
 			} else if (methodName.equals("put")) {
-
+				//Now ProgressListener is in charge of this.
 			} else if (methodName.equals("pwd")) {
 				s.append("Remote working directory: " + result.getExtension());
 			} else if (methodName.equals("version")) {

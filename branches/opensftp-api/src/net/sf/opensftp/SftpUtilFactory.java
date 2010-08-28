@@ -39,8 +39,8 @@ import net.sf.opensftp.interceptor.*;
  * </p>
  * <ul>
  * <li>Use the implementation class specified through the
- * <code>/opensftp-config/sftputil-impl</code> node in the <code>opensftp-config.xml</code>
- * configuration file.</li>
+ * <code>/opensftp-config/sftputil-impl</code> node in the
+ * <code>opensftp-config.xml</code> configuration file.</li>
  * <li>Use the implementation class specified through the
  * <code>net.sf.opensftp.SftpUtil</code> system property.</li>
  * <li>Use the implementation class specified through the first and only
@@ -338,8 +338,8 @@ public class SftpUtilFactory {
 			configReader.getDocumentFactory().setXPathNamespaceURIs(map);
 
 			// validation
-			String configXSDPath = SftpUtilFactory.class.getClassLoader().getResource(
-					configXSDFileName).toString();
+			String configXSDPath = SftpUtilFactory.class.getClassLoader()
+					.getResource(configXSDFileName).toString();
 			log.debug("The XSD file found at " + configXSDPath);
 
 			configReader.setValidation(true);
@@ -693,18 +693,19 @@ public class SftpUtilFactory {
 
 		public Object invoke(Object proxy, Method method, Object[] args)
 				throws Throwable {
-			
+
 			if (method.getName().startsWith("connect")
-					|| method.getName().equals("disconnect")) {
+					|| method.getName().equals("disconnect")
+					|| method.getName().startsWith("set")) {
 				return method.invoke(this.proxiedObj, args);
 			}
-			
+
 			// before invocation
 			ListIterator<Interceptor> it = interceptors.listIterator();
 			while (it.hasNext()) {
 				it.next().beforeMethod(method, args);
 			}
-			
+
 			SftpResult result = (SftpResult) method.invoke(this.proxiedObj,
 					args);
 
