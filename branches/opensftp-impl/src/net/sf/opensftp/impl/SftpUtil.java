@@ -25,6 +25,8 @@ import net.sf.opensftp.SftpResult;
 
 public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	private Prompter prompter;
+	private static final String unsupported = "The requested operation is not supported.";
+	private static final int SSH_ERROR_OP_UNSUPPORTED = 8;
 
 	public void setPrompter(Prompter prompter) {
 		this.prompter = prompter;
@@ -168,7 +170,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			return sftpSessionImpl;
 
 		} catch (JSchException e) {
-			String error = "Failed to login ( " + user + "@" + host + ":" + port +" ).";
+			String error = "Failed to login ( " + user + "@" + host + ":"
+					+ port + " ).";
 			SftpException exception = new SftpException(error, e);
 			log.error(error, exception);
 			throw exception;
@@ -211,7 +214,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			sftpSessionImpl.setDirChanged(false);
 			return sftpSessionImpl;
 		} catch (JSchException e) {
-			String error = "Failed to login ( " + user + "@" + host + ":" + port +" ).";
+			String error = "Failed to login ( " + user + "@" + host + ":"
+					+ port + " ).";
 			SftpException exception = new SftpException(error, e);
 			log.error(error, exception);
 			throw exception;
@@ -238,7 +242,12 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult get(SftpSession session, String remoteFilename) {
-		return get(session, remoteFilename, ".", null);
+		return get(session, remoteFilename, ".");
+	}
+
+	public SftpResult get(SftpSession session, String remoteFilename,
+			String localFilename) {
+		return get(session, remoteFilename, localFilename, null);
 	}
 
 	/**
@@ -248,8 +257,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	 * NOTE: This method doesn't completely implement the
 	 * {@link net.sf.opensftp.SftpUtil#get(SftpSession, String, String, ProgressListener)}
 	 * . The <code>progressListener</code> param must be an
-	 * {@link AbstractProgressListener}. Otherwise, an
-	 * <code>UnsupportedOperationException</code> will be thrown.
+	 * {@link AbstractProgressListener}. Otherwise, the ProgressListener will be
+	 * ignored.
 	 * 
 	 * @param progressListener
 	 *            An {@link AbstractProgressListener} listening the progresses
@@ -265,7 +274,9 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			if (progressListener instanceof AbstractProgressListener) {
 				convertedProgressListener = (AbstractProgressListener) progressListener;
 			} else {
-				throw new UnsupportedOperationException();
+				progressListener = null;
+				log
+						.warn("The specified ProgressListener is not an AbstractProgressListener. Ignore it.");
 			}
 		}
 
@@ -329,18 +340,15 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult lls(SftpSession session) {
-		// TODO Auto-generated method stub
-		return null;
+		return lls(session, ".");
 	}
 
 	public SftpResult lls(SftpSession session, String path) {
-		// TODO Auto-generated method stub
-		return null;
+		return new SftpResultImpl(false, SSH_ERROR_OP_UNSUPPORTED, unsupported);
 	}
 
 	public SftpResult lmkdir(SftpSession session, String path) {
-		// TODO Auto-generated method stub
-		return null;
+		return new SftpResultImpl(false, SSH_ERROR_OP_UNSUPPORTED, unsupported);
 	}
 
 	public SftpResult ln(SftpSession session, String src, String link) {
@@ -405,8 +413,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult lumask(SftpSession session, String umask) {
-		// TODO Auto-generated method stub
-		return null;
+		return new SftpResultImpl(false, SSH_ERROR_OP_UNSUPPORTED, unsupported);
 	}
 
 	public SftpResult mkdir(SftpSession session, String path) {
@@ -424,7 +431,12 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	public SftpResult put(SftpSession session, String localFilename) {
-		return put(session, localFilename, ".", null);
+		return put(session, localFilename, ".");
+	}
+
+	public SftpResult put(SftpSession session, String localFilename,
+			String remoteFilename) {
+		return put(session, localFilename, remoteFilename, null);
 	}
 
 	/**
@@ -434,8 +446,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	 * NOTE: This method doesn't completely implement the
 	 * {@link net.sf.opensftp.SftpUtil#get(SftpSession, String, String, ProgressListener)}
 	 * . The <code>progressListener</code> param must be an
-	 * {@link AbstractProgressListener}. Otherwise, an
-	 * <code>UnsupportedOperationException</code> will be thrown.
+	 * {@link AbstractProgressListener}. Otherwise, the ProgressListener will be
+	 * ignored.
 	 * 
 	 * @param progressListener
 	 *            An {@link AbstractProgressListener} listening the progresses
@@ -451,7 +463,9 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			if (progressListener instanceof AbstractProgressListener) {
 				convertedProgressListener = (AbstractProgressListener) progressListener;
 			} else {
-				throw new UnsupportedOperationException();
+				progressListener = null;
+				log
+						.warn("The specified ProgressListener is not an AbstractProgressListener. Ignore it.");
 			}
 		}
 
@@ -652,4 +666,5 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			logger4LoggingInterceptor.log(levels.get(level), message);
 		}
 	}
+
 }

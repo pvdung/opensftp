@@ -212,48 +212,48 @@ public class SftpUtilTest {
 		assertNotNull(session);
 
 		SftpResult result = util.help(session);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.ls(session);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.pwd(session);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.mkdir(session, "tmp4sftp");
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.put(session, "D:/Received/README", "tmp4sftp", null);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.put(session, "D:/Received/README", "tmp4sftp/README2",
 				null);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.get(session, "tmp4sftp/README2", "D:/Received", null);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.get(session, "tmp4sftp/README2", "D:/Received/README3",
 				null);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.rename(session, "tmp4sftp/README2", "tmp4sftp/README3");
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.rm(session, "tmp4sftp/*");
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.rmdir(session, "tmp4sftp");
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.cd(session, "..");
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.pwd(session);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.version(session);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 	}
 
 	/**
@@ -280,20 +280,20 @@ public class SftpUtilTest {
 
 		// unsupported function
 		// result = util.lls(session);
-		// assertTrue(result.getSuccessFalg());
+		// assertTrue(result.getSuccessFlag());
 
 		result = util.lpwd(session);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		// unsupported function
 		// result = util.lmkdir(session, "tmp4sftp");
-		// assertTrue(result.getSuccessFalg());
+		// assertTrue(result.getSuccessFlag());
 
 		result = util.lcd(session, "..");
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.lpwd(session);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 	}
 
 	/**
@@ -326,37 +326,37 @@ public class SftpUtilTest {
 
 		// preparations
 		result = util.mkdir(session, "tmp4sftp");
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.put(session, "D:/Received/README", "tmp4sftp", null);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		// start testing
 		result = util.ln(session, path, pathLn);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.chmod(session, mode, path);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.chgrp(session, gid, path);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.chown(session, uid, path);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		// unsupported function
 		// String mask="";
 		// result = util.lumask(session, mask);
-		// assertTrue(result.getSuccessFalg());
+		// assertTrue(result.getSuccessFlag());
 
 		// site clearing
 		result = util.rm(session, pathLn);
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.rm(session, "tmp4sftp/*");
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 
 		result = util.rmdir(session, "tmp4sftp");
-		assertTrue(result.getSuccessFalg());
+		assertTrue(result.getSuccessFlag());
 	}
 }

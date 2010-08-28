@@ -17,7 +17,7 @@ public interface ProgressListener {
 	public static final int GET = 1;
 
 	/**
-	 * Notify the event that a new transfer is about to be initiated.
+	 * Invoked when a new transfer is about to be initiated.
 	 * 
 	 * @param op
 	 *            the operation type. Candidate values are {@link #PUT} and
@@ -32,7 +32,7 @@ public interface ProgressListener {
 	public void init(int op, String src, String dest, long total);
 
 	/**
-	 * Notify the event that more data has been processed.
+	 * Invoked when more data has been processed.
 	 * 
 	 * @param delta
 	 *            an increment, i.e. the newly completed size, measured with the
@@ -42,7 +42,7 @@ public interface ProgressListener {
 	public void progress(long delta);
 
 	/**
-	 * Notify the event that the transfer has been completed.
+	 * Invoked when the transfer has been completed.
 	 */
 	public void complete();
 

@@ -9,7 +9,7 @@ package net.sf.opensftp.impl;
  * @author BurningXFlame
  */
 public class SftpResultImpl implements net.sf.opensftp.SftpResult {
-	private boolean successFalg = false;
+	private boolean successFlag = false;
 	private int errorCode = 0;
 	private String errorMsg = null;
 	private Object extension = null;
@@ -26,7 +26,7 @@ public class SftpResultImpl implements net.sf.opensftp.SftpResult {
 	 * unspecified properties remain null or 0.
 	 */
 	public SftpResultImpl(boolean successFalg, Object extension) {
-		this.successFalg = successFalg;
+		this.successFlag = successFalg;
 		this.extension = extension;
 
 	}
@@ -36,7 +36,7 @@ public class SftpResultImpl implements net.sf.opensftp.SftpResult {
 	 * unspecified properties remain null.
 	 */
 	public SftpResultImpl(boolean successFalg, int errorCode, String errorMsg) {
-		this.successFalg = successFalg;
+		this.successFlag = successFalg;
 		this.errorCode = errorCode;
 		this.errorMsg = errorMsg;
 	}
@@ -46,7 +46,7 @@ public class SftpResultImpl implements net.sf.opensftp.SftpResult {
 	 */
 	public SftpResultImpl(boolean successFalg, int errorCode,
 			String errorMsg, Object extension) {
-		this.successFalg = successFalg;
+		this.successFlag = successFalg;
 		this.errorCode = errorCode;
 		this.errorMsg = errorMsg;
 		this.extension = extension;
@@ -68,12 +68,12 @@ public class SftpResultImpl implements net.sf.opensftp.SftpResult {
 		this.errorMsg = errorMsg;
 	}
 
-	public boolean getSuccessFalg() {
-		return successFalg;
+	public boolean getSuccessFlag() {
+		return successFlag;
 	}
 
 	public void setSuccessFalg(boolean successFalg) {
-		this.successFalg = successFalg;
+		this.successFlag = successFalg;
 	}
 
 	public Object getExtension() {

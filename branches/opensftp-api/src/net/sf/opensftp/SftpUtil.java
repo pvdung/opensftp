@@ -193,17 +193,21 @@ public interface SftpUtil {
 	 * put(session, localFilename, &quot;.&quot;)
 	 * </pre>
 	 * 
-	 * @see #put(SftpSession, String, String, ProgressListener)
-	 * 
-	 * @param session
-	 *            The {@link SftpSession} object you previously got when
-	 *            connecting.
-	 * @param localFilename
-	 *            The path of the local file to be uploaded.
-	 * @return an {@link SftpResult} object representing the result of this
-	 *         operation
+	 * @see #put(SftpSession, String, String)
 	 */
 	public SftpResult put(SftpSession session, String localFilename);
+
+	/**
+	 * Represent the put command. Invoking this method is equivalent to:
+	 * 
+	 * <pre>
+	 * put(session, localFilename, remoteFilename, null)
+	 * </pre>
+	 * 
+	 * @see #put(SftpSession, String, String, ProgressListener)
+	 */
+	public SftpResult put(SftpSession session, String localFilename,
+			String remoteFilename);
 
 	/**
 	 * Represent the put command.
@@ -232,17 +236,21 @@ public interface SftpUtil {
 	 * get(session, remoteFilename, &quot;.&quot;)
 	 * </pre>
 	 * 
-	 * @see #get(SftpSession, String, String, ProgressListener)
-	 * 
-	 * @param session
-	 *            The {@link SftpSession} object you previously got when
-	 *            connecting.
-	 * @param remoteFilename
-	 *            The path of the remote file to be downloaded.
-	 * @return an {@link SftpResult} object representing the result of this
-	 *         operation
+	 * @see #get(SftpSession, String, String)
 	 */
 	public SftpResult get(SftpSession session, String remoteFilename);
+
+	/**
+	 * Represent the get command. Invoking this method is equivalent to:
+	 * 
+	 * <pre>
+	 * get(session, remoteFilename, localFilename, null)
+	 * </pre>
+	 * 
+	 * @see #get(SftpSession, String, String, ProgressListener)
+	 */
+	public SftpResult get(SftpSession session, String remoteFilename,
+			String localFilename);
 
 	/**
 	 * Represent the get command.

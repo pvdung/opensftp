@@ -167,4 +167,16 @@ public class MockSftpUtil implements SftpUtil {
 		return null;
 	}
 
+	public SftpResult get(SftpSession session, String remoteFilename,
+			String localFilename) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SftpResult put(SftpSession session, String localFilename,
+			String remoteFilename) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

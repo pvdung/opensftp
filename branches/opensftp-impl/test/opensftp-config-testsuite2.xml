@@ -9,8 +9,6 @@
 	<interceptors>
 		<interceptor name="loggingInterceptor"
 			type="net.sf.opensftp.interceptor.LoggingInterceptor" />
-		<interceptor name="monitoringInterceptor"
-			type="net.sf.opensftp.interceptor.MonitoringInterceptor" />
 		<interceptor name="dummyInterceptor"
 			type="net.sf.opensftp.interceptor.DummyInterceptor">
 			<property name="dummyfield1" type="java.lang.String" value="value1" />

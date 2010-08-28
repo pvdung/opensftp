@@ -47,7 +47,10 @@ public class LoggingInterceptor implements Interceptor {
 			return;
 		}
 		StringBuilder s = new StringBuilder();
-		boolean success = result.getSuccessFalg();
+		if (result == null)
+			return;
+
+		boolean success = result.getSuccessFlag();
 
 		if (success) {// output
 			String methodName = method.getName();
@@ -56,11 +59,9 @@ public class LoggingInterceptor implements Interceptor {
 
 			} else if (methodName.equals("help")) {
 				s.append(result.getExtension());
-			} else if (methodName.equals("lls")) {
-
 			} else if (methodName.equals("lpwd")) {
-				s.append(result.getExtension());
-			} else if (methodName.equals("ls")) {
+				s.append("Local working directory: " + result.getExtension());
+			} else if (methodName.equals("ls") || methodName.equals("lls")) {
 				List<SftpFile> l = (List<SftpFile>) result.getExtension();
 				Iterator<SftpFile> i = l.iterator();
 				while (i.hasNext()) {
@@ -71,14 +72,14 @@ public class LoggingInterceptor implements Interceptor {
 			} else if (methodName.equals("put")) {
 
 			} else if (methodName.equals("pwd")) {
-				s.append(result.getExtension());
+				s.append("Remote working directory: " + result.getExtension());
 			} else if (methodName.equals("version")) {
 				s.append(result.getExtension());
 			}
 			if (s.length() != 0)
 				log.info(s);
 		} else {// error message
-			log.info(result.getErrorMessage());
+			log.info(result.getErrorCode() + ": " + result.getErrorMessage());
 		}
 	}
 
@@ -100,7 +101,7 @@ public class LoggingInterceptor implements Interceptor {
 			s.append(method.getName());
 			if (method.getName().startsWith("chmod")) {
 				s.append(" ");
-				s.append(Integer.toOctalString(((Integer)args[1]).intValue()));
+				s.append(Integer.toOctalString(((Integer) args[1]).intValue()));
 				s.append(" ");
 				s.append(args[2]);
 			} else {

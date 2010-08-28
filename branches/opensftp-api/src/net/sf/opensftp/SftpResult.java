@@ -23,7 +23,7 @@ public interface SftpResult {
 	 * 
 	 * @return the <code>successFlag</code>.
 	 */
-	public boolean getSuccessFalg();
+	public boolean getSuccessFlag();
 
 	/**
 	 * Return the <code>errorCode</code>.
