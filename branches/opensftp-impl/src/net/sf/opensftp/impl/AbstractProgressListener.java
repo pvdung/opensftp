@@ -28,7 +28,7 @@ public abstract class AbstractProgressListener implements ProgressListener,
 
 	public boolean count(long count) {
 		progress(count);
-		return isCancelled();
+		return !isCancelled();
 	}
 
 	public void end() {
