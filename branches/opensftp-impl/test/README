@@ -76,3 +76,14 @@ Steps:
 Copy opensftp-config-testsuite5.xml to your classpath and rename it to 'opensftp-config.xml'.
 Run net.sf.opensftp.impl.SftpUtilTest.
 
+
+
+######################################################################################
+###  Test ProgressListener functionalities.                                        ###
+###  And meanwhile, test net.sf.opensftp.impl.PlainProgressListener                ###
+######################################################################################
+
+Steps:
+Copy opensftp-config-testsuite6.xml to your classpath and rename it to 'opensftp-config.xml'.
+Run net.sf.opensftp.impl.ProgressListenerTest.
+

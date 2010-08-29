@@ -1,5 +1,7 @@
 package net.sf.opensftp.impl;
 
+import net.sf.opensftp.ProgressListener;
+
 import org.apache.log4j.Logger;
 
 public class PlainProgressListener extends AbstractProgressListener {
@@ -9,9 +11,9 @@ public class PlainProgressListener extends AbstractProgressListener {
 
 	private long total = 0;
 	private long progress = 0;
-	private String src;
-	private String dst;
-	private int op;
+	private String src = null;
+	private String dst = null;
+	private int op = 0;
 	private long percent = 0;
 
 	@Override
@@ -19,15 +21,27 @@ public class PlainProgressListener extends AbstractProgressListener {
 		String msg = "Completed!";
 		log.info(msg);
 		logger4LoggingInterceptor.info(msg);
+		clear();
+	}
+
+	private void clear() {
+		total = 0;
+		progress = 0;
+		src = null;
+		dst = null;
+		op = 0;
+		percent = 0;
 	}
 
 	@Override
 	public void init(int op, String src, String dest, long total) {
 		this.op = op;
 		this.src = src;
-		this.dst = dst;
+		this.dst = dest;
 		this.total = total;
-		String msg = String.format("Fetching %1$ to %2$", src, dst);
+		String opStr = (op == ProgressListener.GET) ? "Fetching" : "Uploading";
+		String msg = String.format("%3$s %1$s to %2$s", this.src, this.dst,
+				opStr);
 		log.info(msg);
 		logger4LoggingInterceptor.info(msg);
 	}
@@ -40,7 +54,7 @@ public class PlainProgressListener extends AbstractProgressListener {
 			percent = tmp;
 		}
 
-		String msg = String.format("Completed %1$d (%2$d%) out of %3$d",
+		String msg = String.format("Completed %1$d ( %2$d%% ) out of %3$d.",
 				progress, percent, total);
 		log.info(msg);
 		logger4LoggingInterceptor.info(msg);

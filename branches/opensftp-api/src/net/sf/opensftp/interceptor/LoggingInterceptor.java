@@ -79,7 +79,7 @@ public class LoggingInterceptor implements Interceptor {
 			if (s.length() != 0)
 				log.info(s);
 		} else {// error message
-			log.info(result.getErrorCode() + ": " + result.getErrorMessage());
+			log.info(result.getErrorMessage());
 		}
 	}
 
