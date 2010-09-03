@@ -4,15 +4,21 @@ Ease Your Work with SFTP by Using OpenSFTP
 </font></p>
 ----
 OpenSFTP provides a <font color="blue">FREE</font> and <font color="blue">HANDY</font> set of utilities <font color="blue">in pure Java</font> designed to ease your work with SFTP. 
+<br><br>
+OpenSFTP consists of three low-coupling parts:
+  * !OpenSftp-api. A well designed set of API.
+  * !OpenSftp-impl. A reference implementation.
+  * Pluggable, configurable, and customizable modules, which are now represented in the forms of interceptors and listeners.
 <br>
-It's <font color="blue">programmer friendly</font>.
+It's platform-independent, <font color="blue">programmer-friendly, customizable, configurable and configuration-free</font>. 
 <br>
-And what's more, it's platform-independent, easy to use, easy to troubleshot and easy to extend.
+It's easy to use, easy to extend and easy to troubleshot.
+<br><br>
+You can use OpenSFTP as a <font color="blue">LIGHTWEIGHT</font> SFTP client,
 <br>
-You can use OpenSFTP as a <font color="blue">LIGHTWEIGHT</font> SFTP client
-<br>
-Or develop your own SFTP client, such as a desktop version,  an RIA version or a customized version for a certain Enterprise Application, based on OpenSFTP.
-<br>
+Or develop your own SFTP client, such as a desktop version, an RIA version and a customized version for a certain enterprise application, based on OpenSFTP.
+<br><br>
 OpenSFTP is licensed under <font color="blue"><a href="http://www.gnu.org/licenses/lgpl.html"><img src="http://www.gnu.org/graphics/lgplv3-88x31.png" alt="GNU LGPLv3" title="GNU LGPLv3" align="middle"/></a></font>.
 <br><br>
 For more details, please jump to the [Features] page.
+<p/>
