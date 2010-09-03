@@ -4,6 +4,6 @@ Who Shall Use It?
 </font></p>
 ----
 You're exactly the guy who need it if -
-  * you are developing your own SFTP client such as a desktop version,  an RIA version or a customized version for a certain Enterprise Application
-  * or you simply have to put or get files through SFTP protocol in a certain Enterprise Application
+  * you are developing your own SFTP client such as a desktop version,  an RIA version or a customized version for a certain enterprise application
+  * or you simply have to download or upload files through SFTP protocol in a certain enterprise application
   * or any other scenarios where you have to deal with SFTP.
