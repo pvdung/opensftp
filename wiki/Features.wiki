@@ -16,8 +16,8 @@ The following is a list of features of OpenSFTP:
   * Most SFTP commands are implemented. The leftover will be added in the short future. 
   * Easy to use. You can seamlessly use it in your Java project without worrying about the output capturing and exception handling. OpenSFTP manages them well for you. 
   * Easy to extend. This feature contains two levels. 
-      * You're free to construct your own implementation of OpenSftp.
-      * You're free to create various modules for OpenSftp.
-      *  It's very easy to make your application which build on OpenSftp use another concrete implementation of OpenSftp instead without interfering the application itself.
+      * You're free to construct your own implementation of OpenSFTP.
+      * You're free to create various modules for !OpenSftp.
+      *  It's very easy to make your application which build on OpenSFTP use another concrete implementation of OpenSFTP instead without interfering the application itself.
       *  It's very easy to plug in or remove the out-of-box modules or modules created by yourself or provided by 3rd parties without interfering your application.
   * Easy to troubleshot. OpenSFTP using log4j to record its running status including output capturing and exception handling. It's easy to change the logging level, change the logging pattern and even customize your own appender. 
