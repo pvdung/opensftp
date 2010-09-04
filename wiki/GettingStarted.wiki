@@ -76,6 +76,6 @@ For more examples, please jump to the [Examples] page.
 Where Next?
 </font></p>
 ----
+The OpenSFTP library is explored in more depth in [Cookbook].
 The [CheatSheet Cheat Sheet] is an overview of the entire OpenSFTP API.
-<br>
 Besides, the [Javadoc] is a good helper.
