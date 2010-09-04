@@ -103,6 +103,12 @@ public class ProgressListenerTest {
 		result = util.rm(session, "tmp4sftp/*");
 		assertTrue(result.getSuccessFlag());
 
+		result = util.put(session, "D:/Received/README*", "tmp4sftp");
+		assertTrue(result.getSuccessFlag());
+		
+		result = util.rm(session, "tmp4sftp/*");
+		assertTrue(result.getSuccessFlag());
+		
 		result = util.rmdir(session, "tmp4sftp");
 		assertTrue(result.getSuccessFlag());
 	}

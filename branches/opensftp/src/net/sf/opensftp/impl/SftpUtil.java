@@ -506,7 +506,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			channelSftp.rmdir(path);
 			result.setSuccessFalg(true);
 		} catch (com.jcraft.jsch.SftpException e) {
-			log.error("command mkdir failed.", e);
+			log.error("command rmdir failed.", e);
 			result.setErrorMessage(e.toString());
 			result.setErrorCode(e.id);
 		}
