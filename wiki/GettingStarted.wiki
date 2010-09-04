@@ -27,19 +27,21 @@ The Simplest Example
 {{{
 SftpUtil util = SftpUtilFactory.getSftpUtil();
 SftpSession session = null;
-String host = "192.168.234.132";
-String user = "guest";
-String password = "guest";
+String host = ...;
+String user = ...;
+String password = ...;
 
 try {
   //connect
   session = util.connectByPasswdAuth(host, user, password,
-      SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES);
+      SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO);
 } catch (SftpException e) {
   e.printStackTrace();
 }
+
 if (session == null)
   return;
+
 util.help(session); //print the help information
 
 //OpenSftp provide a default logging interceptor to capture the print the output or error message of commands.
