@@ -4,6 +4,11 @@ import java.util.Date;
 import net.sf.opensftp.SftpFileAttribute;
 import com.jcraft.jsch.SftpATTRS;
 
+/**
+ * 
+ * @author BurningXFlame
+ *
+ */
 public class SftpFileAttributeImpl implements SftpFileAttribute {
 	private char type;
 	private int permissions;

@@ -1,11 +1,7 @@
 package net.sf.opensftp.impl;
 
 /**
- * <p>
- * An <code>SftpResult</code> object represents an SFTP operation result.
- * </p>
  * 
- * @version
  * @author BurningXFlame
  */
 public class SftpResultImpl implements net.sf.opensftp.SftpResult {

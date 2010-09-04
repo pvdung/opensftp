@@ -2,6 +2,14 @@ package net.sf.opensftp.impl;
 
 import net.sf.opensftp.*;
 
+/**
+ * If you want to plug in <code>ProgressListener</code> module to
+ * <code>net.sf.opensftp.impl.SftpUtil</code>, your
+ * <code>ProgressListener</code> must extends this class.
+ * 
+ * @author BurningXFlame
+ * 
+ */
 public abstract class AbstractProgressListener implements ProgressListener,
 		com.jcraft.jsch.SftpProgressMonitor {
 

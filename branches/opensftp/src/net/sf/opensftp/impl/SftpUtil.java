@@ -23,6 +23,12 @@ import net.sf.opensftp.SftpException;
 import net.sf.opensftp.SftpSession;
 import net.sf.opensftp.SftpResult;
 
+/**
+ * A reference implementation of {@link net.sf.opensftp.SftpUtil}.
+ * 
+ * @author BurningXFlame
+ *
+ */
 public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	private Prompter prompter;
 	private AbstractProgressListener progressListener;

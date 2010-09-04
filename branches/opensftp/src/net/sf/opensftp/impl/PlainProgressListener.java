@@ -4,6 +4,16 @@ import net.sf.opensftp.ProgressListener;
 
 import org.apache.log4j.Logger;
 
+/**
+ * A plain implementation of
+ * <code>net.sf.opensftp.impl.AbstractProgressListener</code>.
+ * <code>PlainProgressListener</code> outputs file uploading or downloading
+ * status in the format of plain text into the OpenSftp log and
+ * LoggingInterceptor log.
+ * 
+ * @author BurningXFlame
+ * 
+ */
 public class PlainProgressListener extends AbstractProgressListener {
 	private static Logger log = Logger.getLogger(SftpUtil.class);
 	private static Logger logger4LoggingInterceptor = Logger

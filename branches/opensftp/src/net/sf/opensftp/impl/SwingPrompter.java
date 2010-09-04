@@ -4,6 +4,12 @@ import javax.swing.JOptionPane;
 
 import net.sf.opensftp.Prompter;
 
+/**
+ * A Swing version of {@link Prompter}.
+ * 
+ * @author BurningXFlame
+ *
+ */
 public class SwingPrompter implements Prompter {
 
 	public boolean promptYesNo(String str) {

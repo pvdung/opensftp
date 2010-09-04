@@ -5,6 +5,11 @@ import net.sf.opensftp.SftpFileAttribute;
 
 import com.jcraft.jsch.ChannelSftp.LsEntry;
 
+/**
+ * 
+ * @author BurningXFlame
+ *
+ */
 public class SftpFileImpl implements SftpFile {
 	private String filename;
 	private String fullname;
