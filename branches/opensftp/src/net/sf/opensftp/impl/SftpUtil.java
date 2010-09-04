@@ -579,11 +579,11 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 		public boolean promptYesNo(String str) {
 			boolean flag = false;
 			switch (strictHostKeyChecking) {
-			case net.sf.opensftp.SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES:
+			case net.sf.opensftp.SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO:
 				flag = true;
 				break;
 
-			case net.sf.opensftp.SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO:
+			case net.sf.opensftp.SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES:
 				break;
 
 			case net.sf.opensftp.SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_ASK:

@@ -66,10 +66,10 @@ public class SftpUtilTest {
 
 	/**
 	 * Test connection functions:<br>
-	 * connect through Password Authentication with strictHostKeyChecking = no.
+	 * connect through Password Authentication with strictHostKeyChecking = yes.
 	 */
 	//@Test(expected = Throwable.class)
-	public void testConnectionFunctionality_passwordAuth_unstrictHostKeyChecking() {
+	public void testConnectionFunctionality_passwordAuth_strictHostKeyChecking() {
 		String UTName = "testConnectionFunctionality_passwordAuth_unstrictHostKeyChecking";
 
 		int i = 1;
@@ -89,10 +89,10 @@ public class SftpUtilTest {
 
 	/**
 	 * Test connection functions:<br>
-	 * connect through Password Authentication with strictHostKeyChecking = no.
+	 * connect through Password Authentication with strictHostKeyChecking = yes.
 	 */
 	//@Test(expected = Throwable.class)
-	public void testConnectionFunctionality_pubkeyAuth_unstrictHostKeyChecking() {
+	public void testConnectionFunctionality_pubkeyAuth_strictHostKeyChecking() {
 		String UTName = "testConnectionFunctionality_pubkeyAuth_unstrictHostKeyChecking";
 
 		int i = 1;
@@ -114,12 +114,12 @@ public class SftpUtilTest {
 	 * Test connection functions:<br>
 	 * connect, disconnect.
 	 */
-	//@Test
+	@Test
 	public void testConnectionFunctionalities() {
 		String UTName = "testConnect";
 
-		int[] options = { // SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO,
-		SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES,
+		int[] options = { // SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES,
+		SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO,
 				SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_ASK };
 		int i = 1;
 

@@ -168,7 +168,7 @@ public class SftpUtilFactoryTest extends SftpUtilFactoryDup {
 		SftpUtil util = getSftpUtil();
 		try {
 			SftpSession session = util.connectByPasswdAuth("192.168.234.129", "guest",
-					"guest", SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES);
+					"guest", SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO);
 			util.cd(session, "..");
 		} catch (SftpException e) {
 			// TODO Auto-generated catch block

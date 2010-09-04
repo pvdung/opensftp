@@ -8,14 +8,13 @@ import org.apache.log4j.Logger;
  * A plain implementation of
  * <code>net.sf.opensftp.impl.AbstractProgressListener</code>.
  * <code>PlainProgressListener</code> outputs file uploading or downloading
- * status in the format of plain text into the OpenSftp log and
- * LoggingInterceptor log.
+ * status in the format of plain text into the LoggingInterceptor log.
  * 
  * @author BurningXFlame
  * 
  */
 public class PlainProgressListener extends AbstractProgressListener {
-	private static Logger log = Logger.getLogger(SftpUtil.class);
+	// private static Logger log = Logger.getLogger(SftpUtil.class);
 	private static Logger logger4LoggingInterceptor = Logger
 			.getLogger(net.sf.opensftp.interceptor.LoggingInterceptor.class);
 
@@ -29,7 +28,7 @@ public class PlainProgressListener extends AbstractProgressListener {
 	@Override
 	public void complete() {
 		String msg = "Completed!";
-		log.info(msg);
+		// log.info(msg);
 		logger4LoggingInterceptor.info(msg);
 		clear();
 	}
@@ -52,7 +51,7 @@ public class PlainProgressListener extends AbstractProgressListener {
 		String opStr = (op == ProgressListener.GET) ? "Fetching" : "Uploading";
 		String msg = String.format("%3$s %1$s to %2$s", this.src, this.dst,
 				opStr);
-		log.info(msg);
+		// log.info(msg);
 		logger4LoggingInterceptor.info(msg);
 	}
 
@@ -66,7 +65,7 @@ public class PlainProgressListener extends AbstractProgressListener {
 
 		String msg = String.format("Completed %1$d ( %2$d%% ) out of %3$d.",
 				progress, percent, total);
-		log.info(msg);
+		// log.info(msg);
 		logger4LoggingInterceptor.info(msg);
 	}
 }
