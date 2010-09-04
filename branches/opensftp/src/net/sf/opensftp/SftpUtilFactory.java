@@ -274,6 +274,9 @@ public class SftpUtilFactory {
 		String tmp = System.getProperty(SFTPUTIL_PROPERTY, null);
 		if (tmp != null && tmp.trim().length() != 0) {
 			checkAndSetSftpUtilClassName(tmp);
+		} else {
+			log.debug(String.format("The system property %s is not set.",
+					SFTPUTIL_PROPERTY));
 		}
 	}
 
@@ -322,7 +325,7 @@ public class SftpUtilFactory {
 				configFilename);
 		if (url == null) {
 			log
-					.debug("Configuration file not found. Skip the reading configuration phase.");
+					.debug("Configuration file not found. Skip the phase of reading configuration.");
 			return;
 		}
 		log.debug("Configuration file found at '" + url + "'.");
@@ -338,8 +341,14 @@ public class SftpUtilFactory {
 			configReader.getDocumentFactory().setXPathNamespaceURIs(map);
 
 			// validation
-			String configXSDPath = SftpUtilFactory.class.getClassLoader()
-					.getResource(configXSDFileName).toString();
+			url = SftpUtilFactory.class.getClassLoader().getResource(
+					configXSDFileName);
+			if (url == null) {
+				log
+						.warn("The XSD file \'opensftp-config.xsd\' not found. Skip the phase of reading configuration.");
+				return;
+			}
+			String configXSDPath = url.toString();
 			log.debug("The XSD file found at " + configXSDPath);
 
 			configReader.setValidation(true);
