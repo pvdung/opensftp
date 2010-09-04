@@ -5,8 +5,8 @@ How To
 
 OpenSFTP enables you connect to a sftp server by using two types of authentication - public key and password. As follows is a list of connection methods for each authentication type.
 || *Authentication Type* || *API* ||
-|| publickey || public SftpSession connect(String host, String user, String identityFile, int strictHostKeyChecking) throws SftpException <br>public SftpSession connect(String host, String user, String passphrase, String identityFile, int strictHostKeyChecking) throws SftpException <br>public SftpSession connect(String host, int port, String user, String passphrase, String identityFile, int strictHostKeyChecking, int timeout) throws SftpException ||
-|| password || public SftpSession connectByPasswdAuth(String host, String user, String password, int strictHostKeyChecking) throws SftpException <br>public SftpSession connectByPasswdAuth(String host, int port, String user, String password, int strictHostKeyChecking, int timeout) throws SftpException ||
+|| publickey || public !SftpSession connect(String host, String user, String identityFile, int strictHostKeyChecking) throws !SftpException <br>public !SftpSession connect(String host, String user, String passphrase, String identityFile, int strictHostKeyChecking) throws !SftpException <br>public !SftpSession connect(String host, int port, String user, String passphrase, String identityFile, int strictHostKeyChecking, int timeout) throws !SftpException ||
+|| password || public !SftpSession connectByPasswdAuth(String host, String user, String password, int strictHostKeyChecking) throws !SftpException <br>public !SftpSession connectByPasswdAuth(String host, int port, String user, String password, int strictHostKeyChecking, int timeout) throws !SftpException ||
 
 
 = Details =
