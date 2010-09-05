@@ -9,7 +9,11 @@ OpenSFTP enables you to connect to a sftp server by using two types of authentic
 || password || `public SftpSession connectByPasswdAuth(String host, String user, String password, int strictHostKeyChecking) throws SftpException`<br>`public SftpSession connectByPasswdAuth(String host, int port, String user, String password, int strictHostKeyChecking, int timeout) throws SftpException` ||
 
 The `port` parameter defaults to 22 if not specified.<br>
-Available values for the `strictHostKeyChecking` parameter are `STRICT_HOST_KEY_CHECKING_OPTION_ASK`, `STRICT_HOST_KEY_CHECKING_OPTION_YES` and `STRICT_HOST_KEY_CHECKING_OPTION_NO`, corresponding to `ask`, `yes` and `no`, respectively. If you don't know what `StrictHostKeyChecking` is for, please refer to the famous OpenSSH project.
+Available values for the `strictHostKeyChecking` parameter are `STRICT_HOST_KEY_CHECKING_OPTION_ASK`, `STRICT_HOST_KEY_CHECKING_OPTION_YES` and `STRICT_HOST_KEY_CHECKING_OPTION_NO`, corresponding to `ask`, `yes` and `no`, respectively. If you don't know what `StrictHostKeyChecking` is for, please refer to the famous OpenSSH project.<br>
+The `timeout` parameter is the timeout in milliseconds.<br>
+The `identityFile` parameter points out where your private keys store. If you specify a value begining with '~' and a following directory separator ('/' or '\\'), the '~' is treated as your home folder.<br>
+The `passphrase` paramter defaults to `""` (an empty string) which means empty (no) passphrase.
+
 
 = Details =
 
