@@ -36,8 +36,14 @@ try {
 
 Please note that here I use `net.sf.opensftp.SftpUtilFactory` to obtain a singleton instance of some concrete implementation of `net.sf.opensftp.SftpUtil`. It's highly recommended to always obtain an instance of `SftpUtil` in this way, thus enabling you to use lots of advanced, exciting features at no or very little cost. For further information about these features, please jump to the [#Use_Advanced_Features Use Advanced Features] section.
 
+= Disconnect from an Sftp Server =
+In contrast with connecting to an sftp server, disconnecting from an sftp server is rather simple. You just need an `SftpUtil` instance and an `SftpSession` instance you previously got when connecting, and do as follows.
+{{{
+util.disconnect(session); //util is the SftpUtil instance you previously got, session is the SftpSession you previously got when connecting
+}}}
+
 = Manipulate an Sftp Server =
 
-= Disconnect from an Sftp Server =
+
 
 = Use Advanced Features =
