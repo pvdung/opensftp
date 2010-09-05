@@ -1,3 +1,4 @@
+<font face="Calibri" size="3">
 How To
 <wiki:toc max_depth="1" />
 
