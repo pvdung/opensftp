@@ -24,6 +24,11 @@ Add the following JARs to your class path:
 The Simplest Example
 </font></p>
 ----
+Generally speaking, there're three steps to access and manipulate an sftp server.
+  # Connect to an sftp server. Use the connection methods of `net.sf.opensftp.SftpUtil` to connect to an sftp server. The returned `net.sftp.opensftp.SftpSession` object is in charge of maintaining the communication between you and the sftp server and must be passed through when manipulating the sftp server (see below).
+  # Manipulate the sftp server. Use the command methods (ls, pwd, cd, put, get, etc.) of `net.sf.opensftp.SftpUtil` to manipulate the sftp server.
+  # Disconnect from the sftp server. Use the disconnection method of `net.sf.opensftp.SftpUtil` to disconnect from the sftp server.
+Here is an example.
 {{{
 SftpUtil util = SftpUtilFactory.getSftpUtil();
 SftpSession session = null;
