@@ -4,7 +4,7 @@ How To
 
 = Connect to an sftp server =
 
-OpenSFTP enables you to connect to a sftp server by using two types of authentication - public key and password. The following table lists the connection methods for each authentication type.
+OpenSFTP enables you to connect to an sftp server by using two types of authentication - public key and password. The following table lists the connection methods for each authentication type.
 || *Authentication Type* || *API* (methods of `net.sf.opensftp.SftpUtil`) ||
 || publickey || `public SftpSession connect(String host, String user, String identityFile, int strictHostKeyChecking) throws SftpException`<br>`public SftpSession connect(String host, String user, String passphrase, String identityFile, int strictHostKeyChecking) throws SftpException`<br>`public SftpSession connect(String host, int port, String user, String passphrase, String identityFile, int strictHostKeyChecking, int timeout) throws SftpException` ||
 || password || `public SftpSession connectByPasswdAuth(String host, String user, String password, int strictHostKeyChecking) throws SftpException`<br>`public SftpSession connectByPasswdAuth(String host, int port, String user, String password, int strictHostKeyChecking, int timeout) throws SftpException` ||
@@ -15,10 +15,29 @@ The `timeout` parameter is the timeout in milliseconds.<br>
 The `identityFile` parameter points out where your private keys store. If you specify a value begining with '~' and a following directory separator ('/' or '\\'), the '~' is treated as your home folder.<br>
 The `passphrase` paramter defaults to `""` (an empty string) which means empty (no) passphrase.
 
+The returned `net.sftp.opensftp.SftpSession` object is in charge of maintaining the communication between you and the sftp server and must be passed through when manipulating the sftp server (see the next session). 
 
-= Details =
+Here is an example of connection.
+{{{
+SftpUtil util = SftpUtilFactory.getSftpUtil(); 
+SftpSession session = null; 
+String host = ...; 
+String user = ...; 
+String password = ...; 
+ 
+try { 
+  //connect 
+  session = util.connectByPasswdAuth(host, user, password, 
+      SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO); 
+} catch (SftpException e) { 
+  e.printStackTrace(); 
+}
+}}}
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Please note that here I use `net.sf.opensftp.SftpUtilFactory` to obtain a singleton instance of some concrete implementation of `net.sf.opensftp.SftpUtil`. It's highly recommended to always obtain an instance of `SftpUtil` in this way, thus enabling you to use lots of advanced, exciting features at no or very little cost. For further information about these features, please jump to the [Cookbook#Use_Advanced_Features] section.
+
+= Manipulate an sftp server =
+
+= Disconnect from an sftp server =
+
+= Use Advanced Features =
