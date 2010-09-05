@@ -2,7 +2,7 @@
 How To
 <wiki:toc max_depth="1" />
 
-= Connect to an sftp server =
+= Connect to an Sftp Server =
 
 OpenSFTP enables you to connect to an sftp server by using two types of authentication - public key and password. The following table lists the connection methods for each authentication type.
 || *Authentication Type* || *API* (methods of `net.sf.opensftp.SftpUtil`) ||
@@ -36,8 +36,8 @@ try {
 
 Please note that here I use `net.sf.opensftp.SftpUtilFactory` to obtain a singleton instance of some concrete implementation of `net.sf.opensftp.SftpUtil`. It's highly recommended to always obtain an instance of `SftpUtil` in this way, thus enabling you to use lots of advanced, exciting features at no or very little cost. For further information about these features, please jump to the [#Use_Advanced_Features Use Advanced Features] section.
 
-= Manipulate an sftp server =
+= Manipulate an Sftp Server =
 
-= Disconnect from an sftp server =
+= Disconnect from an Sftp Server =
 
 = Use Advanced Features =
