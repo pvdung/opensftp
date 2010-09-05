@@ -34,7 +34,7 @@ try {
 }
 }}}
 
-Please note that here I use `net.sf.opensftp.SftpUtilFactory` to obtain a singleton instance of some concrete implementation of `net.sf.opensftp.SftpUtil`. It's highly recommended to always obtain an instance of `SftpUtil` in this way, thus enabling you to use lots of advanced, exciting features at no or very little cost. For further information about these features, please jump to the [Cookbook#Use_Advanced_Features] section.
+Please note that here I use `net.sf.opensftp.SftpUtilFactory` to obtain a singleton instance of some concrete implementation of `net.sf.opensftp.SftpUtil`. It's highly recommended to always obtain an instance of `SftpUtil` in this way, thus enabling you to use lots of advanced, exciting features at no or very little cost. For further information about these features, please jump to the [#Use_Advanced_Features] section.
 
 = Manipulate an sftp server =
 
