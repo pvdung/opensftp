@@ -9,7 +9,6 @@ import net.sf.opensftp.SftpResult;
  * {@link net.sf.opensftp.SftpUtil} objects to provide various customized
  * functionality.
  * 
- * @version
  * @author BurningXFlame
  */
 public interface Interceptor {

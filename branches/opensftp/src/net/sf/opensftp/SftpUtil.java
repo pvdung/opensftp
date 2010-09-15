@@ -4,7 +4,6 @@ package net.sf.opensftp;
  * <code>SftpUtil</code> provides a handy set of utilities designed to ease your
  * work with SFTP.
  * 
- * @version
  * @author BurningXFlame
  */
 public interface SftpUtil {
@@ -26,7 +25,7 @@ public interface SftpUtil {
 	 * any implementation of opensftp must use this prompter in any scenario
 	 * where a <code>Prompter</code> should be used.
 	 * 
-	 * @see {@link Prompter}
+	 * @see net.sf.opensftp.Prompter
 	 */
 	public void setPrompter(Prompter prompter);
 
@@ -35,7 +34,7 @@ public interface SftpUtil {
 	 * valid, any implementation of opensftp must use this progressListener in
 	 * any scenario where a <code>ProgressListener</code> should be used.
 	 * 
-	 * @see {@link ProgressListener}
+	 * @see net.sf.opensftp.ProgressListener
 	 */
 	public void setProgressListener(ProgressListener progressListener);
 

@@ -24,7 +24,6 @@ import java.util.Date;
  * the year is shown rather than time.</li>
  * </ul>
  * 
- * @version
  * @author BurningXFlame
  */
 public interface SftpFileAttribute {

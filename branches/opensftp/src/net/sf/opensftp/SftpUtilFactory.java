@@ -39,7 +39,7 @@ import net.sf.opensftp.interceptor.*;
  * </p>
  * <ul>
  * <li>Use the implementation class specified through the
- * <code>/opensftp-config/sftputil-impl</code> node in the
+ * <code>/opensftp-config/sftputil-impl/@type</code> node in the
  * <code>opensftp-config.xml</code> configuration file.</li>
  * <li>Use the implementation class specified through the
  * <code>net.sf.opensftp.SftpUtil</code> system property.</li>
@@ -55,7 +55,6 @@ import net.sf.opensftp.interceptor.*;
  * or doesn't implement {@link SftpUtil} at all.
  * </p>
  * 
- * @version
  * @author BurningXFlame
  */
 
@@ -224,7 +223,7 @@ public class SftpUtilFactory {
 	 * A call to this method is effective only when the following conditions are
 	 * all met.
 	 * <ul>
-	 * <li>The <code>/opensftp-impl</code> node in the
+	 * <li>The <code>/opensftp-config/sftputil-impl/@type</code> node in the
 	 * <code>opensftp-config.xml</code> configuration file was not or not
 	 * effectively set. It's not a effective set if you specify a class which
 	 * doesn't exist in the classpath or doesn't implement {@link SftpUtil} at

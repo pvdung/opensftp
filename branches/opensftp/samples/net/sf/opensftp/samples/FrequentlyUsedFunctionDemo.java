@@ -26,7 +26,7 @@ public class FrequentlyUsedFunctionDemo {
 		try {
 			//connect
 			session = util.connectByPasswdAuth(host, user, password,
-					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES);
+					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO);
 		} catch (SftpException e) {
 			e.printStackTrace();
 		}

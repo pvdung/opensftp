@@ -3,7 +3,6 @@ package net.sf.opensftp;
 /**
  * An exception that provides information on an SFTP access error.
  * 
- * @version
  * @author BurningXFlame
  * 
  */

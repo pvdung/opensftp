@@ -15,7 +15,6 @@ package net.sf.opensftp;
  * </ul>
  * 
  * @see SftpFileAttribute
- * @version
  * @author BurningXFlame
  */
 public interface SftpFile {
