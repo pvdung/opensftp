@@ -9,7 +9,7 @@ The latest stable release:
 <br>
 [http://code.google.com/p/opensftp/downloads/detail?name=opensftp-0.1.0-bin.zip Package] (includes JARs, source, Javadoc, manuals, etc.)
 <br><br>
-Older releases can be found [http://code.google.com/p/opensftp/downloads here].
+Older releases can be found [ReleaseHistory here].
 <p/>
 <p align="left"><font size="4" color="blue">
 Set Up the Class Path
