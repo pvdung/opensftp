@@ -16,7 +16,7 @@ import net.sf.opensftp.SftpUtilFactory;
  * <code>LoggingInterceptor</code>s intercept method invocations on
  * {@link net.sf.opensftp.SftpUtil} objects to provide logging functionality.
  * 
- * @author BurningXFlame
+ * @author BurningXFlame@gmail.com
  */
 public class LoggingInterceptor implements Interceptor {
 	private static Logger log = Logger.getLogger(LoggingInterceptor.class);

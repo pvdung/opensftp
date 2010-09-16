@@ -55,7 +55,7 @@ import net.sf.opensftp.interceptor.*;
  * or doesn't implement {@link SftpUtil} at all.
  * </p>
  * 
- * @author BurningXFlame
+ * @author BurningXFlame@gmail.com
  */
 
 public class SftpUtilFactory {

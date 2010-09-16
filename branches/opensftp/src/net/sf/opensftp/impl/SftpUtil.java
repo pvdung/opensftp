@@ -26,7 +26,7 @@ import net.sf.opensftp.SftpResult;
 /**
  * A reference implementation of {@link net.sf.opensftp.SftpUtil}.
  * 
- * @author BurningXFlame
+ * @author BurningXFlame@gmail.com
  *
  */
 public class SftpUtil implements net.sf.opensftp.SftpUtil {

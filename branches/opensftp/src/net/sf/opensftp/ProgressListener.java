@@ -4,7 +4,7 @@ package net.sf.opensftp;
  * <code>ProgressListener</code>s listen progresses of put/get operations to
  * provide progress meter functionality.
  * 
- * @author BurningXFlame
+ * @author BurningXFlame@gmail.com
  */
 public interface ProgressListener {
 	/**

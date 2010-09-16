@@ -7,7 +7,7 @@ import net.sf.opensftp.Prompter;
 /**
  * A Swing version of {@link Prompter}.
  * 
- * @author BurningXFlame
+ * @author BurningXFlame@gmail.com
  *
  */
 public class SwingPrompter implements Prompter {

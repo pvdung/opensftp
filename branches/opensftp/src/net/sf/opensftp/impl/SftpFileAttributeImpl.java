@@ -6,7 +6,7 @@ import com.jcraft.jsch.SftpATTRS;
 
 /**
  * 
- * @author BurningXFlame
+ * @author BurningXFlame@gmail.com
  *
  */
 public class SftpFileAttributeImpl implements SftpFileAttribute {

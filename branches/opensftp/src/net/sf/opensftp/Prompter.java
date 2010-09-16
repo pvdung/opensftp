@@ -7,7 +7,7 @@ package net.sf.opensftp;
  * registered in the known_hosts file, the user must decide whether to continue
  * or not.
  * 
- * @author BurningXFlame
+ * @author BurningXFlame@gmail.com
  */
 public interface Prompter {
 

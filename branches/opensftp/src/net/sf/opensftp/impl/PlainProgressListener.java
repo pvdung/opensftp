@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
  * <code>PlainProgressListener</code> outputs file uploading or downloading
  * status in the format of plain text into the LoggingInterceptor log.
  * 
- * @author BurningXFlame
+ * @author BurningXFlame@gmail.com
  * 
  */
 public class PlainProgressListener extends AbstractProgressListener {

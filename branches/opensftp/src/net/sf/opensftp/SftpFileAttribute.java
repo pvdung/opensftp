@@ -24,7 +24,7 @@ import java.util.Date;
  * the year is shown rather than time.</li>
  * </ul>
  * 
- * @author BurningXFlame
+ * @author BurningXFlame@gmail.com
  */
 public interface SftpFileAttribute {
 	/**

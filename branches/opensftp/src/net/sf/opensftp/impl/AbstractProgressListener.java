@@ -7,7 +7,7 @@ import net.sf.opensftp.*;
  * <code>net.sf.opensftp.impl.SftpUtil</code>, your
  * <code>ProgressListener</code> must extends this class.
  * 
- * @author BurningXFlame
+ * @author BurningXFlame@gmail.com
  * 
  */
 public abstract class AbstractProgressListener implements ProgressListener,

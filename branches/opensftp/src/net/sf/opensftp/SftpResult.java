@@ -13,7 +13,7 @@ package net.sf.opensftp;
  * <li><code>extension</code>, represents the output of the operation, if any</li>
  * </ul>
  * 
- * @author BurningXFlame
+ * @author BurningXFlame@gmail.com
  */
 public interface SftpResult {
 

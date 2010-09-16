@@ -7,7 +7,7 @@ import com.jcraft.jsch.ChannelSftp;
 
 /**
  * 
- * @author BurningXFlame
+ * @author BurningXFlame@gmail.com
  * 
  */
 public class SftpSessionImpl implements net.sf.opensftp.SftpSession {

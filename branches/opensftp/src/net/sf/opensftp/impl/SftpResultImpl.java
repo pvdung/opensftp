@@ -2,7 +2,7 @@ package net.sf.opensftp.impl;
 
 /**
  * 
- * @author BurningXFlame
+ * @author BurningXFlame@gmail.com
  */
 public class SftpResultImpl implements net.sf.opensftp.SftpResult {
 	private boolean successFlag = false;

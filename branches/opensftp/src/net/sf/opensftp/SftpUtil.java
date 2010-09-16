@@ -4,7 +4,7 @@ package net.sf.opensftp;
  * <code>SftpUtil</code> provides a handy set of utilities designed to ease your
  * work with SFTP.
  * 
- * @author BurningXFlame
+ * @author BurningXFlame@gmail.com
  */
 public interface SftpUtil {
 	/**

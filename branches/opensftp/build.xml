@@ -197,6 +197,7 @@
 
 		<property name="root"
 		          value="${project.name}-${version.major}.${version.minor}.${version.build}" />
+		<!-- full release -->
 		<zip zipfile="${build.dist.release}/${root}-bin.zip">
 			<zipfileset dir="${build.src}" prefix="${root}/src" />
 			<zipfileset dir="${build.test}" prefix="${root}/test" />
@@ -216,8 +217,30 @@
 		     includes="${root}/**" />
 		<gzip zipfile="${build.dist.release}/${root}-bin.tar.gz"
 		      src="${build.dist.release}/${root}-bin.tar" />
-
 		<delete file="${build.dist.release}/${root}-bin.tar" />
+
+		<!-- only necessary jars -->
+		<zip zipfile="${build.dist.release}/${root}-jars.zip">
+			<zipfileset dir="${build.dependency}" prefix="${root}/lib" />
+			<zipfileset dir="${build.dist.lib}" prefix="${root}" />
+			<zipfileset dir="."
+			            includes="ChangeLog,LICENSE,NOTICE,RELEASE-NOTES"
+			            prefix="${root}" />
+		</zip>
+		
+		<delete includeEmptyDirs="true">
+		    <fileset dir="${build.dist.release}/${root}" includes="**"/>
+		</delete>
+
+		<unzip src="${build.dist.release}/${root}-jars.zip"
+		       dest="${build.dist.release}" />
+		<tar tarfile="${build.dist.release}/${root}-jars.tar"
+		     basedir="${build.dist.release}"
+		     includes="${root}/**" />
+		<gzip zipfile="${build.dist.release}/${root}-jars.tar.gz"
+		      src="${build.dist.release}/${root}-jars.tar" />
+		<delete file="${build.dist.release}/${root}-jars.tar" />
+		
 		<delete dir="${build.dist.release}/${root}" />
 	</target>
 </project>

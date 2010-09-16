@@ -4,7 +4,7 @@ package net.sf.opensftp;
  * An <code>SftpSession</code> object represents the context information of a
  * communication between a client and an SFTP server.
  * 
- * @author BurningXFlame
+ * @author BurningXFlame@gmail.com
  */
 public interface SftpSession {
 
