@@ -3,6 +3,6 @@
 Get Javadoc
 </font></p>
 ----
-The Javadoc for the latest stable release: [http://opensftp.googlecode.com/svn/tags/0.1/docs/javadocs/index.html Javadoc].
+The Javadoc for the latest stable release: [http://opensftp.googlecode.com/svn/trunk/opensftp/docs/javadocs/index.html Javadoc].
 <br><br>
 The Javadocs for older releases can be found [ReleaseHistory here].
