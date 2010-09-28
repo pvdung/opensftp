@@ -13,7 +13,7 @@ The following is a list of features of OpenSFTP:
       * Key exchange: diffie-hellman-group-exchange-sha1, diffie-hellman-group1-sha1 
       * Cipher: blowfish-cbc,3des-cbc,aes128-cbc,aes192-cbc,aes256-cbc,aes128-ctr,aes192-ctr,aes256-ctr,3des-ctr,arcfour,arcfour128,arcfour256 
       * MAC: hmac-md5, hmac-sha1, hmac-md5-96, hmac-sha1-96 
-  * Most SFTP commands are implemented. The leftover will be added in the short future. 
+  * Most SFTP commands have been implemented. The leftover will be added in the short future. 
   * Easy to use. You can seamlessly use it in your Java project without worrying about the output capturing and exception handling. OpenSFTP manages them well for you. 
   * Easy to extend. This feature contains two levels. 
       * You're free to construct your own implementation of OpenSFTP.
