@@ -15,7 +15,7 @@ Available values for the `strictHostKeyChecking` parameter are `STRICT_HOST_KEY_
 
 The `timeout` parameter is the timeout in milliseconds.
 
-The `identityFile` parameter points out where your private keys store. If you specify a value begining with '~' and a following directory separator ('/' or '\\'), the '~' is treated as your home folder.
+The `identityFile` parameter points out where your private keys are stored. If you specify a value begining with '~' and a following directory separator ('/' or '\\'), the '~' is treated as your home folder.
 
 The `passphrase` paramter defaults to `""` (an empty string) which means empty (no) passphrase.
 
