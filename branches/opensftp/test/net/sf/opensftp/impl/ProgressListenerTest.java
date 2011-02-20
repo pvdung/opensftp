@@ -145,6 +145,12 @@ public class ProgressListenerTest {
 		result = util.put(session, "D:/Received/README", "tmp4sftp");
 		assertTrue(result.getSuccessFlag());
 
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// end
 		result = util.rm(session, "tmp4sftp/*");
 		assertTrue(result.getSuccessFlag());
