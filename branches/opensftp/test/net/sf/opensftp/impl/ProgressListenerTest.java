@@ -131,9 +131,6 @@ public class ProgressListenerTest {
 		assertTrue(result.getSuccessFlag());
 		//
 
-		result = util.put(session, "D:/Received/README", "tmp4sftp");
-		assertTrue(result.getSuccessFlag());
-
 		Thread t = new Thread(new Runnable() {
 
 			public void run() {
@@ -142,6 +139,11 @@ public class ProgressListenerTest {
 				assertTrue(result.getSuccessFlag());
 			}
 		});
+
+		t.start();
+
+		result = util.put(session, "D:/Received/README", "tmp4sftp");
+		assertTrue(result.getSuccessFlag());
 
 		// end
 		result = util.rm(session, "tmp4sftp/*");
