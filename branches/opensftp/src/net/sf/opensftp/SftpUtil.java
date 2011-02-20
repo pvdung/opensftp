@@ -31,7 +31,7 @@ public interface SftpUtil {
 
 	/**
 	 * Set the <code>progressListener</code> property. If the specified value is
-	 * valid, any implementation of opensftp must use this progressListener in
+	 * valid, The specified progressListener will be used in
 	 * any scenario where a <code>ProgressListener</code> should be used.
 	 * 
 	 * @see net.sf.opensftp.ProgressListener

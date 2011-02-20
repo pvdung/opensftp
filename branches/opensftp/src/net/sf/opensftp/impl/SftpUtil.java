@@ -31,7 +31,7 @@ import net.sf.opensftp.SftpResult;
  */
 public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	private Prompter prompter;
-	private AbstractProgressListener progressListener;
+	private BaseProgressListener progressListener;
 	private static final String unsupported = "The requested operation is not supported.";
 	private static final int SSH_ERROR_OP_UNSUPPORTED = 8;
 
@@ -41,7 +41,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 
 	/**
 	 * Set the <code>progressListener</code> property. If the specified value is
-	 * valid, any implementation of opensftp must use this progressListener in
+	 * valid, the specified progressListener will be used in
 	 * any scenario where a <code>ProgressListener</code> should be used.
 	 * <p>
 	 * NOTE: This concrete implementation of opensftp doesn't fully support
@@ -51,8 +51,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	 */
 	public void setProgressListener(ProgressListener progressListener) {
 		if (progressListener != null) {
-			if (progressListener instanceof AbstractProgressListener) {
-				this.progressListener = (AbstractProgressListener) progressListener;
+			if (progressListener instanceof BaseProgressListener) {
+				this.progressListener = (BaseProgressListener) progressListener;
 			} else {
 				log.warn("The specified ProgressListener is not an AbstractProgressListener. Ignore it.");
 			}
@@ -278,7 +278,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	private SftpResult get(SftpSession session, String remoteFilename,
-			String localFilename, AbstractProgressListener progressListener) {
+			String localFilename, BaseProgressListener progressListener) {
 		SftpResultImpl result = new SftpResultImpl();
 		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
 		try {
@@ -439,7 +439,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	private SftpResult put(SftpSession session, String localFilename,
-			String remoteFilename, AbstractProgressListener progressListener) {
+			String remoteFilename, BaseProgressListener progressListener) {
 		SftpResultImpl result = new SftpResultImpl();
 		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
 		try {
