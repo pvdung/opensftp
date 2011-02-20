@@ -4,9 +4,3 @@ Project Goals
 </font></p>
 ----
 To develop a fully functional set of SFTP utilities which is the easiest to use, easiest to troubleshot, easiest to extend.
-<br><br>
-<font size="3" color="blue">
-Branch Goal
-</font>
-<br>
-To develop a SFTP Client with friendly GUI and strong functionalities based on OpenSFTP.
