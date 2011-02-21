@@ -22,7 +22,8 @@ public class ProgressListenerTest {
 	private static Logger log = Logger.getLogger(ProgressListenerTest.class);
 	private static SftpUtil util = SftpUtilFactory.getSftpUtil();
 	private static SftpSession session;
-	private static String host = "192.168.234.129";
+	private static SftpSession session2;
+	private static String host = "192.168.234.132";
 	private static int port = 22;
 	private static String user = "guest";
 	private static String password = "guest";
@@ -61,10 +62,12 @@ public class ProgressListenerTest {
 	public void tearDown() {
 		if (session != null)
 			util.disconnect(session);
+		if (session2 != null)
+			util.disconnect(session2);
 		new File(known_hosts_file).delete();
 	}
 
-	@Test
+	//@Test
 	public void testProgressListenerFunction() {
 		String UTName = "testProgressListnerFunction";
 		int i = 1;
@@ -72,7 +75,7 @@ public class ProgressListenerTest {
 
 		try {
 			session = util.connectByPasswdAuth(host, user, password,
-					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES);
+					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO);
 		} catch (SftpException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -119,30 +122,32 @@ public class ProgressListenerTest {
 
 		try {
 			session = util.connectByPasswdAuth(host, user, password,
-					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES);
+					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO);
+			session2 = util.connectByPasswdAuth(host, user, password,
+					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO);
 		} catch (SftpException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		assertNotNull(session);
+		assertNotNull(session2);
 
 		SftpResult result = util.mkdir(session, "tmp4sftp");
 		assertTrue(result.getSuccessFlag());
 		//
 
 		Thread t = new Thread(new Runnable() {
-
 			public void run() {
 				SftpResult result = util.put(session, "D:/Received/README",
-						"tmp4sftp/README2");
+						"tmp4sftp");
 				assertTrue(result.getSuccessFlag());
 			}
 		});
 
 		t.start();
 
-		result = util.put(session, "D:/Received/README", "tmp4sftp");
+		result = util.put(session2, "D:/Received/README2", "tmp4sftp");
 		assertTrue(result.getSuccessFlag());
 
 		try {

@@ -70,10 +70,15 @@ public interface ProgressListener extends Cloneable {
 	/**
 	 * Set the status of this <code>ProgressListener</code>, idle or not.<br>
 	 * Being idle means being ready for use.<br>
-	 * The init() method should call setIdle(false) in its very beginning. The
-	 * complete() method should call setIdle(true) at its very end. And,
-	 * setIdle(true) should be called when the transfer is actually cancelled
-	 * (not going to be cancelled).
+	 * NOTE:
+	 * <ul>
+	 * <li>
+	 * Before using a <code>ProgressListener</code>, call setIdle(false) first.</li>
+	 * <li>
+	 * The complete() method should call setIdle(true) at its very end.</li>
+	 * <li>setIdle(true) should be called when the transfer is actually
+	 * cancelled (not going to be cancelled).</li>
+	 * </ul>
 	 * 
 	 * @return true if the transfer has been cancelled; false otherwise.
 	 */
@@ -98,12 +103,31 @@ public interface ProgressListener extends Cloneable {
 	public void reset();
 
 	/**
-	 * Creates and returns a copy of this <code>ProgressListener</code>.<br>
+	 * Creates and returns a clean copy of this <code>ProgressListener</code>.<br>
 	 * NOTE: Not to clone the operation type, the source file, the target file,
 	 * the total size of the file and the current progress. Conversely, reset
 	 * them.
 	 * 
-	 * @return the copy
+	 * @return a clean copy
 	 */
 	public ProgressListener clone();
+
+	/**
+	 * Returns an instance of <code>ProgressListener</code>.<br>
+	 * The algorithm is as follows:<br>
+	 * <ul>
+	 * <li>Return this object itself if it's idle. Reset it before return.</li>
+	 * <li>Return a clean clone of this object.</li>
+	 * </ul>
+	 * 
+	 * To make this method work, make sure implement the following methods
+	 * correctly:<br>
+	 * <code>isIdle(), setIdle(boolean), reset(), clone()</code>.<br>
+	 * And make sure <code>setIdle()</code> is called where it should be.
+	 * 
+	 * @return a clean instance
+	 * @see {@link #isIdle()}, {@link #setIdle(boolean)}, {@link #reset()},
+	 *      {@link #clone()}
+	 */
+	public ProgressListener newInstance();
 }

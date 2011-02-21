@@ -57,4 +57,16 @@ public abstract class AbstractProgressListener implements ProgressListener {
 	}
 
 	public abstract ProgressListener clone();
+
+	public ProgressListener newInstance() {
+		synchronized (idleLock) {
+			if (isIdle) {
+				this.reset();
+				setIdle(false);
+				return this;
+			} else {
+				return this.clone();
+			}
+		}
+	}
 }

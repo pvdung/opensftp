@@ -27,7 +27,7 @@ import net.sf.opensftp.SftpResult;
  * A reference implementation of {@link net.sf.opensftp.SftpUtil}.
  * 
  * @author BurningXFlame@gmail.com
- *
+ * 
  */
 public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	private Prompter prompter;
@@ -41,8 +41,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 
 	/**
 	 * Set the <code>progressListener</code> property. If the specified value is
-	 * valid, the specified progressListener will be used in
-	 * any scenario where a <code>ProgressListener</code> should be used.
+	 * valid, the specified progressListener will be used in any scenario where
+	 * a <code>ProgressListener</code> should be used.
 	 * <p>
 	 * NOTE: This concrete implementation of opensftp doesn't fully support
 	 * <code>ProgressListener</code>. The <code>progressListener</code> param
@@ -54,7 +54,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			if (progressListener instanceof BaseProgressListener) {
 				this.progressListener = (BaseProgressListener) progressListener;
 			} else {
-				log.warn("The specified ProgressListener is not an AbstractProgressListener. Ignore it.");
+				log
+						.warn("The specified ProgressListener is not an AbstractProgressListener. Ignore it.");
 			}
 		}
 	}
@@ -274,7 +275,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 
 	public SftpResult get(SftpSession session, String remoteFilename,
 			String localFilename) {
-		return get(session, remoteFilename, localFilename, progressListener);
+		return get(session, remoteFilename, localFilename,
+				(BaseProgressListener) progressListener.newInstance());
 	}
 
 	private SftpResult get(SftpSession session, String remoteFilename,
@@ -282,8 +284,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 		SftpResultImpl result = new SftpResultImpl();
 		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
 		try {
-			channelSftp.get(remoteFilename, localFilename,
-					progressListener);
+			channelSftp.get(remoteFilename, localFilename, progressListener);
 			result.setSuccessFalg(true);
 		} catch (com.jcraft.jsch.SftpException e) {
 			log.error("command get failed", e);
@@ -435,7 +436,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 
 	public SftpResult put(SftpSession session, String localFilename,
 			String remoteFilename) {
-		return put(session, localFilename, remoteFilename, progressListener);
+		return put(session, localFilename, remoteFilename,
+				(BaseProgressListener) progressListener.newInstance());
 	}
 
 	private SftpResult put(SftpSession session, String localFilename,
@@ -443,11 +445,10 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 		SftpResultImpl result = new SftpResultImpl();
 		ChannelSftp channelSftp = ((SftpSessionImpl) session).getChannelSftp();
 		try {
-			channelSftp.put(localFilename, remoteFilename,
-					progressListener);
+			channelSftp.put(localFilename, remoteFilename, progressListener);
 			result.setSuccessFalg(true);
 		} catch (com.jcraft.jsch.SftpException e) {
-			log.error("command get failed", e);
+			log.error("command put failed", e);
 			result.setErrorMessage(e.toString());
 			result.setErrorCode(e.id);
 		}
