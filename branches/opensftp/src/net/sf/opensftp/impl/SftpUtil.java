@@ -263,9 +263,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			channelSftp.getSession().disconnect();
 		} catch (JSchException e) {
 			String error = "Failed to disconnect.";
-			log.error("Failed to disconnect.", e);
 			log.error(error, new SftpException(error, e));
-
 		}
 	}
 

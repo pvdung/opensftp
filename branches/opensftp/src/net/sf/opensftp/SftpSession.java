@@ -1,5 +1,7 @@
 package net.sf.opensftp;
 
+import java.util.Hashtable;
+
 /**
  * An <code>SftpSession</code> object represents the context information of a
  * communication between a client and an SFTP server.
@@ -37,4 +39,12 @@ public interface SftpSession {
 	 * @return the current path
 	 */
 	public String getCurrentPath();
+	
+	/**
+	 * A bundle of any additional/customized information.
+	 * 
+	 * @return the bundle
+	 */
+	public Hashtable getExtras();
+	
 }
