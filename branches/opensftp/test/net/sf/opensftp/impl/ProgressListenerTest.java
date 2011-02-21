@@ -23,7 +23,7 @@ public class ProgressListenerTest {
 	private static SftpUtil util = SftpUtilFactory.getSftpUtil();
 	private static SftpSession session;
 	private static SftpSession session2;
-	private static String host = "192.168.234.132";
+	private static String host = "192.168.209.128";
 	private static int port = 22;
 	private static String user = "guest";
 	private static String password = "guest";
