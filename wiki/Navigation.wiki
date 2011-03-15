@@ -1,4 +1,4 @@
-<font face="Calibri" size="3">
+<font face="Calibri" size="4">
   * About OpenSFTP
     * [Overview Overview]
     * [User Who Shall Use It]
