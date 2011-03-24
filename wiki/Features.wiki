@@ -15,9 +15,9 @@ The following is a list of features of OpenSFTP:
       * MAC: hmac-md5, hmac-sha1, hmac-md5-96, hmac-sha1-96 
   * Most SFTP commands have been implemented. The leftover will be added in the short future. 
   * Easy to use. You can seamlessly use it in your Java project without worrying about the output capturing and exception handling. OpenSFTP manages them well for you. 
-  * Easy to extend. This feature contains two levels. 
+  * Easy to extend.
       * You're free to construct your own implementation of OpenSFTP.
       * You're free to create various modules for !OpenSftp.
-      *  It's very easy to make your application which builds on OpenSFTP use another concrete implementation of OpenSFTP instead without interfering the application itself.
-      *  It's very easy to plug in or remove the out-of-box modules or modules created by yourself or provided by 3rd parties without interfering your application.
+      * It's very easy to make your application which builds on OpenSFTP use another concrete implementation of OpenSFTP instead without interfering the application itself.
+      * It's very easy to plug in or remove the out-of-box modules or modules created by yourself or provided by 3rd parties without interfering your application.
   * Easy to troubleshot. OpenSFTP uses log4j to record its running status including output capturing and exception handling. It's easy to change the logging level, change the logging pattern and even customize your own appender. 
