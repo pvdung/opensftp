@@ -8,7 +8,7 @@ import net.sf.opensftp.*;
  * <code>ProgressListener</code> must extend this class.
  * 
  * @author BurningXFlame@gmail.com
- * 
+ * @since 0.2 
  */
 public abstract class BaseProgressListener extends AbstractProgressListener
 		implements com.jcraft.jsch.SftpProgressMonitor {

@@ -1,10 +1,12 @@
 package net.sf.opensftp;
 
 /**
- * An easy approach to work with <code>ProgressListener</code>. You man prefer
- * to use this to use <code>ProgressListener</code> directly.
+ * An easy approach to work with <code>ProgressListener</code>. It's more
+ * advisable to extend this class than to implement
+ * <code>ProgressListener</code> directly.
  * 
  * @author BurningXFlame@gmail.com
+ * @since 0.2
  */
 public abstract class AbstractProgressListener implements ProgressListener {
 	protected int op = 0;
