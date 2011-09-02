@@ -39,12 +39,12 @@ public interface SftpSession {
 	 * @return the current path
 	 */
 	public String getCurrentPath();
-	
+
 	/**
 	 * A bundle of any additional/customized information.
 	 * 
 	 * @return the bundle
 	 */
 	public Hashtable getExtras();
-	
+
 }

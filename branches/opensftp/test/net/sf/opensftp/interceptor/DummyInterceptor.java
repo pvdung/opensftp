@@ -76,7 +76,7 @@ public class DummyInterceptor implements Interceptor {
 			Object key = it.next();
 			log.debug(key + " - " + dummyfield3.get(key));
 		}
-		
+
 		log.debug("dummyfield4: " + dummyfield4);
 		log.debug("dummyfield5: " + dummyfield5.getCalendar().getTime());
 	}

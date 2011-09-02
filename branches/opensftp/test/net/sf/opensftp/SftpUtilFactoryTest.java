@@ -30,8 +30,7 @@ public class SftpUtilFactoryTest extends SftpUtilFactoryDup {
 		}
 		StringBuilder str = new StringBuilder(
 				"\nactualSftpUtilClassNameIdentifiedBySystemProperty: ");
-		str
-				.append(actualSftpUtilClassNameIdentifiedBySystemPropertyOrConfiguration);
+		str.append(actualSftpUtilClassNameIdentifiedBySystemPropertyOrConfiguration);
 		str.append("\ndefaultSftpUtilClassName: ");
 		str.append(defaultSftpUtilClassName);
 		str.append("\nmockSftpUtilClassName: ");
@@ -167,8 +166,9 @@ public class SftpUtilFactoryTest extends SftpUtilFactoryDup {
 		log.info(UTName + " - case " + i++);
 		SftpUtil util = getSftpUtil();
 		try {
-			SftpSession session = util.connectByPasswdAuth("192.168.234.129", "guest",
-					"guest", SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO);
+			SftpSession session = util.connectByPasswdAuth("192.168.234.129",
+					"guest", "guest",
+					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO);
 			util.cd(session, "..");
 		} catch (SftpException e) {
 			// TODO Auto-generated catch block

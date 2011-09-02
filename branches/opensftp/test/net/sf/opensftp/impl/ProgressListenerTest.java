@@ -32,8 +32,7 @@ public class ProgressListenerTest {
 	private static int timeout = 0;
 
 	private final static String known_hosts_file = System
-			.getProperty("user.home")
-			+ "/.ssh/known_hosts";
+			.getProperty("user.home") + "/.ssh/known_hosts";
 	private final static String known_hosts_file_bak = known_hosts_file
 			+ ".bak";
 
@@ -67,7 +66,7 @@ public class ProgressListenerTest {
 		new File(known_hosts_file).delete();
 	}
 
-	//@Test
+	// @Test
 	public void testProgressListenerFunction() {
 		String UTName = "testProgressListnerFunction";
 		int i = 1;

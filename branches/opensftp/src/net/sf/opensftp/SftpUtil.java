@@ -31,8 +31,8 @@ public interface SftpUtil {
 
 	/**
 	 * Set the <code>progressListener</code> property. If the specified value is
-	 * valid, The specified progressListener will be used in
-	 * any scenario where a <code>ProgressListener</code> should be used.
+	 * valid, The specified progressListener will be used in any scenario where
+	 * a <code>ProgressListener</code> should be used.
 	 * 
 	 * @see net.sf.opensftp.ProgressListener
 	 */
@@ -176,7 +176,8 @@ public interface SftpUtil {
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation. Invoking <code>getExtension()</code> on the returned
 	 *         <code>SftpResult</code> object should return a
-	 *         <code>List<{@link SftpFile}></code> object, if this ls operation succeed.
+	 *         <code>List<{@link SftpFile}></code> object, if this ls operation
+	 *         succeed.
 	 */
 	public SftpResult ls(SftpSession session);
 
@@ -191,7 +192,8 @@ public interface SftpUtil {
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation. Invoking <code>getExtension()</code> on the returned
 	 *         <code>SftpResult</code> object should return a
-	 *         <code>List<{@link SftpFile}></code> object, if this ls operation succeed.
+	 *         <code>List<{@link SftpFile}></code> object, if this ls operation
+	 *         succeed.
 	 */
 	public SftpResult ls(SftpSession session, String path);
 

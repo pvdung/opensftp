@@ -40,8 +40,8 @@ public class SftpResultImpl implements net.sf.opensftp.SftpResult {
 	/**
 	 * Construct a new <code>SftpResult</code> using the specified values .
 	 */
-	public SftpResultImpl(boolean successFalg, int errorCode,
-			String errorMsg, Object extension) {
+	public SftpResultImpl(boolean successFalg, int errorCode, String errorMsg,
+			Object extension) {
 		this.successFlag = successFalg;
 		this.errorCode = errorCode;
 		this.errorMsg = errorMsg;

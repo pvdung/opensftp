@@ -323,8 +323,7 @@ public class SftpUtilFactory {
 		URL url = SftpUtilFactory.class.getClassLoader().getResource(
 				configFilename);
 		if (url == null) {
-			log
-					.debug("Configuration file not found. Skip the phase of reading configuration.");
+			log.debug("Configuration file not found. Skip the phase of reading configuration.");
 			return;
 		}
 		log.debug("Configuration file found at '" + url + "'.");
@@ -343,8 +342,7 @@ public class SftpUtilFactory {
 			url = SftpUtilFactory.class.getClassLoader().getResource(
 					configXSDFileName);
 			if (url == null) {
-				log
-						.warn("The XSD file \'opensftp-config.xsd\' not found. Skip the phase of reading configuration.");
+				log.warn("The XSD file \'opensftp-config.xsd\' not found. Skip the phase of reading configuration.");
 				return;
 			}
 			String configXSDPath = url.toString();
@@ -366,8 +364,7 @@ public class SftpUtilFactory {
 			Element errors = errorHandler.getErrors();
 			if (errors != null && errors.hasContent()) {
 				// output the errors XML
-				log
-						.warn("The configuration file is invalid. Ignore the configuration file. As follows list the validation erros.");
+				log.warn("The configuration file is invalid. Ignore the configuration file. As follows list the validation erros.");
 				log.warn(errors.asXML());
 				new XMLWriter(OutputFormat.createPrettyPrint()).write(errors);
 				return;
@@ -431,9 +428,8 @@ public class SftpUtilFactory {
 					|| interceptorClassName == null
 					|| interceptorClassName.length() == 0) {
 
-				log
-						.warn("Null or blank @name or @type found in the configuration of bean '"
-								+ beanName + "'. Ignore this bean.");
+				log.warn("Null or blank @name or @type found in the configuration of bean '"
+						+ beanName + "'. Ignore this bean.");
 				return;
 			}
 
@@ -517,9 +513,8 @@ public class SftpUtilFactory {
 				if (beanName == null || beanName.length() == 0
 						|| beanType == null || beanType.length() == 0) {
 
-					log
-							.warn("Null or blank @name or @type found in the configuration of bean '"
-									+ beanName + "'. Ignore this bean.");
+					log.warn("Null or blank @name or @type found in the configuration of bean '"
+							+ beanName + "'. Ignore this bean.");
 					return null;
 				}
 				// check whether the bean conforms to the expected type
@@ -556,17 +551,16 @@ public class SftpUtilFactory {
 				if (propertyName == null || propertyName.length() == 0
 						|| propertyType == null || propertyType.length() == 0
 						|| propertyValue == null || propertyValue.length() == 0) {
-					log
-							.warn("Null or blank @name or @type found in the configuration of property '"
-									+ propertyName
-									+ "' of bean '"
-									+ beanName
-									+ "'. Ignore this bean.");
+					log.warn("Null or blank @name or @type found in the configuration of property '"
+							+ propertyName
+							+ "' of bean '"
+							+ beanName
+							+ "'. Ignore this bean.");
 					return null;
 				}
 				log.debug("Start setting property '" + propertyName + "'.");
-				Object value = ConvertUtils.convert(propertyValue, Class
-						.forName(propertyType));
+				Object value = ConvertUtils.convert(propertyValue,
+						Class.forName(propertyType));
 				if (!Class.forName(propertyType).isInstance(value)) {
 					log.warn("Failed to convert property '" + propertyName
 							+ "' of bean '" + beanName + "' to '"
@@ -602,12 +596,11 @@ public class SftpUtilFactory {
 				if (propertyName == null || propertyName.length() == 0
 						|| propertyType == null || propertyType.length() == 0
 						|| propertyRef == null || propertyRef.length() == 0) {
-					log
-							.warn("Null or blank @name or @type found in the configuration of property-ref '"
-									+ propertyName
-									+ "' of bean '"
-									+ beanName
-									+ "'. Ignore this bean.");
+					log.warn("Null or blank @name or @type found in the configuration of property-ref '"
+							+ propertyName
+							+ "' of bean '"
+							+ beanName
+							+ "'. Ignore this bean.");
 					return null;
 				}
 				log.debug("Start setting property '" + propertyName + "'.");
@@ -667,17 +660,16 @@ public class SftpUtilFactory {
 			}
 
 		} catch (EvalError e) {
-			log
-					.warn(
-							"Failed to initialize bean '"
-									+ beanName
-									+ "'. Please check your 'opensftp-config.xml' against the following probable causations.\n"
-									+ "(1) A certain bean or property is declared as a type which provides none no-argument constructor.\n"
-									+ "(2) A certain bean or property is declared as a type which doesn't exist.\n"
-									+ "(3) The declared type of a certain property doesn't match its defined type.\n"
-									+ "(4) A certain bean provide none setter for a certain property.\n"
-									+ "(5) A certain initializing-block contains invalid code.\n",
-							e);
+			log.warn(
+					"Failed to initialize bean '"
+							+ beanName
+							+ "'. Please check your 'opensftp-config.xml' against the following probable causations.\n"
+							+ "(1) A certain bean or property is declared as a type which provides none no-argument constructor.\n"
+							+ "(2) A certain bean or property is declared as a type which doesn't exist.\n"
+							+ "(3) The declared type of a certain property doesn't match its defined type.\n"
+							+ "(4) A certain bean provide none setter for a certain property.\n"
+							+ "(5) A certain initializing-block contains invalid code.\n",
+					e);
 		} catch (ClassNotFoundException e) {
 			log.warn("Failed to initialize bean '" + beanName + "'.", e);
 		} finally {

@@ -54,8 +54,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 			if (progressListener instanceof BaseProgressListener) {
 				this.progressListener = (BaseProgressListener) progressListener;
 			} else {
-				log
-						.warn("The specified ProgressListener is not an AbstractProgressListener. Ignore it.");
+				log.warn("The specified ProgressListener is not an AbstractProgressListener. Ignore it.");
 			}
 		}
 	}
@@ -64,8 +63,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	private static Logger logger4LoggingInterceptor = Logger
 			.getLogger(net.sf.opensftp.interceptor.LoggingInterceptor.class);
 	private final static String known_hosts_file = System
-			.getProperty("user.home")
-			+ "/.ssh/known_hosts";
+			.getProperty("user.home") + "/.ssh/known_hosts";
 
 	static {
 		JSch.setLogger(new MyLogger());
@@ -587,8 +585,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 
 			case net.sf.opensftp.SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_ASK:
 				if (prompter == null) {
-					log
-							.warn("No prompter configured. Use the default one - net.sf.opensftp.impl.SwingPrompter.");
+					log.warn("No prompter configured. Use the default one - net.sf.opensftp.impl.SwingPrompter.");
 					prompter = new SwingPrompter();
 				}
 				flag = prompter.promptYesNo(str);
