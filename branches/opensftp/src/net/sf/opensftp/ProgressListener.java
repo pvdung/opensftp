@@ -1,7 +1,7 @@
 package net.sf.opensftp;
 
 /**
- * <code>ProgressListener</code>s listen progresses of put/get operations to
+ * <code>ProgressListener</code>s monitor progresses of put/get operations to
  * provide progress meter functionality.
  * 
  * @author BurningXFlame@gmail.com
@@ -42,17 +42,17 @@ public interface ProgressListener extends Cloneable {
 	public void progress(long delta);
 
 	/**
-	 * Invoked when the transfer is complete.
+	 * Invoked when the transfer is completed.
 	 */
 	public void complete();
 
 	/**
 	 * Invoking this method to cancel the transfer. <br>
-	 * This method, togethe with {@link #isCancelled()}, provides a
-	 * functionality that a user can cancel a transfer. To accomplish this
-	 * function, the concrete implementation of opensftp-api should invoke the
-	 * <code>isCancelled()</code> method to determine whether to continue the
-	 * transfer or not.<br>
+	 * This method, together with {@link #isCancelled()}, enables you to cancel
+	 * a transfer. To accomplish this function, the concrete implementation of
+	 * {@link SftpUtil} should repeatedly invoke the <code>isCancelled()</code>
+	 * method during a transfer by a certain frequency to determine whether to
+	 * continue the transfer or not.<br>
 	 * NOTE: please make <code>cancel()</code> and <code>isCancelled()</code> be
 	 * a pair of synchronized methods.
 	 */

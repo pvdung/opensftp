@@ -2,13 +2,13 @@ NOTE: Also pay great attention to the log, because it's an important evidence to
 Besides, it can help us find the failure cause quickly.  
 
 ######################################################################################
-###  Test Bese Functionalities, including                                          ###
+###  Test Basic Functionalities, including                                          ###
 ###  SftpUtilFactory, system property functionality, configuration functionality,  ###
 ###  xml validation functionality, bean type validation functionality, etc.        ###
 ######################################################################################
 
 
-1)Description on some dumplicate, mocker, or dummy classes
+1)Description on some duplicate, mocker, or dummy classes
 
 1.1)SftpUtilFactoryDup
 For UT purpose, SftpUtilFactoryDup is created based on SftpUtilFactory.
@@ -24,7 +24,7 @@ DummyInterceptor mocks an implementation of Interceptor. But it's more than a mo
 It's used along with opensftp-config-testsuite.xml to test multiple cases of the configuration functionality.
 
 
-2)Run testsuit
+2)Run testsuite
 Run net.sf.opensftp.SftpUtilFactoryTest.
 
 
@@ -43,7 +43,7 @@ specify the following vm args individually.
 To test the configuration functionality, copy opensftp-config-testsuite.xml to your classpath and rename it to 'opensftp-config.xml'.
 
 4.1)Test the SftpUtil configuration functionality
-set the "type" attrubute of the <sftputil-impl> node to the following values once at a time.
+set the "type" attribute of the <sftputil-impl> node to the following values once at a time.
 {blank or spaces}
 a.b.c
 org.apache.log4j.Logger
