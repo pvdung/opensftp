@@ -8,7 +8,7 @@ import com.jcraft.jsch.ChannelSftp.LsEntry;
 /**
  * 
  * @author BurningXFlame@gmail.com
- *
+ * 
  */
 public class SftpFileImpl implements SftpFile {
 	private String filename;

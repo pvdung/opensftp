@@ -1,6 +1,7 @@
 package net.sf.opensftp.interceptor;
 
 import java.lang.reflect.Method;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,6 +16,12 @@ import net.sf.opensftp.SftpUtilFactory;
 /**
  * <code>LoggingInterceptor</code>s intercept method invocations on
  * {@link net.sf.opensftp.SftpUtil} objects to provide logging functionality.
+ * <p>
+ * The class use a customized session-specific attribute
+ * <code>nestCounter</code> to eliminate duplicate logs caused by nested method
+ * call, for example, <code>put(SftpSession, String)</code> invokes
+ * <code>put(SftpSession, String,
+ * remoteFilename)</code> for implementation.
  * 
  * @author BurningXFlame@gmail.com
  */
@@ -22,13 +29,7 @@ public class LoggingInterceptor implements Interceptor {
 	private static Logger log = Logger.getLogger(LoggingInterceptor.class);
 
 	private boolean logCommand = false;
-
-	/**
-	 * This property is used to make <code>LoggingInterceptor</code> work well
-	 * even when sftp methods are nested, i.e. an sftp method is invoked by
-	 * another sftp method.
-	 */
-	private int nestCounter = 0;
+	private static final String NEST_COUNTER = "nestCounter";
 
 	/**
 	 * Determine whether to log commands or not.
@@ -41,6 +42,13 @@ public class LoggingInterceptor implements Interceptor {
 	}
 
 	public void afterMethod(Method method, Object[] args, SftpResult result) {
+		int nestCounter = 0;
+		SftpSession session = (SftpSession) args[0];
+		Hashtable extras = session.getExtras();
+		Integer counter = (Integer) extras.get(NEST_COUNTER);
+		if (counter != null) {
+			nestCounter = counter.intValue();
+		}
 		nestCounter--;
 		if (nestCounter != 0) {
 			return;
@@ -55,7 +63,7 @@ public class LoggingInterceptor implements Interceptor {
 			String methodName = method.getName();
 
 			if (methodName.equals("get")) {
-				//Now ProgressListener is in charge of this.
+				// Now ProgressListener is in charge of this.
 			} else if (methodName.equals("help")) {
 				s.append(result.getExtension());
 			} else if (methodName.equals("lpwd")) {
@@ -69,7 +77,7 @@ public class LoggingInterceptor implements Interceptor {
 						s.append("\n");
 				}
 			} else if (methodName.equals("put")) {
-				//Now ProgressListener is in charge of this.
+				// Now ProgressListener is in charge of this.
 			} else if (methodName.equals("pwd")) {
 				s.append("Remote working directory: " + result.getExtension());
 			} else if (methodName.equals("version")) {
@@ -83,13 +91,20 @@ public class LoggingInterceptor implements Interceptor {
 	}
 
 	public void beforeMethod(Method method, Object[] args) {
+		int nestCounter = 0;
+		SftpSession session = (SftpSession) args[0];
+		Hashtable extras = session.getExtras();
+		Integer counter = (Integer) extras.get(NEST_COUNTER);
+		if (counter != null) {
+			nestCounter = counter.intValue();
+		}
+
 		nestCounter++;
 		if (nestCounter != 1) {
 			return;
 		}
 
 		if (logCommand) {
-			SftpSession session = (SftpSession) args[0];
 			StringBuilder s = new StringBuilder("[");
 			s.append(session.getUser());
 			s.append("@");

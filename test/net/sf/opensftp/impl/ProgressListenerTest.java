@@ -22,7 +22,8 @@ public class ProgressListenerTest {
 	private static Logger log = Logger.getLogger(ProgressListenerTest.class);
 	private static SftpUtil util = SftpUtilFactory.getSftpUtil();
 	private static SftpSession session;
-	private static String host = "192.168.234.129";
+	private static SftpSession session2;
+	private static String host = "192.168.209.128";
 	private static int port = 22;
 	private static String user = "guest";
 	private static String password = "guest";
@@ -31,8 +32,7 @@ public class ProgressListenerTest {
 	private static int timeout = 0;
 
 	private final static String known_hosts_file = System
-			.getProperty("user.home")
-			+ "/.ssh/known_hosts";
+			.getProperty("user.home") + "/.ssh/known_hosts";
 	private final static String known_hosts_file_bak = known_hosts_file
 			+ ".bak";
 
@@ -61,23 +61,20 @@ public class ProgressListenerTest {
 	public void tearDown() {
 		if (session != null)
 			util.disconnect(session);
+		if (session2 != null)
+			util.disconnect(session2);
 		new File(known_hosts_file).delete();
 	}
 
-
-	/**
-	 * Test ProgressListner function:<br>
-	 * cd, get, help(?), ls, mkdir, put, pwd, rename, rm, rmdir, version.
-	 */
-	@Test
-	public void testProgressListnerFunction() {
+	// @Test
+	public void testProgressListenerFunction() {
 		String UTName = "testProgressListnerFunction";
 		int i = 1;
 		log.info(UTName + " - case " + i++);
 
 		try {
 			session = util.connectByPasswdAuth(host, user, password,
-					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_YES);
+					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO);
 		} catch (SftpException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -105,12 +102,64 @@ public class ProgressListenerTest {
 
 		result = util.put(session, "D:/Received/README*", "tmp4sftp");
 		assertTrue(result.getSuccessFlag());
-		
+
 		result = util.rm(session, "tmp4sftp/*");
 		assertTrue(result.getSuccessFlag());
-		
+
 		result = util.rmdir(session, "tmp4sftp");
 		assertTrue(result.getSuccessFlag());
 	}
 
+	/**
+	 * Test whether ProgressLister works in multi-threading environment.
+	 */
+	@Test
+	public void testProgressListenerFunctionInMultiThreadingEnvironment() {
+		String UTName = "testProgressListnerFunction";
+		int i = 1;
+		log.info(UTName + " - case " + i++);
+
+		try {
+			session = util.connectByPasswdAuth(host, user, password,
+					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO);
+			session2 = util.connectByPasswdAuth(host, user, password,
+					SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_NO);
+		} catch (SftpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		assertNotNull(session);
+		assertNotNull(session2);
+
+		SftpResult result = util.mkdir(session, "tmp4sftp");
+		assertTrue(result.getSuccessFlag());
+		//
+
+		Thread t = new Thread(new Runnable() {
+			public void run() {
+				SftpResult result = util.put(session, "D:/Received/README",
+						"tmp4sftp");
+				assertTrue(result.getSuccessFlag());
+			}
+		});
+
+		t.start();
+
+		result = util.put(session2, "D:/Received/README2", "tmp4sftp");
+		assertTrue(result.getSuccessFlag());
+
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// end
+		result = util.rm(session, "tmp4sftp/*");
+		assertTrue(result.getSuccessFlag());
+
+		result = util.rmdir(session, "tmp4sftp");
+		assertTrue(result.getSuccessFlag());
+	}
 }

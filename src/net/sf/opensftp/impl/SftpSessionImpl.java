@@ -1,5 +1,7 @@
 package net.sf.opensftp.impl;
 
+import java.util.Hashtable;
+
 import net.sf.opensftp.SftpFile;
 import net.sf.opensftp.SftpUtilFactory;
 
@@ -17,6 +19,7 @@ public class SftpSessionImpl implements net.sf.opensftp.SftpSession {
 	private String user;
 	private String serverDateTimePattern;
 	private String currentPath;
+	private Hashtable extras = new Hashtable();
 
 	public SftpSessionImpl(ChannelSftp channelSftp) {
 		this.channelSftp = channelSftp;
@@ -79,4 +82,11 @@ public class SftpSessionImpl implements net.sf.opensftp.SftpSession {
 		return currentPath;
 	}
 
+	public Hashtable getExtras() {
+		return this.extras;
+	}
+
+	public void setExtras(Hashtable bundle) {
+		this.extras = bundle;
+	}
 }
