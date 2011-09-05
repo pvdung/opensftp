@@ -13,37 +13,16 @@ import org.apache.log4j.Logger;
  * @author BurningXFlame@gmail.com
  * 
  */
-public class PlainProgressListener extends AbstractProgressListener {
+public class PlainProgressListener extends BaseProgressListener {
 	// private static Logger log = Logger.getLogger(SftpUtil.class);
 	private static Logger logger4LoggingInterceptor = Logger
 			.getLogger(net.sf.opensftp.interceptor.LoggingInterceptor.class);
 
-	private long total = 0;
-	private long progress = 0;
-	private String src = null;
-	private String dst = null;
-	private int op = 0;
 	private long percent = 0;
 
 	@Override
-	public void complete() {
-		String msg = "Completed!";
-		// log.info(msg);
-		logger4LoggingInterceptor.info(msg);
-		clear();
-	}
-
-	private void clear() {
-		total = 0;
-		progress = 0;
-		src = null;
-		dst = null;
-		op = 0;
-		percent = 0;
-	}
-
-	@Override
 	public void init(int op, String src, String dest, long total) {
+		setIdle(false);
 		this.op = op;
 		this.src = src;
 		this.dst = dest;
@@ -67,5 +46,18 @@ public class PlainProgressListener extends AbstractProgressListener {
 				progress, percent, total);
 		// log.info(msg);
 		logger4LoggingInterceptor.info(msg);
+	}
+
+	@Override
+	public void complete() {
+		setIdle(true);
+		String msg = "Completed!";
+		// log.info(msg);
+		logger4LoggingInterceptor.info(msg);
+	}
+
+	@Override
+	public ProgressListener clone() {
+		return new PlainProgressListener();
 	}
 }
