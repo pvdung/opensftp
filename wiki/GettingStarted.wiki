@@ -5,9 +5,9 @@ Get OpenSFTP
 ----
 The latest stable release:
 <br>
-[http://code.google.com/p/opensftp/downloads/detail?name=opensftp-0.1.0-jars.zip Binary JARs] (includes only necessary JARs)
+[http://code.google.com/p/opensftp/downloads/detail?name=opensftp-0.2.0-jars.zip Binary JARs] (includes only necessary JARs)
 <br>
-[http://code.google.com/p/opensftp/downloads/detail?name=opensftp-0.1.0-bin.zip Package] (includes JARs, source, Javadoc, manuals, etc.)
+[http://code.google.com/p/opensftp/downloads/detail?name=opensftp-0.2.0-bin.zip Package] (includes JARs, source, Javadoc, manuals, etc.)
 <br><br>
 Older releases can be found [ReleaseHistory here].
 <p/>
