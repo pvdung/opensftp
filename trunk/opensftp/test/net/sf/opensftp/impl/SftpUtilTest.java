@@ -31,8 +31,7 @@ public class SftpUtilTest {
 	private static int timeout = 0;
 
 	private final static String known_hosts_file = System
-			.getProperty("user.home")
-			+ "/.ssh/known_hosts";
+			.getProperty("user.home") + "/.ssh/known_hosts";
 	private final static String known_hosts_file_bak = known_hosts_file
 			+ ".bak";
 
@@ -68,7 +67,7 @@ public class SftpUtilTest {
 	 * Test connection functions:<br>
 	 * connect through Password Authentication with strictHostKeyChecking = yes.
 	 */
-	//@Test(expected = Throwable.class)
+	// @Test(expected = Throwable.class)
 	public void testConnectionFunctionality_passwordAuth_strictHostKeyChecking() {
 		String UTName = "testConnectionFunctionality_passwordAuth_unstrictHostKeyChecking";
 
@@ -91,7 +90,7 @@ public class SftpUtilTest {
 	 * Test connection functions:<br>
 	 * connect through Password Authentication with strictHostKeyChecking = yes.
 	 */
-	//@Test(expected = Throwable.class)
+	// @Test(expected = Throwable.class)
 	public void testConnectionFunctionality_pubkeyAuth_strictHostKeyChecking() {
 		String UTName = "testConnectionFunctionality_pubkeyAuth_unstrictHostKeyChecking";
 
