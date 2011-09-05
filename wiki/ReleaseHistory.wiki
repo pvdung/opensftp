@@ -5,4 +5,5 @@ Release History
 </font></p>
 ----
 || *Version* || *Date*<br>(yyyy/MM/dd) || *Changes*<br>(New Features / Bug Fixes) || *Release Notes* || *Javadoc* ||
+|| [http://code.google.com/p/opensftp/downloads/detail?name=opensftp-0.2.0-bin.zip 0.2] || 2011/9/5 || Feature [http://code.google.com/p/opensftp/issues/detail?id=1&can=1 #1] || [http://code.google.com/p/opensftp/source/browse/tags/opensftp/0.2/RELEASE-NOTES ReleaseNotes] || [http://opensftp.googlecode.com/svn/tags/opensftp/0.2/docs/javadocs/index.html Javadoc] ||
 || [http://code.google.com/p/opensftp/downloads/detail?name=opensftp-0.1.0-bin.zip 0.1] || 2010/9/15 || N/A || [http://code.google.com/p/opensftp/source/browse/tags/opensftp/0.1/RELEASE-NOTES ReleaseNotes] || [http://opensftp.googlecode.com/svn/tags/opensftp/0.1/docs/javadocs/index.html Javadoc] ||
