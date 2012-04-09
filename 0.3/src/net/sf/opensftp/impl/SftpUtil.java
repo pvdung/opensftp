@@ -46,7 +46,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	 * <p>
 	 * NOTE: This concrete implementation of opensftp doesn't fully support
 	 * <code>ProgressListener</code>. The <code>progressListener</code> param
-	 * must be an {@link AbstractProgressListener}. Otherwise, this invocation
+	 * must be an {@link BaseProgressListener}. Otherwise, this invocation
 	 * is ignored.
 	 */
 	public void setProgressListener(ProgressListener progressListener) {

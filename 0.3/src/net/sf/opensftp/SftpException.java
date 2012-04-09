@@ -42,7 +42,6 @@ public class SftpException extends Exception {
 	 *            {@link #getCause()} method). (A <tt>null</tt> value is
 	 *            permitted, and indicates that the cause is nonexistent or
 	 *            unknown.)
-	 * @since
 	 */
 	public SftpException(Throwable cause) {
 		super(cause);
@@ -63,7 +62,6 @@ public class SftpException extends Exception {
 	 *            {@link #getCause()} method). (A <tt>null</tt> value is
 	 *            permitted, and indicates that the cause is nonexistent or
 	 *            unknown.)
-	 * @since
 	 */
 	public SftpException(String message, Throwable cause) {
 		super(message, cause);

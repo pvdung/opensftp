@@ -79,8 +79,6 @@ public interface ProgressListener extends Cloneable {
 	 * <li>setIdle(true) should be called when the transfer is actually
 	 * cancelled (not going to be cancelled).</li>
 	 * </ul>
-	 * 
-	 * @return true if the transfer has been cancelled; false otherwise.
 	 */
 	public void setIdle(boolean idle);
 
@@ -126,8 +124,10 @@ public interface ProgressListener extends Cloneable {
 	 * And make sure <code>setIdle()</code> is called where it should be.
 	 * 
 	 * @return a clean instance
-	 * @see {@link #isIdle()}, {@link #setIdle(boolean)}, {@link #reset()},
-	 *      {@link #clone()}
+	 * @see #isIdle()
+	 * @see #setIdle(boolean)
+	 * @see #reset()
+	 * @see #clone()
 	 */
 	public ProgressListener newInstance();
 }
