@@ -6,12 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.omg.PortableInterceptor.USER_EXCEPTION;
-
 import net.sf.opensftp.SftpFile;
 import net.sf.opensftp.SftpResult;
 import net.sf.opensftp.SftpSession;
-import net.sf.opensftp.SftpUtilFactory;
 
 /**
  * <code>LoggingInterceptor</code>s intercept method invocations on
@@ -50,6 +47,8 @@ public class LoggingInterceptor implements Interceptor {
 			nestCounter = counter.intValue();
 		}
 		nestCounter--;
+		extras.put(NEST_COUNTER, Integer.valueOf(nestCounter));
+		
 		if (nestCounter != 0) {
 			return;
 		}
@@ -98,8 +97,9 @@ public class LoggingInterceptor implements Interceptor {
 		if (counter != null) {
 			nestCounter = counter.intValue();
 		}
-
 		nestCounter++;
+		extras.put(NEST_COUNTER, Integer.valueOf(nestCounter));
+		
 		if (nestCounter != 1) {
 			return;
 		}
