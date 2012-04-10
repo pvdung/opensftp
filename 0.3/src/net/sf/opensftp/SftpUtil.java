@@ -21,18 +21,19 @@ public interface SftpUtil {
 	public final static int STRICT_HOST_KEY_CHECKING_OPTION_NO = 2;
 
 	/**
-	 * Set the <code>prompter</code> property. If the specified value is valid,
-	 * any implementation of opensftp must use this prompter in any scenario
-	 * where a <code>Prompter</code> should be used.
+	 * Set the <code>prompter</code> property. Once a valid
+	 * <code>Prompter</code> is set, the <code>Prompter</code> should be used in
+	 * any scenario where a <code>Prompter</code> is supposed to be used.
 	 * 
 	 * @see net.sf.opensftp.Prompter
 	 */
 	public void setPrompter(Prompter prompter);
 
 	/**
-	 * Set the <code>progressListener</code> property. If the specified value is
-	 * valid, The specified progressListener will be used in any scenario where
-	 * a <code>ProgressListener</code> should be used.
+	 * Set the <code>progressListener</code> property. Once a valid
+	 * <code>ProgressListener</code> is set, the <code>ProgressListener</code>
+	 * should be used in any scenario where a
+	 * <code><code>ProgressListener</code></code> is supposed to be used.
 	 * 
 	 * @see net.sf.opensftp.ProgressListener
 	 */
