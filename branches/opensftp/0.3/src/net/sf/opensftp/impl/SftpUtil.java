@@ -31,7 +31,9 @@ import net.sf.opensftp.SftpResult;
  */
 public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	private Prompter prompter;
+	private Object prompterLock = new Object();
 	private BaseProgressListener progressListener;
+	private Object progressListenerLock = new Object();
 	private static final String unsupported = "The requested operation is not supported.";
 	private static final int SSH_ERROR_OP_UNSUPPORTED = 8;
 
@@ -40,14 +42,29 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	/**
-	 * Set the <code>progressListener</code> property. If the specified value is
-	 * valid, the specified progressListener will be used in any scenario where
-	 * a <code>ProgressListener</code> should be used.
+	 * Return the <code>prompter</code>.
 	 * <p>
+	 * If the <code>prompter</code> is null, an instance of
+	 * {@link SwingPrompter} will be created and assigned to
+	 * <code>prompter</code> first.
+	 */
+	public Prompter getPrompter() {
+		if (prompter == null) {
+			synchronized (prompterLock) {
+				if (prompter == null) {
+					prompter = new SwingPrompter();
+					log.warn("No prompter has been set. Use the default one - net.sf.opensftp.impl.SwingPrompter.");
+				}
+			}
+		}
+		return prompter;
+	}
+
+	/**
 	 * NOTE: This concrete implementation of opensftp doesn't fully support
 	 * <code>ProgressListener</code>. The <code>progressListener</code> param
-	 * must be an {@link BaseProgressListener}. Otherwise, this invocation
-	 * is ignored.
+	 * must be an {@link BaseProgressListener}. Otherwise, this invocation is
+	 * ignored.
 	 */
 	public void setProgressListener(ProgressListener progressListener) {
 		if (progressListener != null) {
@@ -57,6 +74,25 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 				log.warn("The specified ProgressListener is not an AbstractProgressListener. Ignore it.");
 			}
 		}
+	}
+
+	/**
+	 * Return the <code>progressListener</code>.
+	 * <p>
+	 * If the <code>progressListener</code> is null, an instance of
+	 * {@link PlainProgressListener} will be created and assigned to
+	 * <code>progressListener</code> first.
+	 */
+	public ProgressListener getProgressListener() {
+		if (progressListener == null) {
+			synchronized (progressListenerLock) {
+				if (progressListener == null) {
+					progressListener = new PlainProgressListener();
+					log.warn("No progressListener has been set. Use the default one - net.sf.opensftp.impl.PlainProgressListener.");
+				}
+			}
+		}
+		return progressListener;
 	}
 
 	private static Logger log = Logger.getLogger(SftpUtil.class);
@@ -272,7 +308,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	public SftpResult get(SftpSession session, String remoteFilename,
 			String localFilename) {
 		return get(session, remoteFilename, localFilename,
-				(BaseProgressListener) progressListener.newInstance());
+				(BaseProgressListener) getProgressListener().newInstance());
 	}
 
 	private SftpResult get(SftpSession session, String remoteFilename,
@@ -433,7 +469,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	public SftpResult put(SftpSession session, String localFilename,
 			String remoteFilename) {
 		return put(session, localFilename, remoteFilename,
-				(BaseProgressListener) progressListener.newInstance());
+				(BaseProgressListener) getProgressListener().newInstance());
 	}
 
 	private SftpResult put(SftpSession session, String localFilename,
@@ -584,11 +620,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 				break;
 
 			case net.sf.opensftp.SftpUtil.STRICT_HOST_KEY_CHECKING_OPTION_ASK:
-				if (prompter == null) {
-					log.warn("No prompter configured. Use the default one - net.sf.opensftp.impl.SwingPrompter.");
-					prompter = new SwingPrompter();
-				}
-				flag = prompter.promptYesNo(str);
+				flag = getPrompter().promptYesNo(str);
 				break;
 			}
 
