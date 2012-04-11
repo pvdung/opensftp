@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
  * 
  */
 public class PlainProgressListener extends BaseProgressListener {
-	// private static Logger log = Logger.getLogger(SftpUtil.class);
 	private static Logger logger4LoggingInterceptor = Logger
 			.getLogger(net.sf.opensftp.interceptor.LoggingInterceptor.class);
 
@@ -30,7 +29,6 @@ public class PlainProgressListener extends BaseProgressListener {
 		String opStr = (op == ProgressListener.GET) ? "Fetching" : "Uploading";
 		String msg = String.format("%3$s %1$s to %2$s", this.src, this.dst,
 				opStr);
-		// log.info(msg);
 		logger4LoggingInterceptor.info(msg);
 	}
 
@@ -42,9 +40,8 @@ public class PlainProgressListener extends BaseProgressListener {
 			percent = tmp;
 		}
 
-		String msg = String.format("Completed %1$d ( %2$d%% ) out of %3$d.",
+		String msg = String.format("Transferred %1$d ( %2$d%% ) out of %3$d.",
 				progress, percent, total);
-		// log.info(msg);
 		logger4LoggingInterceptor.info(msg);
 	}
 
@@ -52,7 +49,6 @@ public class PlainProgressListener extends BaseProgressListener {
 	public void complete() {
 		setIdle(true);
 		String msg = "Completed!";
-		// log.info(msg);
 		logger4LoggingInterceptor.info(msg);
 	}
 
