@@ -85,12 +85,12 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	 */
 	public ProgressListener getProgressListener() {
 		if (progressListener == null) {
-			synchronized (progressListenerLock) {
-				if (progressListener == null) {
+			//synchronized (progressListenerLock) {
+				//if (progressListener == null) {
 					progressListener = new PlainProgressListener();
 					log.warn("No progressListener has been set. Use the default one - net.sf.opensftp.impl.PlainProgressListener.");
-				}
-			}
+				//}
+			//}
 		}
 		return progressListener;
 	}

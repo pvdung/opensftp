@@ -12,8 +12,8 @@
 	<classpathentry kind="lib" path="lib/jaxen-1.1-beta-6.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/xercesImpl-2.6.2.jar"/>
-	<classpathentry kind="lib" path="lib/jsch-0.1.42.jar"/>
 	<classpathentry kind="lib" path="lib/jzlib-1.0.7.jar"/>
+	<classpathentry kind="lib" path="lib/jsch-0.1.47.jar" sourcepath="lib/jsch-0.1.47-src.zip"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
