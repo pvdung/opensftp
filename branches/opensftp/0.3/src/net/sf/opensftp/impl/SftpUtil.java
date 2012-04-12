@@ -47,6 +47,8 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	 * If the <code>prompter</code> is null, an instance of
 	 * {@link SwingPrompter} will be created and assigned to
 	 * <code>prompter</code> first.
+	 * 
+	 * @since 0.3
 	 */
 	public Prompter getPrompter() {
 		if (prompter == null) {
@@ -82,15 +84,17 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	 * If the <code>progressListener</code> is null, an instance of
 	 * {@link PlainProgressListener} will be created and assigned to
 	 * <code>progressListener</code> first.
+	 * 
+	 * @since 0.3
 	 */
 	public ProgressListener getProgressListener() {
 		if (progressListener == null) {
-			//synchronized (progressListenerLock) {
-				//if (progressListener == null) {
-					progressListener = new PlainProgressListener();
-					log.warn("No progressListener has been set. Use the default one - net.sf.opensftp.impl.PlainProgressListener.");
-				//}
-			//}
+			// synchronized (progressListenerLock) {
+			// if (progressListener == null) {
+			progressListener = new PlainProgressListener();
+			log.warn("No progressListener has been set. Use the default one - net.sf.opensftp.impl.PlainProgressListener.");
+			// }
+			// }
 		}
 		return progressListener;
 	}
