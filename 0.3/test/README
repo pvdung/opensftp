@@ -87,3 +87,10 @@ Steps:
 Copy opensftp-config-testsuite6.xml to your classpath and rename it to 'opensftp-config.xml'.
 Run net.sf.opensftp.impl.ProgressListenerTest.
 
+######################################################################################
+###  Test encoding.                                                                ###
+######################################################################################
+
+Steps:
+Copy opensftp-config-testsuite6.xml to your classpath and rename it to 'opensftp-config.xml'.
+Run net.sf.opensftp.impl.EncodingTest.
