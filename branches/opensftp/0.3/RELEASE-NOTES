@@ -88,4 +88,4 @@ Changes Since Version 0.2:
   * Change	- Added two methods to net.sf.opensftp.impl.SftpUtil:
   			  getPrompter(), getProgressListener()
   * Fix		- a code issue of nestCounter in net.sf.opensftp.interceptor.LoggingInterceptor 
- 	    
+  * Change	- refinded the javadoc
