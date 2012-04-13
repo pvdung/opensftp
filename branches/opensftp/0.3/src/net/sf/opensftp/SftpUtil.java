@@ -40,7 +40,7 @@ public interface SftpUtil {
 	public void setProgressListener(ProgressListener progressListener);
 
 	/**
-	 * Connect to an SFTP server through the default port(22) using publickey
+	 * Connect to an SFTP server at the default port(22) with publickey
 	 * authentication with empty passphrase. Invoking this method is equivalent
 	 * to:
 	 * 
@@ -49,7 +49,7 @@ public interface SftpUtil {
 	 * </pre>
 	 * 
 	 * @see #connect(String, int, String, String, String, int, int)
-	 * @return a {@link SftpSession} object representing the context information
+	 * @return an {@link SftpSession} object representing the context 
 	 *         of the communication established between the client and the
 	 *         specified SFTP server.
 	 */
@@ -57,7 +57,7 @@ public interface SftpUtil {
 			int strictHostKeyChecking) throws SftpException;
 
 	/**
-	 * Connect to an SFTP server through the default port(22) using publickey
+	 * Connect to an SFTP server at the default port(22) with publickey
 	 * authentication. Invoking this method is equivalent to:
 	 * 
 	 * <pre>
@@ -65,7 +65,7 @@ public interface SftpUtil {
 	 * </pre>
 	 * 
 	 * @see #connect(String, int, String, String, String, int, int)
-	 * @return a {@link SftpSession} object representing the context information
+	 * @return an {@link SftpSession} object representing the context 
 	 *         of the communication established between the client and the
 	 *         specified SFTP server.
 	 */
@@ -98,10 +98,10 @@ public interface SftpUtil {
 	 *            {@link #STRICT_HOST_KEY_CHECKING_OPTION_YES} and
 	 *            {@link #STRICT_HOST_KEY_CHECKING_OPTION_NO}.
 	 * @param timeout
-	 *            the timeout in milliseconds. A timeout of zero is interpreted
+	 *            the timeout in milliseconds. A timeout of zero is treated
 	 *            as an infinite timeout.
 	 * 
-	 * @return a {@link SftpSession} object representing the context information
+	 * @return an {@link SftpSession} object representing the context 
 	 *         of the communication established between the client and the
 	 *         specified SFTP server.
 	 */
@@ -110,7 +110,7 @@ public interface SftpUtil {
 			int timeout) throws SftpException;
 
 	/**
-	 * Connect to an SFTP server through the default port(22) using password
+	 * Connect to an SFTP server at the default port(22) with password
 	 * authentication. Invoking this method is equivalent to:
 	 * 
 	 * <pre>
@@ -118,7 +118,7 @@ public interface SftpUtil {
 	 * </pre>
 	 * 
 	 * @see #connectByPasswdAuth(String, int, String, String, int, int)
-	 * @return a {@link SftpSession} object representing the context information
+	 * @return an {@link SftpSession} object representing the context 
 	 *         of the communication established between the client and the
 	 *         specified SFTP server.
 	 */
@@ -126,7 +126,7 @@ public interface SftpUtil {
 			String password, int strictHostKeyChecking) throws SftpException;
 
 	/**
-	 * Connect to an SFTP server through password authentication.
+	 * Connect to an SFTP server with password authentication.
 	 * 
 	 * @param host
 	 *            Host name
@@ -142,12 +142,12 @@ public interface SftpUtil {
 	 *            {@link #STRICT_HOST_KEY_CHECKING_OPTION_YES} and
 	 *            {@link #STRICT_HOST_KEY_CHECKING_OPTION_NO}.
 	 * @param timeout
-	 *            the timeout in milliseconds. A timeout of zero is interpreted
-	 *            as an infinite timeout.
+	 *            the timeout in milliseconds. A timeout of zero is treated as
+	 *            an infinite timeout.
 	 * 
-	 * @return a {@link SftpSession} object representing the context information
-	 *         of the communication established between the client and the
-	 *         specified SFTP server.
+	 * @return an {@link SftpSession} object representing the context of the
+	 *         communication established between the client and the specified
+	 *         SFTP server.
 	 */
 	public SftpSession connectByPasswdAuth(String host, int port, String user,
 			String password, int strictHostKeyChecking, int timeout)
@@ -178,7 +178,7 @@ public interface SftpUtil {
 	 *         operation. Invoking <code>getExtension()</code> on the returned
 	 *         <code>SftpResult</code> object should return a
 	 *         <code>List<{@link SftpFile}></code> object, if this ls operation
-	 *         succeed.
+	 *         succeeds.
 	 */
 	public SftpResult ls(SftpSession session);
 
@@ -194,7 +194,7 @@ public interface SftpUtil {
 	 *         operation. Invoking <code>getExtension()</code> on the returned
 	 *         <code>SftpResult</code> object should return a
 	 *         <code>List<{@link SftpFile}></code> object, if this ls operation
-	 *         succeed.
+	 *         succeeds.
 	 */
 	public SftpResult ls(SftpSession session, String path);
 
@@ -302,7 +302,7 @@ public interface SftpUtil {
 	 * @param oldpath
 	 *            The path of the file or directory to be renamed.
 	 * @param newpath
-	 *            the desired new file name
+	 *            the new file name
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
@@ -341,7 +341,7 @@ public interface SftpUtil {
 	 *         operation. Invoking <code>getExtension()</code> on the returned
 	 *         <code>SftpResult</code> object should return a
 	 *         <code>String</code> object representing the current path, if this
-	 *         pwd operation succeed.
+	 *         pwd operation succeeds.
 	 */
 	public SftpResult pwd(SftpSession session);
 
@@ -352,7 +352,7 @@ public interface SftpUtil {
 	 *         operation. Invoking <code>getExtension()</code> on the returned
 	 *         <code>SftpResult</code> object should return a
 	 *         <code>String</code> object representing the current path, if this
-	 *         lpwd operation succeed.
+	 *         lpwd operation succeeds.
 	 */
 	public SftpResult lpwd(SftpSession session);
 
@@ -504,7 +504,7 @@ public interface SftpUtil {
 	 *         operation. Invoking <code>getExtension()</code> on the returned
 	 *         <code>SftpResult</code> object should return a
 	 *         <code>List<{@link SftpFile}></code> object, if this lls operation
-	 *         succeed.
+	 *         succeeds.
 	 */
 	public SftpResult lls(SftpSession session);
 
@@ -520,7 +520,7 @@ public interface SftpUtil {
 	 *         operation. Invoking <code>getExtension()</code> on the returned
 	 *         <code>SftpResult</code> object should return a
 	 *         <code>List<{@link SftpFile}></code> object, if this lls operation
-	 *         succeed.
+	 *         succeeds.
 	 */
 	public SftpResult lls(SftpSession session, String path);
 
@@ -533,7 +533,7 @@ public interface SftpUtil {
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation. Invoking <code>getExtension()</code> on the returned
 	 *         <code>SftpResult</code> object should return a
-	 *         <code>String</code> object, if this operation succeed.
+	 *         <code>String</code> object, if this operation succeeds.
 	 */
 	public SftpResult version(SftpSession session);
 }

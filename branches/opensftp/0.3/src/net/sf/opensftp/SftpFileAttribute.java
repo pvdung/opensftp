@@ -10,7 +10,7 @@ import java.util.Date;
  * </p>
  * <ul>
  * <li><code>type</code>, regular file | directory | character device | block
- * device | socket | symbolic link | named pipe . Each static field begining
+ * device | socket | symbolic link | named pipe . Each static field beginning
  * with "TYPE_" of this interface represents a file type.</li>
  * <li><code>permissions</code></li>
  * <li><code>links</code>, the number of directory entries that refer to the

@@ -160,7 +160,7 @@
 			<zipfileset dir="${build.src}" prefix="${root}/src" />
 			<zipfileset dir="${build.test}" prefix="${root}/test" />
 			<zipfileset dir="${build.samples}" prefix="${root}/samples" />
-			<zipfileset dir="${build.dependency}" exclude="*-src*" prefix="${root}/lib" />
+			<zipfileset dir="${build.dependency}" excludes="*-src*" prefix="${root}/lib" />
 			<zipfileset dir="${build.dist.lib}" prefix="${root}" />
 			<zipfileset dir="${build.dist.docs}" prefix="${root}/docs" />
 			<zipfileset dir="." includes="build.xml,project.properties,ChangeLog,INSTALL,LICENSE,NOTICE,RELEASE-NOTES" prefix="${root}" />
@@ -173,7 +173,7 @@
 
 		<!-- only necessary jars -->
 		<zip zipfile="${build.dist.release}/${root}-jars.zip">
-			<zipfileset dir="${build.dependency}" exclude="*-src*" prefix="${root}/lib" />
+			<zipfileset dir="${build.dependency}" excludes="*-src*" prefix="${root}/lib" />
 			<zipfileset dir="${build.dist.lib}" prefix="${root}" />
 			<zipfileset dir="." includes="ChangeLog,LICENSE,NOTICE,RELEASE-NOTES" prefix="${root}" />
 		</zip>
