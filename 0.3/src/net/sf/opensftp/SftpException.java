@@ -1,7 +1,7 @@
 package net.sf.opensftp;
 
 /**
- * An exception that provides information on an SFTP access error.
+ * SFTP access exception.
  * 
  * @author BurningXFlame@gmail.com
  * 
@@ -9,21 +9,20 @@ package net.sf.opensftp;
 public class SftpException extends Exception {
 	/**
 	 * Constructs a new <code>SftpException</code> with <code>null</code> as its
-	 * detail message. The cause is not initialized, and may subsequently be
-	 * initialized by a call to {@link #initCause}.
+	 * detailed message. The cause is not initialized, and may be initialized by
+	 * a subsequent call to {@link #initCause(Throwable)}.
 	 */
 	public SftpException() {
 		super();
 	}
 
 	/**
-	 * Constructs a new <code>SftpException</code> with the specified detail
-	 * message. The cause is not initialized, and may subsequently be
-	 * initialized by a call to {@link #initCause}.
+	 * Constructs a new <code>SftpException</code> with <code>null</code> as its
+	 * detailed message. The cause is not initialized, and may be initialized by
+	 * a subsequent call to {@link #initCause(Throwable)}.
 	 * 
 	 * @param message
-	 *            the detail message. The detail message is saved for later
-	 *            retrieval by the {@link #getMessage()} method.
+	 *            the detailed message.
 	 */
 	public SftpException(String message) {
 		super(message);
@@ -31,8 +30,8 @@ public class SftpException extends Exception {
 
 	/**
 	 * Constructs a new <code>SftpException</code> with the specified cause and
-	 * a detail message of <tt>(cause==null ? null : cause.toString())</tt>
-	 * (which typically contains the class and detail message of <tt>cause</tt>
+	 * a detailed message of <tt>(cause==null ? null : cause.toString())</tt>
+	 * (which typically contains the class and detailed message of <tt>cause</tt>
 	 * ). This constructor is useful for exceptions that are little more than
 	 * wrappers for other throwables (for example,
 	 * {@link java.security.PrivilegedActionException}).
