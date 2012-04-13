@@ -87,5 +87,5 @@ Changes Since Version 0.2:
   * Feature - Default prompter for net.sf.opensftp.impl.SftpUtil
   * Change	- Added two methods to net.sf.opensftp.impl.SftpUtil:
   			  getPrompter(), getProgressListener()
-  * Fix		- a code issue of nestCounter in net.sf.opensftp.interceptor.LoggingInterceptor 
+  * Fix		- a code issue of nestCounter in net.sf.opensftp.interceptor.LoggingInterceptor
   * Change	- refinded the javadoc
