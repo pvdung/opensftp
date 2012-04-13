@@ -34,25 +34,24 @@ import net.sf.opensftp.interceptor.*;
 
 /**
  * <p>
- * Factory that implements the following algorithm to dynamically select a
- * {@link SftpUtil} implementation class to instantiate a Singleton object for.
+ * <code>SftpUtilFactory</code> uses the following strategy to dynamically
+ * choose an concrete implementation of {@link SftpUtil} to instantiate a
+ * singleton object for.
  * </p>
  * <ul>
- * <li>Use the implementation class specified through the
+ * <li>Uses the concrete implementation specified through the
  * <code>/opensftp-config/sftputil-impl/@type</code> node in the
  * <code>opensftp-config.xml</code> configuration file.</li>
- * <li>Use the implementation class specified through the
+ * <li>Uses the concrete implementation specified through the
  * <code>net.sf.opensftp.SftpUtil</code> system property.</li>
- * <li>Use the implementation class specified through the first and only
+ * <li>Uses the concrete implementation specified through the first and only
  * effective call to {@link #setSftpUtilClassName(String)}.</li>
- * <li>Otherwise, use the default implementation class
+ * <li>Otherwise, uses the default implementation class
  * {@link net.sf.opensftp.impl.SftpUtil}.</li>
  * </ul>
  * <p>
- * NOTE: Among the above approaches, one should effectivly set an SftpUtil
- * implementation class name, otherwise, the flow goes to the next one. It's not
- * a effective set if you specify a class which doesn't exist in the classpath
- * or doesn't implement {@link SftpUtil} at all.
+ * NOTE: Among the above approaches, each one has a lower priority than the one
+ * before it.
  * </p>
  * 
  * @author BurningXFlame@gmail.com
@@ -61,13 +60,15 @@ import net.sf.opensftp.interceptor.*;
 public class SftpUtilFactory {
 
 	private static Logger log = Logger.getLogger(SftpUtilFactory.class);
+
 	/**
-	 * The name (<code>net.sf.opensftp.SftpUtil</code>) of the system property
-	 * identifying our {@link SftpUtil} implementation class.
+	 * The name of the system property which holds the name of the concrete
+	 * implementation of {@link SftpUtil}.
 	 */
 	public static final String SFTPUTIL_PROPERTY = "net.sf.opensftp.SftpUtil";
+
 	/**
-	 * The name of the default {@link SftpUtil} implementation class.
+	 * The name of the default concrete implementation of {@link SftpUtil}.
 	 */
 	private static final String DEFAULT_SFTPUTIL_CLASSNAME = "net.sf.opensftp.impl.SftpUtil";
 
@@ -75,24 +76,28 @@ public class SftpUtilFactory {
 	 * The "sftputil-impl" node ({@link #sftputilImplNodePath}).
 	 */
 	private static Node sftputilImplNode = null;
+
 	/**
-	 * The name of the actual {@link SftpUtil} implementation class.
+	 * The name of the chosen concrete implementation of {@link SftpUtil}.
 	 */
 	private static String sftpUtilClassName = null;
 	private static volatile boolean sftpUtilClassNameInitialized = false;
 	private static Object sftpUtilClassNameLock = new Object();
+
 	/**
-	 * The Singleton instance of the actual {@link SftpUtil} implementation
-	 * class.
+	 * The singleton instance of the chosen concrete implementation of
+	 * {@link SftpUtil}.
 	 */
 	private static SftpUtil proxiedSftpUtil = null;
+
 	/**
-	 * The Singleton proxy instance of {@link SftpUtil} backed by
+	 * The singleton proxy instance of {@link SftpUtil} backed by
 	 * {@link #proxiedSftpUtil}
 	 */
 	private static SftpUtil sftpUtil = null;
 	private static volatile boolean sftpUtilInitialized = false;
 	private static Object sftpUtilLock = new Object();
+
 	/**
 	 * The registered interceptors
 	 */
@@ -100,6 +105,7 @@ public class SftpUtilFactory {
 
 	private static final String configXSDFileName = "opensftp-config.xsd";
 	private static final String configFilename = "opensftp-config.xml";
+
 	// xpath for opensftp-config.xml
 	private static final String ns_prefix = "o";
 	private static final String ns_uri = "http://opensftp.sf.net/opensftp-config";
@@ -138,11 +144,12 @@ public class SftpUtilFactory {
 	}
 
 	/**
-	 * Return the name of the actual {@link SftpUtil} implementation class.
+	 * Returns the name of the chosen concrete implementation of
+	 * {@link SftpUtil} .
 	 * <p>
-	 * This method will set the {@link SftpUtil} implementation class to the
-	 * default one before return if the name of the {@link SftpUtil}
-	 * implementation class hasn't been effectively set.
+	 * This method will set the name of the concrete implementation of
+	 * {@link SftpUtil} to the default one before return, if the name of the
+	 * {@link SftpUtil} implementation class hasn't been effectively set.
 	 * 
 	 * @return the name of the actual {@link SftpUtil} implementation class
 	 */
@@ -161,15 +168,12 @@ public class SftpUtilFactory {
 	}
 
 	/**
-	 * Return the Singleton instance of the actual {@link SftpUtil}
-	 * implementation class.
+	 * Returns the singleton instance of the chosen concrete implementation of
+	 * {@link SftpUtil}.
 	 * <p>
 	 * This method will set the {@link SftpUtil} implementation class to the
 	 * default one before creating a Singleton instance if the name of the
 	 * {@link SftpUtil} implementation class hasn't been effectively set.
-	 * 
-	 * @return the Singleton instance of the actual {@link SftpUtil}
-	 *         implementation class
 	 */
 	public static SftpUtil getSftpUtil() {
 		if (!sftpUtilInitialized) {
@@ -213,7 +217,7 @@ public class SftpUtilFactory {
 	}
 
 	/**
-	 * Set the name of the {@link SftpUtil} implementation class with the
+	 * Sets the name of the {@link SftpUtil} implementation class with the
 	 * specified name.
 	 * <p>
 	 * This method can be used to set the name of the {@link SftpUtil}
@@ -260,10 +264,10 @@ public class SftpUtilFactory {
 	}
 
 	/**
-	 * Check the <code>net.sf.opensftp.SftpUtil</code> system property for an
+	 * Checks the <code>net.sf.opensftp.SftpUtil</code> system property for an
 	 * {@link SftpUtil} implementation class.
 	 * <p>
-	 * The class identified by this property should exist in the classpath and
+	 * The class specified by this property should exist in the classpath and
 	 * implement {@link SftpUtil}. Otherwise, this call will take no effect.
 	 * 
 	 */
@@ -280,7 +284,7 @@ public class SftpUtilFactory {
 	}
 
 	/**
-	 * Check whether the class identified by the specified name exists in the
+	 * Checks whether the class identified by the specified name exists in the
 	 * classpath and implements SftpUtil or not. If ture, set
 	 * {@link #sftpUtilClassName} to the specified name.
 	 * 
@@ -307,7 +311,7 @@ public class SftpUtilFactory {
 	}
 
 	/**
-	 * Read the <code>opensftp-config.xml</code> configuration file for the
+	 * Reads the <code>opensftp-config.xml</code> configuration file for the
 	 * {@link SftpUtil} implementation class and {@link Interceptor}s.
 	 * <p>
 	 * The specified {@link SftpUtil} implementation class should exist in the
@@ -408,12 +412,9 @@ public class SftpUtilFactory {
 	}
 
 	/**
-	 * Check whether the class identified by the specified name exists in the
-	 * classpath and implements {@link Interceptor} or not. If ture, generate an
-	 * instance of this interceptor and add it to {@link #interceptors}.
-	 * 
-	 * @param name
-	 *            Name of the Interceptor implementation class to add
+	 * Checks whether the <code>Node</code> specifies a valid
+	 * {@link Interceptor}. If ture, creates an instance of this interceptor and
+	 * adds it to {@link #interceptors}.
 	 */
 	private static void checkAndAddInterceptor(Node interceptorNode) {
 		String beanName = null;
@@ -464,26 +465,28 @@ public class SftpUtilFactory {
 	}
 
 	/**
-	 * Initialize a specified bean configured through the
+	 * Initializes a bean configured through the
 	 * <code>opensftp-config.xml</code> configuration file.
 	 * 
 	 * @param beanNode
-	 *            the {@link Node} object representing the configuration node of
-	 *            a specified bean
+	 *            represents a bean configuration node
 	 * @param needConstruct
-	 *            a boolean value indicating whether constructing the bean.<br>
+	 *            indicates whether to construct the bean.<br>
 	 *            If this param is set to <code>true</code>, this method must
-	 *            construct the bean. And the values of the
-	 *            <code>beanName</code> and the <code>bean</code> are ignored,
-	 *            because these values are fetched out from the
-	 *            <code>beanNode</code>. And this method must check the declared
-	 *            type of this bean against the <code>expectedType</code> param.
-	 *            This functionality is designed for Bean configuration.<br>
+	 *            construct the bean. Note that the param <code>beanName</code>
+	 *            and <code>bean</code> are ignored in this case, instead the
+	 *            real <code>beanName</code> and <code>bean</code> should be
+	 *            read from the <code>beanNode</code>. And this method must
+	 *            check the declared type of this bean against the
+	 *            <code>expectedType</code> param. This functionality is
+	 *            designed for <code>Bean</code> configuration.<br>
+	 * <br>
 	 *            If this param is set to <code>false</code>, this method must
-	 *            not construct the bean, but use the specified
-	 *            <code>beanName</code> and the <code>bean</code> as the
-	 *            already-constructed bean instead. This functionality is
-	 *            designed for sftputil-impl and Interceptor configurations.
+	 *            not construct the bean, but instead use the specified
+	 *            <code>beanName</code> and <code>bean</code> as the
+	 *            already-constructed bean . This functionality is designed for
+	 *            configurations of <code>sftputil-impl</code> and
+	 *            <code>Interceptors</code>.
 	 * @param beanName
 	 *            the name of the bean. Please refer to the description of the
 	 *            needConstruct param for more details.
@@ -491,13 +494,13 @@ public class SftpUtilFactory {
 	 *            the bean. Please refer to the description of the needConstruct
 	 *            param for more details.
 	 * @param expectedType
-	 *            a String value representing a type of which this bean is
-	 *            expected to be an instance. Please refer to the description of
-	 *            the needConstruct param for more details.
+	 *            represents a class of which this bean is expected to be an
+	 *            instance. Please refer to the description of the needConstruct
+	 *            param for more details.
 	 * 
 	 * @return the constructed and initialized bean if needConstruct is true,<br>
-	 *         the <code>bean</code> param if needConstruct is false,<br>
-	 *         or null if fail.
+	 *         or the <code>bean</code> param if needConstruct is false,<br>
+	 *         or null if failure.
 	 */
 	private static Object initializeBean(Node beanNode, boolean needConstruct,
 			String beanName, Object bean, String expectedType) {

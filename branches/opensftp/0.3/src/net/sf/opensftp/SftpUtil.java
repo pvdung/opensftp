@@ -8,20 +8,20 @@ package net.sf.opensftp;
  */
 public interface SftpUtil {
 	/**
-	 * Represent the StrictHostKeyChecking option 'ask'.
+	 * Represents the StrictHostKeyChecking option 'ask'.
 	 */
 	public final static int STRICT_HOST_KEY_CHECKING_OPTION_ASK = 0;
 	/**
-	 * Represent the StrictHostKeyChecking option 'yes'.
+	 * Represents the StrictHostKeyChecking option 'yes'.
 	 */
 	public final static int STRICT_HOST_KEY_CHECKING_OPTION_YES = 1;
 	/**
-	 * Represent the StrictHostKeyChecking option 'no'.
+	 * Represents the StrictHostKeyChecking option 'no'.
 	 */
 	public final static int STRICT_HOST_KEY_CHECKING_OPTION_NO = 2;
 
 	/**
-	 * Set the <code>prompter</code> property. Once a valid
+	 * Sets the <code>prompter</code> property. Once a valid
 	 * <code>Prompter</code> is set, the <code>Prompter</code> should be used in
 	 * any scenario where a <code>Prompter</code> is supposed to be used.
 	 * 
@@ -30,7 +30,7 @@ public interface SftpUtil {
 	public void setPrompter(Prompter prompter);
 
 	/**
-	 * Set the <code>progressListener</code> property. Once a valid
+	 * Sets the <code>progressListener</code> property. Once a valid
 	 * <code>ProgressListener</code> is set, the <code>ProgressListener</code>
 	 * should be used in any scenario where a
 	 * <code><code>ProgressListener</code></code> is supposed to be used.
@@ -40,41 +40,40 @@ public interface SftpUtil {
 	public void setProgressListener(ProgressListener progressListener);
 
 	/**
-	 * Connect to an SFTP server at the default port(22) with publickey
-	 * authentication with empty passphrase. Invoking this method is equivalent
-	 * to:
+	 * Connects to an SFTP server at the default port(22) with publickey
+	 * authentication with empty passphrase. This method is equivalent to:
 	 * 
 	 * <pre>
 	 * connect(host, 22, user, &quot;&quot;, identityFile, strictHostKeyChecking)
 	 * </pre>
 	 * 
 	 * @see #connect(String, int, String, String, String, int, int)
-	 * @return an {@link SftpSession} object representing the context 
-	 *         of the communication established between the client and the
-	 *         specified SFTP server.
+	 * @return an {@link SftpSession} object representing the context of the
+	 *         communication established between the client and the specified
+	 *         SFTP server.
 	 */
 	public SftpSession connect(String host, String user, String identityFile,
 			int strictHostKeyChecking) throws SftpException;
 
 	/**
-	 * Connect to an SFTP server at the default port(22) with publickey
-	 * authentication. Invoking this method is equivalent to:
+	 * Connects to an SFTP server at the default port(22) with publickey
+	 * authentication. This method is equivalent to:
 	 * 
 	 * <pre>
 	 * connect(host, 22, user, passphrase, identityFile, strictHostKeyChecking)
 	 * </pre>
 	 * 
 	 * @see #connect(String, int, String, String, String, int, int)
-	 * @return an {@link SftpSession} object representing the context 
-	 *         of the communication established between the client and the
-	 *         specified SFTP server.
+	 * @return an {@link SftpSession} object representing the context of the
+	 *         communication established between the client and the specified
+	 *         SFTP server.
 	 */
 	public SftpSession connect(String host, String user, String passphrase,
 			String identityFile, int strictHostKeyChecking)
 			throws SftpException;
 
 	/**
-	 * Connect to an SFTP server through publickey authentication.
+	 * Connects to an SFTP server with publickey authentication.
 	 * 
 	 * @param host
 	 *            Host name
@@ -85,48 +84,48 @@ public interface SftpUtil {
 	 * @param passphrase
 	 *            Passphrase. An empty string ("") indicates no passphrase.
 	 * @param identityFile
-	 *            The path of the identityFile. for security, it's strongly
-	 *            recommended to place your identityFile under the
-	 *            <code>.ssh</code> folder of your home folder,
+	 *            The path of the identityFile. For security, it's strongly
+	 *            recommended to place your identityFile in the
+	 *            <code>.ssh</code> folder under your home folder,
 	 *            /home/<i>yourusername</i>/.ssh for Linux for instance. If you
 	 *            specify a value begining with '~' and a following directory
 	 *            separator ('/' or '\\'), the '~' is treated as your home
 	 *            folder.
 	 * @param strictHostKeyChecking
-	 *            The strictHostKeyChecking option. Valid values for this param
-	 *            are {@link #STRICT_HOST_KEY_CHECKING_OPTION_ASK},
+	 *            The strictHostKeyChecking option. Valid values are
+	 *            {@link #STRICT_HOST_KEY_CHECKING_OPTION_ASK},
 	 *            {@link #STRICT_HOST_KEY_CHECKING_OPTION_YES} and
 	 *            {@link #STRICT_HOST_KEY_CHECKING_OPTION_NO}.
 	 * @param timeout
-	 *            the timeout in milliseconds. A timeout of zero is treated
-	 *            as an infinite timeout.
+	 *            the timeout in milliseconds. A timeout of zero is treated as
+	 *            an infinite timeout.
 	 * 
-	 * @return an {@link SftpSession} object representing the context 
-	 *         of the communication established between the client and the
-	 *         specified SFTP server.
+	 * @return an {@link SftpSession} object representing the context of the
+	 *         communication established between the client and the specified
+	 *         SFTP server.
 	 */
 	public SftpSession connect(String host, int port, String user,
 			String passphrase, String identityFile, int strictHostKeyChecking,
 			int timeout) throws SftpException;
 
 	/**
-	 * Connect to an SFTP server at the default port(22) with password
-	 * authentication. Invoking this method is equivalent to:
+	 * Connects to an SFTP server at the default port(22) with password
+	 * authentication. This method is equivalent to:
 	 * 
 	 * <pre>
 	 * connectByPasswdAuth(host, 22, user, password, strictHostKeyChecking)
 	 * </pre>
 	 * 
 	 * @see #connectByPasswdAuth(String, int, String, String, int, int)
-	 * @return an {@link SftpSession} object representing the context 
-	 *         of the communication established between the client and the
-	 *         specified SFTP server.
+	 * @return an {@link SftpSession} object representing the context of the
+	 *         communication established between the client and the specified
+	 *         SFTP server.
 	 */
 	public SftpSession connectByPasswdAuth(String host, String user,
 			String password, int strictHostKeyChecking) throws SftpException;
 
 	/**
-	 * Connect to an SFTP server with password authentication.
+	 * Connects to an SFTP server with password authentication.
 	 * 
 	 * @param host
 	 *            Host name
@@ -137,8 +136,8 @@ public interface SftpUtil {
 	 * @param password
 	 *            Password. An empty string ("") indicates no password.
 	 * @param strictHostKeyChecking
-	 *            The strictHostKeyChecking option. Valid values for this param
-	 *            are {@link #STRICT_HOST_KEY_CHECKING_OPTION_ASK},
+	 *            The strictHostKeyChecking option. Valid values are
+	 *            {@link #STRICT_HOST_KEY_CHECKING_OPTION_ASK},
 	 *            {@link #STRICT_HOST_KEY_CHECKING_OPTION_YES} and
 	 *            {@link #STRICT_HOST_KEY_CHECKING_OPTION_NO}.
 	 * @param timeout
@@ -154,7 +153,7 @@ public interface SftpUtil {
 			throws SftpException;
 
 	/**
-	 * Disconnect from an SFTP server.
+	 * Disconnects from an SFTP server.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
@@ -163,7 +162,7 @@ public interface SftpUtil {
 	public void disconnect(SftpSession session);
 
 	/**
-	 * Represent the ls command. Invoking this method is equivalent to:
+	 * Represents the ls command. This method is equivalent to:
 	 * 
 	 * <pre>
 	 * ls(session, &quot;.&quot;)
@@ -183,7 +182,7 @@ public interface SftpUtil {
 	public SftpResult ls(SftpSession session);
 
 	/**
-	 * Represent the ls command.
+	 * Represents the ls command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
@@ -199,7 +198,7 @@ public interface SftpUtil {
 	public SftpResult ls(SftpSession session, String path);
 
 	/**
-	 * Represent the put command. Invoking this method is equivalent to:
+	 * Represents the put command. This method is equivalent to:
 	 * 
 	 * <pre>
 	 * put(session, localFilename, &quot;.&quot;)
@@ -210,7 +209,7 @@ public interface SftpUtil {
 	public SftpResult put(SftpSession session, String localFilename);
 
 	/**
-	 * Represent the put command.
+	 * Represents the put command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
@@ -227,7 +226,7 @@ public interface SftpUtil {
 			String remoteFilename);
 
 	/**
-	 * Represent the get command. Invoking this method is equivalent to:
+	 * Represents the get command. This method is equivalent to:
 	 * 
 	 * <pre>
 	 * get(session, remoteFilename, &quot;.&quot;)
@@ -238,7 +237,7 @@ public interface SftpUtil {
 	public SftpResult get(SftpSession session, String remoteFilename);
 
 	/**
-	 * Represent the get command.
+	 * Represents the get command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
@@ -255,52 +254,52 @@ public interface SftpUtil {
 			String localFilename);
 
 	/**
-	 * Represent the cd command.
+	 * Represents the cd command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param path
-	 *            The new path
+	 *            The directory
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
 	public SftpResult cd(SftpSession session, String path);
 
 	/**
-	 * Represent the lcd command.
+	 * Represents the lcd command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param path
-	 *            The new path
+	 *            The directory
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
 	public SftpResult lcd(SftpSession session, String path);
 
 	/**
-	 * Represent the mkdir command.
+	 * Represents the mkdir command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param path
-	 *            The path of the directory to be created.
+	 *            The path of the directory you want to create.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
 	public SftpResult mkdir(SftpSession session, String path);
 
 	/**
-	 * Represent the rename command.
+	 * Represents the rename command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param oldpath
-	 *            The path of the file or directory to be renamed.
+	 *            The path of the file or directory you want to rename.
 	 * @param newpath
 	 *            the new file name
 	 * @return an {@link SftpResult} object representing the result of this
@@ -309,33 +308,33 @@ public interface SftpUtil {
 	public SftpResult rename(SftpSession session, String oldpath, String newpath);
 
 	/**
-	 * Represent the rm command.
+	 * Represents the rm command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param filename
-	 *            The path of the file to be deleted.
+	 *            The path of the file you want to deleted.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
 	public SftpResult rm(SftpSession session, String filename);
 
 	/**
-	 * Represent the rmdir command.
+	 * Represents the rmdir command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param path
-	 *            The path of the directory to be deleted.
+	 *            The path of the directory you want to delete.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
 	public SftpResult rmdir(SftpSession session, String path);
 
 	/**
-	 * Represent the pwd command.
+	 * Represents the pwd command.
 	 * 
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation. Invoking <code>getExtension()</code> on the returned
@@ -346,7 +345,7 @@ public interface SftpUtil {
 	public SftpResult pwd(SftpSession session);
 
 	/**
-	 * Represent the lpwd command.
+	 * Represents the lpwd command.
 	 * 
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation. Invoking <code>getExtension()</code> on the returned
@@ -357,7 +356,7 @@ public interface SftpUtil {
 	public SftpResult lpwd(SftpSession session);
 
 	/**
-	 * Represent the chgrp command.
+	 * Represents the chgrp command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
@@ -365,8 +364,8 @@ public interface SftpUtil {
 	 * @param grp
 	 *            the new group
 	 * @param path
-	 *            The path representing the file or directory the group of which
-	 *            is about to be changed.
+	 *            The path of the file or directory the group of which you want
+	 *            to change.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 * @deprecated
@@ -374,7 +373,7 @@ public interface SftpUtil {
 	// public SftpResult chgrp(SftpSession session, String grp, String path);
 
 	/**
-	 * Represent the chgrp command.
+	 * Represents the chgrp command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
@@ -382,15 +381,15 @@ public interface SftpUtil {
 	 * @param gid
 	 *            The GID of the new group
 	 * @param path
-	 *            The path representing the file or directory the group of which
-	 *            is about to be changed.
+	 *            The path of the file or directory the group of which you want
+	 *            to change.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
 	public SftpResult chgrp(SftpSession session, int gid, String path);
 
 	/**
-	 * Represent the chown command.
+	 * Represents the chown command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
@@ -398,8 +397,8 @@ public interface SftpUtil {
 	 * @param own
 	 *            the new owner
 	 * @param path
-	 *            The path representing the file or directory the owner of which
-	 *            is about to be changed.
+	 *            The path of the file or directory the owner of which you want
+	 *            to change.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 * @deprecated
@@ -407,7 +406,7 @@ public interface SftpUtil {
 	// public SftpResult chown(SftpSession session, String own, String path);
 
 	/**
-	 * Represent the chown command.
+	 * Represents the chown command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
@@ -415,15 +414,15 @@ public interface SftpUtil {
 	 * @param uid
 	 *            The UID of the new owner
 	 * @param path
-	 *            The path representing the file or directory the owner of which
-	 *            is about to be changed.
+	 *            The path of the file or directory the owner of which you want
+	 *            to change.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
 	public SftpResult chown(SftpSession session, int uid, String path);
 
 	/**
-	 * Represent the chmod command.
+	 * Represents the chmod command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
@@ -432,21 +431,21 @@ public interface SftpUtil {
 	 *            an three-digit octal number, 0755 for instance, representing
 	 *            the new permissions
 	 * @param path
-	 *            The path representing the file or directory the permission of
-	 *            which is about to be changed.
+	 *            The path of the file or directory the permission of which you
+	 *            want to change.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
 	public SftpResult chmod(SftpSession session, int mode, String path);
 
 	/**
-	 * Represent the ln/symlink command.
+	 * Represents the ln/symlink command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param src
-	 *            The path of the file to be symlinked.
+	 *            The path of the file which you want to symlink.
 	 * @param link
 	 *            The path of the link file
 	 * @return an {@link SftpResult} object representing the result of this
@@ -455,7 +454,7 @@ public interface SftpUtil {
 	public SftpResult ln(SftpSession session, String src, String link);
 
 	/**
-	 * Represent the lumask command.
+	 * Represents the lumask command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
@@ -468,7 +467,7 @@ public interface SftpUtil {
 	public SftpResult lumask(SftpSession session, String umask);
 
 	/**
-	 * Represent the help command.
+	 * Represents the help command.
 	 * 
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
@@ -476,20 +475,20 @@ public interface SftpUtil {
 	public SftpResult help(SftpSession session);
 
 	/**
-	 * Represent the lmkdir command.
+	 * Represents the lmkdir command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param path
-	 *            The path of the folder to be created.
+	 *            The path of the folder which you want to create.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation
 	 */
 	public SftpResult lmkdir(SftpSession session, String path);
 
 	/**
-	 * Represent the lls command. Invoking this method is equivalent to:
+	 * Represents the lls command. This method is equivalent to:
 	 * 
 	 * <pre>
 	 * lls(session, &quot;.&quot;)
@@ -509,13 +508,13 @@ public interface SftpUtil {
 	public SftpResult lls(SftpSession session);
 
 	/**
-	 * Represent the lls command.
+	 * Represents the lls command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
 	 *            connecting.
 	 * @param path
-	 *            The local path to be listed.
+	 *            The local path you want to list.
 	 * @return an {@link SftpResult} object representing the result of this
 	 *         operation. Invoking <code>getExtension()</code> on the returned
 	 *         <code>SftpResult</code> object should return a
@@ -525,7 +524,7 @@ public interface SftpUtil {
 	public SftpResult lls(SftpSession session, String path);
 
 	/**
-	 * Represent the version command.
+	 * Represents the version command.
 	 * 
 	 * @param session
 	 *            The {@link SftpSession} object you previously got when
