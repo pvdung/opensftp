@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://opensftp.sf.net/opensftp-config opensftp-config.xsd ">
 	<sftputil-impl type="net.sf.opensftp.impl.SftpUtil">
-		<property-ref name="prompter" type="net.sf.opensftp.impl.SwingPrompter"
+		<property-ref name="prompter" type="net.sf.opensftp.prompter.Prompter"
 			ref="swingPrompter" />
 	</sftputil-impl>
 	<interceptors>
@@ -13,6 +13,6 @@
 		</interceptor>
 	</interceptors>
 	<beans>
-		<bean name="swingPrompter" type="net.sf.opensftp.impl.SwingPrompter" />
+		<bean name="swingPrompter" type="net.sf.opensftp.prompter.SwingPrompter" />
 	</beans>
 </opensftp-config>

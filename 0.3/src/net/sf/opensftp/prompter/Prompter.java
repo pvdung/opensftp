@@ -1,4 +1,4 @@
-package net.sf.opensftp;
+package net.sf.opensftp.prompter;
 
 /**
  * <code>Prompter</code> is used to retrieve the user's choice when he must make

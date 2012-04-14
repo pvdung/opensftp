@@ -2,8 +2,8 @@
 <opensftp-config xmlns="http://opensftp.sf.net/opensftp-config"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://opensftp.sf.net/opensftp-config opensftp-config.xsd ">
-	<sftputil-impl type="net.sf.opensftp.impl.SftpUtil">
-		<property-ref name="prompter" type="net.sf.opensftp.impl.SwingPrompter"
+	<sftputil-impl type="net.sf.opensftp.MockSftpUtil">
+		<property-ref name="prompter" type="net.sf.opensftp.prompter.Prompter"
 			ref="swingPrompter" />
 	</sftputil-impl>
 	<interceptors>
@@ -22,7 +22,7 @@
 		</interceptor>
 	</interceptors>
 	<beans>
-		<bean name="swingPrompter" type="net.sf.opensftp.impl.SwingPrompter" />
+		<bean name="swingPrompter" type="net.sf.opensftp.prompter.SwingPrompter" />
 		<bean name="dummyMap" type="java.util.HashMap">
 			<initializing-block>put("1","one");put("2","two");put("5","five");</initializing-block>
 		</bean>

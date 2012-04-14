@@ -1,5 +1,7 @@
 package net.sf.opensftp;
 
+import net.sf.opensftp.prompter.Prompter;
+
 /**
  * <code>SftpUtil</code> provides a handy set of utilities designed to ease your
  * work with SFTP.
@@ -25,7 +27,7 @@ public interface SftpUtil {
 	 * <code>Prompter</code> is set, the <code>Prompter</code> should be used in
 	 * any scenario where a <code>Prompter</code> is supposed to be used.
 	 * 
-	 * @see net.sf.opensftp.Prompter
+	 * @see net.sf.opensftp.prompter.Prompter
 	 */
 	public void setPrompter(Prompter prompter);
 

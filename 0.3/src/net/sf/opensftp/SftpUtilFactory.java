@@ -246,7 +246,8 @@ public class SftpUtilFactory {
 	 *            Name of the SftpUtil implementation class to set
 	 */
 	public static void setSftpUtilClassName(String name) {
-		log.debug("User is trying to set SftpUtil class name.");
+		log.debug("User is trying to set SftpUtil class name to '" + name
+				+ "'.");
 		if (sftpUtilClassNameInitialized || name == null
 				|| name.trim().length() == 0) {
 			log.debug("Ignored.");
@@ -299,14 +300,14 @@ public class SftpUtilFactory {
 					SftpUtil.class)) {
 				sftpUtilClassName = name;
 				sftpUtilClassNameInitialized = true;
-				log.debug("The SftpUtil class name was set to '" + name + "'.");
+				log.debug("The SftpUtil class name is set to '" + name + "'.");
 			} else {
 				log.warn("The specified clss '" + name
 						+ "' doesn't implement 'net.sf.opensftp.SftpUtil'. ");
 			}
 		} catch (ClassNotFoundException e) {
 			log.warn("The specified SftpUtil class '" + name
-					+ "' was not found.");
+					+ "' is not found.");
 		}
 	}
 
@@ -327,10 +328,10 @@ public class SftpUtilFactory {
 		URL url = SftpUtilFactory.class.getClassLoader().getResource(
 				configFilename);
 		if (url == null) {
-			log.debug("Configuration file not found. Skip the phase of reading configuration.");
+			log.debug("No configuration file found. Skip the phase of reading configuration.");
 			return;
 		}
-		log.debug("Configuration file found at '" + url + "'.");
+		log.debug("A configuration file is found at '" + url + "'.");
 		log.debug("Start reading configuration.");
 		InputStream in = SftpUtilFactory.class.getClassLoader()
 				.getResourceAsStream(configFilename);
@@ -346,11 +347,11 @@ public class SftpUtilFactory {
 			url = SftpUtilFactory.class.getClassLoader().getResource(
 					configXSDFileName);
 			if (url == null) {
-				log.warn("The XSD file \'opensftp-config.xsd\' not found. Skip the phase of reading configuration.");
+				log.warn("The XSD file \'opensftp-config.xsd\' is not found. Skip the phase of reading configuration.");
 				return;
 			}
 			String configXSDPath = url.toString();
-			log.debug("The XSD file found at " + configXSDPath);
+			log.debug("The XSD file is found at '" + configXSDPath + "'.");
 
 			configReader.setValidation(true);
 			configReader.setFeature(
