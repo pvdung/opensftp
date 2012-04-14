@@ -16,9 +16,8 @@ import net.sf.opensftp.SftpSession;
  * <p>
  * The class use a customized session-specific attribute
  * <code>nestCounter</code> to eliminate duplicate logs caused by nested method
- * call, for example, <code>put(SftpSession, String)</code> invokes
- * <code>put(SftpSession, String,
- * remoteFilename)</code> for implementation.
+ * calls, for example, <code>put(SftpSession, String)</code> internally invokes
+ * <code>put(SftpSession, String, remoteFilename)</code>.
  * 
  * @author BurningXFlame@gmail.com
  */
@@ -29,7 +28,7 @@ public class LoggingInterceptor implements Interceptor {
 	private static final String NEST_COUNTER = "nestCounter";
 
 	/**
-	 * Determine whether to log commands or not.
+	 * Determines whether to log commands or not.
 	 * 
 	 * @param logCommand
 	 *            log commands if true. The default value is <code>false</code>.
@@ -48,7 +47,7 @@ public class LoggingInterceptor implements Interceptor {
 		}
 		nestCounter--;
 		extras.put(NEST_COUNTER, Integer.valueOf(nestCounter));
-		
+
 		if (nestCounter != 0) {
 			return;
 		}
@@ -99,7 +98,7 @@ public class LoggingInterceptor implements Interceptor {
 		}
 		nestCounter++;
 		extras.put(NEST_COUNTER, Integer.valueOf(nestCounter));
-		
+
 		if (nestCounter != 1) {
 			return;
 		}

@@ -42,7 +42,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	/**
-	 * Return the <code>prompter</code>.
+	 * Returns the <code>prompter</code>.
 	 * <p>
 	 * If the <code>prompter</code> is null, an instance of
 	 * {@link SwingPrompter} will be created and assigned to
@@ -79,7 +79,7 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	}
 
 	/**
-	 * Return the <code>progressListener</code>.
+	 * Returns the <code>progressListener</code>.
 	 * <p>
 	 * If the <code>progressListener</code> is null, an instance of
 	 * {@link PlainProgressListener} will be created and assigned to
