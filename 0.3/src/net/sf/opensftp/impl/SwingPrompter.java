@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 import net.sf.opensftp.Prompter;
 
 /**
- * A Swing version of {@link Prompter}.
+ * A Swing style of {@link Prompter}.
  * 
  * @author BurningXFlame@gmail.com
  * 

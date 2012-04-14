@@ -14,7 +14,7 @@ import net.sf.opensftp.SftpResult;
 public interface Interceptor {
 
 	/**
-	 * Method invoked prior to executing the given method.
+	 * A callback method which will be called before calling the given method.
 	 * 
 	 * @param method
 	 *            the intercepted method
@@ -24,7 +24,7 @@ public interface Interceptor {
 	public void beforeMethod(Method method, Object[] args);
 
 	/**
-	 * Method invoked upon completion of execution of the given method.
+	 * A callback method which will be called after calling the given method.
 	 * 
 	 * @param method
 	 *            the intercepted method
