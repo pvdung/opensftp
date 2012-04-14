@@ -18,10 +18,11 @@ import com.jcraft.jsch.Session;
 import com.jcraft.jsch.UserInfo;
 
 import net.sf.opensftp.ProgressListener;
-import net.sf.opensftp.Prompter;
 import net.sf.opensftp.SftpException;
 import net.sf.opensftp.SftpSession;
 import net.sf.opensftp.SftpResult;
+import net.sf.opensftp.prompter.Prompter;
+import net.sf.opensftp.prompter.SwingPrompter;
 
 /**
  * A reference implementation of {@link net.sf.opensftp.SftpUtil}.
@@ -31,9 +32,9 @@ import net.sf.opensftp.SftpResult;
  */
 public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	private Prompter prompter;
-	private Object prompterLock = new Object();
+	// private Object prompterLock = new Object();
 	private BaseProgressListener progressListener;
-	private Object progressListenerLock = new Object();
+	// private Object progressListenerLock = new Object();
 	private static final String unsupported = "The requested operation is not supported.";
 	private static final int SSH_ERROR_OP_UNSUPPORTED = 8;
 
@@ -52,12 +53,12 @@ public class SftpUtil implements net.sf.opensftp.SftpUtil {
 	 */
 	public Prompter getPrompter() {
 		if (prompter == null) {
-			synchronized (prompterLock) {
-				if (prompter == null) {
-					prompter = new SwingPrompter();
-					log.warn("No prompter has been set. Use the default one - net.sf.opensftp.impl.SwingPrompter.");
-				}
-			}
+			// synchronized (prompterLock) {
+			// if (prompter == null) {
+			prompter = new SwingPrompter();
+			log.warn("No prompter has been set. Use the default one - net.sf.opensftp.impl.SwingPrompter.");
+			// }
+			// }
 		}
 		return prompter;
 	}
