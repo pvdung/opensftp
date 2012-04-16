@@ -140,7 +140,6 @@
 	<!-- Clean targets                                                       -->
 	<!-- =================================================================== -->
 	<target name="clean">
-		<!-- delete the classpath -->
 		<delete>
 			<fileset dir="${build.dist.javadocs}" defaultexcludes="yes"/>
 		</delete>
@@ -165,19 +164,19 @@
 			<zipfileset dir="${build.dist.docs}" prefix="${root}/docs" />
 			<zipfileset dir="." includes="build.xml,project.properties,ChangeLog,INSTALL,LICENSE,NOTICE,RELEASE-NOTES" prefix="${root}" />
 		</zip>
-
+<!--
 		<unzip src="${build.dist.release}/${root}-bin.zip" dest="${build.dist.release}" />
 		<tar tarfile="${build.dist.release}/${root}-bin.tar" basedir="${build.dist.release}" includes="${root}/**" />
 		<gzip zipfile="${build.dist.release}/${root}-bin.tar.gz" src="${build.dist.release}/${root}-bin.tar" />
 		<delete file="${build.dist.release}/${root}-bin.tar" />
-
+-->
 		<!-- only necessary jars -->
 		<zip zipfile="${build.dist.release}/${root}-jars.zip">
 			<zipfileset dir="${build.dependency}" excludes="*-src*" prefix="${root}/lib" />
 			<zipfileset dir="${build.dist.lib}" prefix="${root}" />
 			<zipfileset dir="." includes="ChangeLog,LICENSE,NOTICE,RELEASE-NOTES" prefix="${root}" />
 		</zip>
-
+<!--
 		<delete includeEmptyDirs="true">
 			<fileset dir="${build.dist.release}/${root}" includes="**" />
 		</delete>
@@ -188,5 +187,14 @@
 		<delete file="${build.dist.release}/${root}-jars.tar" />
 
 		<delete dir="${build.dist.release}/${root}" />
+-->		
 	</target>
+	
+	<!-- =================================================================== -->
+	<!-- Clean targets                                                       -->
+	<!-- =================================================================== -->
+	<target name="clean-except-docs">
+		<delete dir="${build.dist}" />
+	</target>
+	
 </project>
