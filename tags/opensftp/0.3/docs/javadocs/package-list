@@ -1,0 +1,4 @@
+net.sf.opensftp
+net.sf.opensftp.impl
+net.sf.opensftp.interceptor
+net.sf.opensftp.prompter
