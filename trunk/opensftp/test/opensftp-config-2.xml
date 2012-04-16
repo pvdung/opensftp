@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://opensftp.sf.net/opensftp-config opensftp-config.xsd ">
 	<sftputil-impl type="net.sf.opensftp.MockSftpUtil">
-		<property-ref name="prompter" type="net.sf.opensftp.impl.SwingPrompter"
+		<property-ref name="prompter" type="net.sf.opensftp.prompter.Prompter"
 			ref="swingPrompter" />
 	</sftputil-impl>
 	<interceptors>
@@ -12,7 +12,7 @@
 		<interceptor name="dummyInterceptor"
 			type="net.sf.opensftp.interceptor.DummyInterceptor">
 			<property name="dummyfield1" type="java.lang.String" value="value1" />
-			<property name="dummyfield2" type="java.lang.Integer" value="2a" />
+			<property name="dummyfield2" type="java.lang.Integer" value="2" />
 			<property-ref name="dummyfield3" type="java.util.HashMap"
 				ref="dummyMap" />
 			<property-ref name="dummyfield4" type="java.util.Date"
@@ -22,6 +22,9 @@
 		</interceptor>
 	</interceptors>
 	<beans>
+		<bean name="dummyMap" type="java.util.HashMap">
+			<initializing-block>put("1","one");put("2","two");put("5","five");</initializing-block>
+		</bean>
 		<bean name="dummyMap" type="java.util.HashMap">
 			<initializing-block>put("1","one");put("2","two");put("5","five");</initializing-block>
 		</bean>
@@ -37,6 +40,9 @@
 		<bean name="dummyCalendar" type="java.util.GregorianCalendar">
 			<property-ref name="time" type="java.util.Date" ref="dummyDate2" />
 		</bean>
-		<bean name="dummyDate2" type="java.sql.Date" />
+		<bean name="dummyDate2" type="java.util.Date">
+			<property name="hours" type="java.lang.Integer" value="17" />
+		</bean>
 	</beans>
+	<beans></beans>
 </opensftp-config>

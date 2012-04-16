@@ -4,13 +4,13 @@ http://www.gnu.org/licenses/lgpl.html
 
 
                                  OpenSFTP
-                                Version 0.2
+                                Version 0.3
                                Release Notes
 
 Introduction:
 =============
 
-This document contains the release notes for OpenSFTP v0.2, 
+This document contains the release notes for OpenSFTP v0.3, 
 and highlights changes since the previous version.
 
 For the very latest news, releases, manuals, hints, FAQs etc., 
@@ -75,10 +75,18 @@ The following is a list of features of OpenSFTP:
 Changes Since Version 0.1:
 ==========================
   * Feature - [#1] Added multi-threading abilities to ProgressListener.
-  * Change - Added net.sf.opensftp.AbstractProgressListener 
-  			 An easy approach to work with ProgressListener
-  * Change - Deleted net.sf.opensftp.impl.AbstractProgressListener
-  			 replaced by net.sf.opensftp.impl.BaseProgressListener
-  * Change - Added net.sf.opensftp.impl.BaseProgressListener
+  * Change	- Added net.sf.opensftp.AbstractProgressListener 
+  			  An easy approach to work with ProgressListener
+  * Change	- Deleted net.sf.opensftp.impl.AbstractProgressListener
+  			  replaced it with net.sf.opensftp.impl.BaseProgressListener
+  * Change	- Added net.sf.opensftp.impl.BaseProgressListener
      		 
- 	    
+Changes Since Version 0.2:
+==========================
+  * Feature - [#3] Default progressListener for net.sf.opensftp.impl.SftpUtil
+  * Feature - Default prompter for net.sf.opensftp.impl.SftpUtil
+  * Change	- Added two methods to net.sf.opensftp.impl.SftpUtil:
+  			  getPrompter(), getProgressListener()
+  * Change	- Renamed net.sf.opensftp.impl.SwingPrompter to net.sf.opensftp.prompter.SwingPrompter
+  * Fix		- a code issue of nestCounter in net.sf.opensftp.interceptor.LoggingInterceptor
+  * Change	- Refinded the javadoc

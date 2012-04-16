@@ -3,7 +3,7 @@ package net.sf.opensftp.impl;
 import net.sf.opensftp.*;
 
 /**
- * If you want to plug in <code>ProgressListener</code> module to
+ * If you want to plug a <code>ProgressListener</code> module into
  * <code>net.sf.opensftp.impl.SftpUtil</code>, your
  * <code>ProgressListener</code> must extend this class.
  * 

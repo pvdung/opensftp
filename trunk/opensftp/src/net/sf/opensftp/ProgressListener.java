@@ -8,85 +8,88 @@ package net.sf.opensftp;
  */
 public interface ProgressListener extends Cloneable {
 	/**
-	 * Represent the put operation.
+	 * Represents the put operation.
 	 */
 	public static final int PUT = 0;
 	/**
-	 * Represent the get operation.
+	 * Represents the get operation.
 	 */
 	public static final int GET = 1;
 
 	/**
-	 * Invoked when a new transfer is about to be initiated.
+	 * A callback method which will be called when a new transfer is about to be
+	 * initiated.
 	 * 
 	 * @param op
-	 *            the operation type. Candidate values are {@link #PUT} and
+	 *            the operation type. Valid values are {@link #PUT} and
 	 *            {@link #GET}.
 	 * @param src
-	 *            the source file of the operation
+	 *            the path of the source file
 	 * @param dest
-	 *            the target file of the operation
+	 *            the destination path
 	 * @param total
 	 *            the size of the file measured with a certain unit.
 	 */
 	public void init(int op, String src, String dest, long total);
 
 	/**
-	 * Invoked when more data has been processed.
+	 * A callback method which will be called when more data has been
+	 * transferred.
 	 * 
 	 * @param delta
-	 *            an increment, i.e. the newly completed size, measured with the
-	 *            same unit with the <code>total</code> param of the init
-	 *            method.
+	 *            an increment, i.e. the newly transferred size, measured with
+	 *            the same unit with the <code>total</code> param of
+	 *            {@link #init(int, String, String, long)}.
 	 */
 	public void progress(long delta);
 
 	/**
-	 * Invoked when the transfer is completed.
+	 * A callback method which will be called when the transfer is completed.
 	 */
 	public void complete();
 
 	/**
-	 * Invoking this method to cancel the transfer. <br>
+	 * Call this method to cancel the transfer which this
+	 * <code>ProgressListener</code> is monitoring. <br>
 	 * This method, together with {@link #isCancelled()}, enables you to cancel
 	 * a transfer. To accomplish this function, the concrete implementation of
-	 * {@link SftpUtil} should repeatedly invoke the <code>isCancelled()</code>
-	 * method during a transfer by a certain frequency to determine whether to
-	 * continue the transfer or not.<br>
-	 * NOTE: please make <code>cancel()</code> and <code>isCancelled()</code> be
-	 * a pair of synchronized methods.
+	 * {@link SftpUtil} should repeatedly call {@link #isCancelled()} during a
+	 * transfer by a certain frequency to determine whether to continue the
+	 * transfer or not.<br>
+	 * NOTE: please make {@link #cancel()} and {@link #isCancelled()} be a pair
+	 * of synchronized methods.
 	 */
 	public void cancel();
 
 	/**
-	 * Check whether the user has cancelled the transfer.<br>
-	 * Please refer to the description of the {@link #cancel()} method for more
-	 * details.
+	 * Checks whether the transfer has been cancelled.<br>
+	 * Please refer to method {@link #cancel()} for more details.
 	 * 
 	 * @return true if the transfer has been cancelled; false otherwise.
 	 */
 	public boolean isCancelled();
 
 	/**
-	 * Set the status of this <code>ProgressListener</code>, idle or not.<br>
-	 * Being idle means being ready for use.<br>
+	 * Sets the status of this <code>ProgressListener</code>, idle or not.<br>
+	 * Idle means ready for use.<br>
 	 * NOTE:
 	 * <ul>
 	 * <li>
-	 * Before using a <code>ProgressListener</code>, call setIdle(false) first.</li>
+	 * Before using a <code>ProgressListener</code>, call
+	 * <code>setIdle(false)</code> first.</li>
 	 * <li>
-	 * The complete() method should call setIdle(true) at its very end.</li>
-	 * <li>setIdle(true) should be called when the transfer is actually
-	 * cancelled (not going to be cancelled).</li>
+	 * The method {@link #complete()} should call <code>setIdle(true)</code>
+	 * at its very end.</li>
+	 * <li>setIdle(true) should be called when the transfer which this
+	 * <code>ProgressListener</code> is monitoring has been cancelled (not going
+	 * to be cancelled).</li>
 	 * </ul>
-	 * 
-	 * @return true if the transfer has been cancelled; false otherwise.
 	 */
 	public void setIdle(boolean idle);
 
 	/**
-	 * Check whether this <code>ProgressListener</code> is idle or not.<br>
-	 * Being idle means being ready for use.<br>
+	 * Checks whether this <code>ProgressListener</code> is idle or not.<br>
+	 * Idle means ready for use.<br>
 	 * 
 	 * @return true if this <code>ProgressListener</code> is idle; false
 	 *         otherwise.
@@ -94,21 +97,22 @@ public interface ProgressListener extends Cloneable {
 	public boolean isIdle();
 
 	/**
-	 * Reset this <code>ProgressListener</code>.<br>
-	 * This method should reset the operation type, the source file, the target
-	 * file, the total size of the file and the current progress.<br>
-	 * Before reusing a <code>ProgressListener</code>, please make sure it's
-	 * completed or cancelled, and then call <code>reset()</code> on it.
+	 * Resets this <code>ProgressListener</code>.<br>
+	 * This method should reset the operation type, the source path, the
+	 * destination path, the total size of the file and the current progress.<br>
+	 * Before resetting and reusing a <code>ProgressListener</code>, please make
+	 * sure the transfer which this <code>ProgressListener</code> is monitoring
+	 * has been completed or cancelled.
 	 */
 	public void reset();
 
 	/**
 	 * Creates and returns a clean copy of this <code>ProgressListener</code>.<br>
-	 * NOTE: Not to clone the operation type, the source file, the target file,
-	 * the total size of the file and the current progress. Conversely, reset
-	 * them.
+	 * NOTE: Don't clone the operation type, the source path, the destination
+	 * path, the total size of the file and the current progress. Conversely,
+	 * reset them.
 	 * 
-	 * @return a clean copy
+	 * @return a clean copy of this <code>ProgressListener</code>
 	 */
 	public ProgressListener clone();
 
@@ -116,18 +120,22 @@ public interface ProgressListener extends Cloneable {
 	 * Returns an instance of <code>ProgressListener</code>.<br>
 	 * The algorithm is as follows:<br>
 	 * <ul>
-	 * <li>Return this object itself if it's idle. Reset it before return.</li>
-	 * <li>Return a clean clone of this object.</li>
+	 * <li>Returns this object itself if it's idle. Reset it before return.</li>
+	 * <li>Returns a clean copy of this object.</li>
 	 * </ul>
 	 * 
-	 * To make this method work, make sure implement the following methods
+	 * To make this method work, make sure to implement the following methods
 	 * correctly:<br>
-	 * <code>isIdle(), setIdle(boolean), reset(), clone()</code>.<br>
-	 * And make sure <code>setIdle()</code> is called where it should be.
+	 * {@link #isIdle()}, {@link #setIdle(boolean)}, {@link #reset()},
+	 * {@link #clone()}.<br>
+	 * And make sure {@link #setIdle(boolean)} is called in any scenario where
+	 * it should be.
 	 * 
 	 * @return a clean instance
-	 * @see {@link #isIdle()}, {@link #setIdle(boolean)}, {@link #reset()},
-	 *      {@link #clone()}
+	 * @see #isIdle()
+	 * @see #setIdle(boolean)
+	 * @see #reset()
+	 * @see #clone()
 	 */
 	public ProgressListener newInstance();
 }

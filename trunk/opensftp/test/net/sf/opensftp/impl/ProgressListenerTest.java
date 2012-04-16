@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import net.sf.opensftp.ServerConstants;
 import net.sf.opensftp.SftpException;
 import net.sf.opensftp.SftpResult;
 import net.sf.opensftp.SftpSession;
@@ -23,13 +24,13 @@ public class ProgressListenerTest {
 	private static SftpUtil util = SftpUtilFactory.getSftpUtil();
 	private static SftpSession session;
 	private static SftpSession session2;
-	private static String host = "192.168.209.128";
-	private static int port = 22;
-	private static String user = "guest";
-	private static String password = "guest";
-	private static String identityFile = "~/.ssh/sxiang_rsa";
-	private static String passphrase = "";
-	private static int timeout = 0;
+	private static String host = ServerConstants.host;
+	private static int port = ServerConstants.port;
+	private static String user = ServerConstants.user;
+	private static String password = ServerConstants.password;
+	private static String identityFile = ServerConstants.identityFile;
+	private static String passphrase = ServerConstants.passphrase;
+	private static int timeout = ServerConstants.timeout;
 
 	private final static String known_hosts_file = System
 			.getProperty("user.home") + "/.ssh/known_hosts";
@@ -66,7 +67,7 @@ public class ProgressListenerTest {
 		new File(known_hosts_file).delete();
 	}
 
-	// @Test
+	@Test
 	public void testProgressListenerFunction() {
 		String UTName = "testProgressListnerFunction";
 		int i = 1;

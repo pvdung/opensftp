@@ -1,5 +1,7 @@
 package net.sf.opensftp;
 
+import net.sf.opensftp.prompter.Prompter;
+
 public class MockSftpUtil implements SftpUtil {
 	private Prompter prompter;
 

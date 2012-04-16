@@ -28,8 +28,8 @@ public class SftpResultImpl implements net.sf.opensftp.SftpResult {
 	}
 
 	/**
-	 * Construct a new <code>SftpResult</code> using the specified values. The
-	 * unspecified properties remain null.
+	 * Construct a new <code>SftpResult</code> with the specified parameters.
+	 * The unspecified properties remain null.
 	 */
 	public SftpResultImpl(boolean successFalg, int errorCode, String errorMsg) {
 		this.successFlag = successFalg;
@@ -38,7 +38,7 @@ public class SftpResultImpl implements net.sf.opensftp.SftpResult {
 	}
 
 	/**
-	 * Construct a new <code>SftpResult</code> using the specified values .
+	 * Construct a new <code>SftpResult</code> with the specified parameters .
 	 */
 	public SftpResultImpl(boolean successFalg, int errorCode, String errorMsg,
 			Object extension) {
